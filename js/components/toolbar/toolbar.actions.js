@@ -1,6 +1,5 @@
 m.toolbar.acts({
     get_settings(_$, args) {
-        console.log("ping");
         const api_key = prompt("Airtable API Key");
         const base = prompt("Airtable base ID");
 
@@ -8,5 +7,13 @@ m.toolbar.acts({
         localStorage.setItem("airtable_base_id", base);
 
         alert("Set.");
+    },
+
+    approve(_$, args) {
+        // console.log(base('💬 Tweets'));
+    },
+
+    reject(_$, args) {
+
     }
 })
