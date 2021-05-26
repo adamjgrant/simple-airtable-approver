@@ -284,6 +284,13 @@ textarea {
 [data-component~="card"] {
     font-size: 20px;
     height: 100%;
+    max-width: 600px;
+    margin: 0px auto;
+}
+
+[data-component~="card"] #tweet {
+    margin-bottom: 60px;
+    font-style: italic;
 }
 
 [data-component~="toolbar"] {
