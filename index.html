@@ -17,20 +17,25 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/viewport-fix.css">
     <link rel="stylesheet" href="css/main.css">
 
     <meta name="theme-color" content="#fafafa">
 </head>
 
 <body>
-    <div data-component="card">
-        <p id="tweet">This is the tweet</p>
-        <p id="response">This is the response</p>
-    </div>
-    <div data-component="toolbar">
-        <button id="set-localstorage-values">Settings</button>
-        <button id="approve">Approve</button>
-        <button id="reject">Reject</button>
+    <div id="viewport">
+        <div id="area">
+            <div data-component="card">
+                <p id="tweet">This is the tweet</p>
+                <p id="response">This is the response</p>
+            </div>
+            <div data-component="toolbar">
+                <button id="set-localstorage-values">Settings</button>
+                <button id="approve">Approve</button>
+                <button id="reject">Reject</button>
+            </div>
+        </div>
     </div>
     <script src="js/vendor/airtable.js"></script>
     <script src="js/vendor/mozart.js"></script>
@@ -46,6 +51,11 @@
 
     <script>
         Mozart.init();
+    </script>
+
+    <script src="js/vendor/viewport-fix.js"></script>
+    <script>
+        new VVP()
     </script>
 </body>
 

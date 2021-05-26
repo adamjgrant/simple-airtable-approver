@@ -273,12 +273,12 @@ textarea {
     box-sizing: border-box;
 }
 
-body {
+#area {
     padding: 15px;
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: var(--100vh, 100vh);
 }
 
 [data-component~="card"] {
