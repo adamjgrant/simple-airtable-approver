@@ -24,19 +24,29 @@
 
 <body>
     <div data-component="card">
-        <div id="tweet">
-            <p>This is the tweet</p>
-        </div>
-        <div id="response">
-            <p>This is the response</p>
-        </div>
+        <p id="tweet">This is the tweet</p>
+        <p id="response">This is the response</p>
     </div>
     <div data-component="toolbar">
+        <button id="set-localstorage-values">Settings</button>
         <button id="approve">Approve</button>
         <button id="reject">Reject</button>
     </div>
+    <script src="js/vendor/airtable.js"></script>
     <script src="js/vendor/mozart.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="js/components/card/card.actions.js"></script>
+    <script src="js/components/card/card.events.js"></script>
+    <script src="js/components/card/card.routes.js"></script>
+
+    <script src="js/components/toolbar/toolbar.actions.js"></script>
+    <script src="js/components/toolbar/toolbar.events.js"></script>
+    <script src="js/components/toolbar/toolbar.routes.js"></script>
+
+    <script>
+        Mozart.init();
+    </script>
 </body>
 
 </html>
