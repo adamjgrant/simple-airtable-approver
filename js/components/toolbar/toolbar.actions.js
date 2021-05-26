@@ -11,10 +11,12 @@ m.toolbar.acts({
 
     approve(_$, args) {
         _$.act.update_review_status({ status: 1 });
+        m.card.act.advance_to_next_card();
     },
 
     reject(_$, args) {
         _$.act.update_review_status({ status: -1 });
+        m.card.act.advance_to_next_card();
     },
 
     priv: {
