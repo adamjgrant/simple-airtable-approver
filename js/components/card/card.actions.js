@@ -1,6 +1,5 @@
 m.card.act({
     load_in_data(_$, args) {
-        console.log(args);
         const card_data = {
             id: args.record.getId(),
             tweet: args.record.get("Responds to (Text) cleaned up"),
@@ -33,8 +32,22 @@ m.card.act({
     },
 
     advance_to_next_card(_$, args) {
+        if (m.card.this_card != null) m.card.cards_processed.push(m.card.this_card);
         m.card.this_card = m.card.data.pop();
         _$.act.format_card();
+        _$.act.set_card_values();
+    },
+
+    undo(_$, args) {
+        if (!m.card.cards_processed.length) return console.error("No card to go back to");
+        m.card.data.unshift(m.card.this_card);
+        m.card.this_card = m.card.cards_processed.pop();
+        m.toolbar.act.in_review();
+        _$.act.format_card();
+        _$.act.set_card_values();
+    },
+
+    set_card_values(_$, args) {
         _$("#tweet").innerHTML = m.card.this_card.tweet;
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
@@ -42,4 +55,5 @@ m.card.act({
 })
 
 m.card.data = [];
+m.card.cards_processed = [];
 m.card.this_card = null;

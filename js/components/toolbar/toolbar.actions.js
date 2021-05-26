@@ -19,13 +19,18 @@ m.toolbar.acts({
         m.card.act.advance_to_next_card();
     },
 
+    in_review(_$, args) {
+        _$.act.update_review_status({ status: 0 });
+    },
+
     priv: {
         update_review_status(_$, args) {
+            let new_status = "Pending Review";
+            if (args.status > 0) new_status = "Approved";
+            if (args.status < 0) new_status = "Rejected";
             base('💬 Tweets').update([{
                 id: m.card.this_card.id,
-                fields: {
-                    "Review Status": args.status > 0 ? "Approved" : "Rejected"
-                }
+                fields: { "Review Status": new_status }
             }], function(err, records) {
                 if (err) return console.error(err);
             });
