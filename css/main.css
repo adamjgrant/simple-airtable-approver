@@ -273,6 +273,10 @@ textarea {
     box-sizing: border-box;
 }
 
+#viewport {
+    max-height: var(--100vh, 100vh);
+}
+
 #area {
     padding: 15px;
     font-family: sans-serif;
@@ -294,10 +298,14 @@ textarea {
 }
 
 [data-component~="toolbar"] {
-    height: 150px;
+    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }
 
 [data-component~="toolbar"] button {
