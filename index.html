@@ -9,7 +9,7 @@
 
     <meta property="og:title" content="">
     <meta property="og:type" content="">
-    <meta property="og:url" content="">
+    <meta property="og:url" content="https://adamjgrant.github.io/simple-airtable-approver/">
     <meta property="og:image" content="">
 
     <link rel="manifest" href="site.webmanifest">
@@ -27,8 +27,20 @@
     <div id="viewport">
         <div id="area">
             <div data-component="card">
-                <p id="tweet">This is the tweet</p>
-                <p id="response">This is the response</p>
+                <div class="twitter-box">
+                    <img src="img/twitter.jpg" class="profile">
+                    <article>
+                        <h1>They say</h1>
+                        <p id="tweet">This is the tweet</p>
+                    </article>
+                </div>
+                <div class="twitter-box">
+                    <img src="" class="profile" id="response-thumbnail">
+                    <article>
+                        <h1>Responding with</h1>
+                        <p id="response">This is the response</p>
+                    </article>
+                </div>
             </div>
             <div data-component="toolbar">
                 <button id="set-localstorage-values">Settings</button>
