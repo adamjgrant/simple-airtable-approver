@@ -17,7 +17,7 @@ m.card.events(_$ => {
 
             fetchNextPage();
         }, function done(err) {
-            if (err) { console.error(err); return }
+            if (err) { console.error(err); }
             _$.act.start();
         });
     }

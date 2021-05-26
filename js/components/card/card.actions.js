@@ -16,8 +16,8 @@ m.card.act({
     advance_to_next_card(_$, args) {
         m.card.this_card = m.card.data.pop();
 
-        _$("#tweet").innerHTML = this_card.tweet;
-        _$("#response").innerHTML = this_card.response;
+        _$("#tweet").innerHTML = m.card.this_card.tweet;
+        _$("#response").innerHTML = m.card.this_card.response;
     }
 })
 
