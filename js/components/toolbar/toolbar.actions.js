@@ -10,10 +10,23 @@ m.toolbar.acts({
     },
 
     approve(_$, args) {
-        // console.log(base('💬 Tweets'));
+        _$.act.update_review_status({ status: 1 });
     },
 
     reject(_$, args) {
+        _$.act.update_review_status({ status: -1 });
+    },
 
+    priv: {
+        update_review_status(_$, args) {
+            base('💬 Tweets').update([{
+                id: m.card.this_card.id,
+                fields: {
+                    "Review Status": args.status > 0 ? "Approved" : "Rejected"
+                }
+            }], function(err, records) {
+                if (err) return console.error(err);
+            });
+        }
     }
 })
