@@ -1,14 +1,28 @@
 m.card.act({
-    load_in_data(_$, args) {
-        const card_data = {
-            id: args.record.getId(),
-            tweet: args.record.get("Responds to (Text) cleaned up"),
-            response: args.record.get("Full tweet"),
-            thumbnail: _$.act.get_twitter_photo({ record: args.record }),
-            previous_responses: _$.act.get_previous_responses({ record: args.record })
-        }
+    airtable_base(_$, args) {
+        const Airtable = require('airtable');
+        // Get a base ID for an instance of art gallery example
+        const base = new Airtable({ apiKey: localStorage.getItem("airtable_api_key") }).base(localStorage.getItem('airtable_base_id'));
+        return base;
+    },
 
-        m.card.data.push(card_data);
+    load_in_data(_$, args) {
+        return new Promise((resolve, reject) => {
+            let card_data = {
+                id: args.record.getId(),
+                tweet: args.record.get("Responds to (Text) cleaned up"),
+                response: args.record.get("Full tweet"),
+                thumbnail: _$.act.get_twitter_photo({ record: args.record })
+            }
+
+            _$.act.get_previous_responses({ record: args.record }).then(previous_responses => {
+                card_data.previous_responses = previous_responses;
+                resolve(m.card.data.push(card_data));
+            }).catch(err => {
+                console.log(err); 
+                reject(err);
+            });
+        })
     },
 
     get_twitter_photo(_$, args) {
@@ -58,21 +72,45 @@ m.card.act({
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
 
         m.card.this_card.previous_responses.forEach((response, i) => {
-            _$(`#tweet-minus-${i + 1}`).innerHTML = response.text;
+            _$(`#tweet-minus-${i + 1}`).innerHTML = response.tweet;
             _$(`.tweet-minus-${i + 1}`).classList.add("show");
         });
     },
 
     priv: {
         get_previous_responses(_$, args) {
-          return [
-              {
-                  text: "Foo"
-              },
-              {
-                  text: "Bar"
-              }
-          ].reverse(); // TODO
+            return new Promise((resolve, reject) => {
+                const external_tweet = args.record.get("External tweets");
+
+                if (!external_tweet) return resolve([]);
+                let responses = [];
+
+                const get_tweet = (record_id) => {
+                    _$.act.get_external_tweet_for_record_id(
+                        { recordId: record_id }
+                    ).then(tweet => { 
+                        console.log(responses);
+                        responses.push(tweet);
+                        if (tweet.responds_to) get_tweet(tweet.responds_to[0]);
+                        else return resolve(responses);
+                    }).catch(err => {
+                        reject(err);
+                    });
+                }
+                get_tweet(external_tweet[0]);
+            });
+        },
+
+        get_external_tweet_for_record_id(_$, args) {
+            return new Promise((resolve, reject) => {
+                _$.act.airtable_base()('📧 External tweets').find(args.recordId, function(err, record) {
+                    if (err) { console.error(err); return reject(err); }
+                    return resolve({
+                        tweet: record.get("Tweet"),
+                        responds_to: record.get("Responds to (external)")
+                    });
+                });
+            });
         }
     }
 })

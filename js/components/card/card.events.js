@@ -1,24 +1,33 @@
 // Load AirTable
-const Airtable = require('airtable');
-// Get a base ID for an instance of art gallery example
-const base = new Airtable({ apiKey: localStorage.getItem("airtable_api_key") }).base(localStorage.getItem('airtable_base_id'));
 let called = false;
 
 m.card.events(_$ => {
+    let load_in_data_promises = [];
+
     if (!called) {
+        // TODO: Status update: Loading data...
         called = true;
-        base('💬 Tweets').select({
+        _$.act.airtable_base()('💬 Tweets').select({
             view: "Permutations Review Board",
             maxRecords: 100
         }).eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
-                _$.act.load_in_data({ record: record });
+                // There are a bunch of join ops for external tweets potentially
+                // needed for each of these, so we do a Promise.all on this later.
+                load_in_data_promises.push(_$.act.load_in_data({ record: record }));
             })
 
             fetchNextPage();
         }, function done(err) {
             if (err) { console.error(err); }
-            _$.act.start();
+
+            // TODO: Status update: Waiting for joined data...
+
+            Promise.allSettled(load_in_data_promises).then(data => {
+                _$.act.start();
+
+                // TODO: Status update: Done.
+            });
         });
     }
 })
