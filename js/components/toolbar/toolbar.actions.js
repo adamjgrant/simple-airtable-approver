@@ -28,7 +28,7 @@ m.toolbar.acts({
             let new_status = "Pending Review";
             if (args.status > 0) new_status = "Approved";
             if (args.status < 0) new_status = "Rejected";
-            base('💬 Tweets').update([{
+            m.card.act.airtable_base()('💬 Tweets').update([{
                 id: m.card.this_card.id,
                 fields: { "Review Status": new_status }
             }], function(err, records) {
