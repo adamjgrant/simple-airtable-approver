@@ -4,7 +4,8 @@ m.card.act({
             id: args.record.getId(),
             tweet: args.record.get("Responds to (Text) cleaned up"),
             response: args.record.get("Full tweet"),
-            thumbnail: _$.act.get_twitter_photo({ record: args.record })
+            thumbnail: _$.act.get_twitter_photo({ record: args.record }),
+            previous_responses: _$.act.get_previous_responses({ record: args.record })
         }
 
         m.card.data.push(card_data);
@@ -48,9 +49,31 @@ m.card.act({
     },
 
     set_card_values(_$, args) {
+        // Reset
+        _$(".tweet-minus-1").classList.remove("show");
+        _$(".tweet-minus-2").classList.remove("show");
+
         _$("#tweet").innerHTML = m.card.this_card.tweet;
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
+
+        m.card.this_card.previous_responses.forEach((response, i) => {
+            _$(`#tweet-minus-${i + 1}`).innerHTML = response.text;
+            _$(`.tweet-minus-${i + 1}`).classList.add("show");
+        });
+    },
+
+    priv: {
+        get_previous_responses(_$, args) {
+          return [
+              {
+                  text: "Foo"
+              },
+              {
+                  text: "Bar"
+              }
+          ].reverse(); // TODO
+        }
     }
 })
 

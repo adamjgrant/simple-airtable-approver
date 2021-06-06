@@ -312,6 +312,21 @@ textarea {
     width: 100%;
 }
 
+[data-component~="card"] .twitter-box p {
+  margin-top: 0;
+  margin-block-start: 0;
+}
+
+[data-component~="card"] .twitter-box.tweet-minus-1, 
+[data-component~="card"] .twitter-box.tweet-minus-2 {
+    display: none;
+}
+
+[data-component~="card"] .twitter-box.tweet-minus-1.show, 
+[data-component~="card"] .twitter-box.tweet-minus-2.show {
+    display: flex;
+}
+
 [data-component~="card"] .twitter-box:before {
     content: "";
     border-left: 2px solid var(--twitter-bar-color);
