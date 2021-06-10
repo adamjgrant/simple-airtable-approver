@@ -31,7 +31,7 @@ m.card.events(_$ => {
 
             Promise.allSettled(load_in_data_promises).then(data => {
                 _$.act.set_curtain_text({ text: "Done" });
-                _$.act.remove_curtain();
+                if (data.length) { _$.act.remove_curtain() };
                 _$.act.start();
 
                 // TODO: Status update: Done.
