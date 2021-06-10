@@ -45,25 +45,29 @@ m.toolbar.acts({
         _$(".status-indicator").classList.remove("yellow");
     },
 
-    set_status_green(_$, args) { _$.act.set_status({ color: "green" }) },
+    set_status_green(_$, args) { _$.act.set_status({ color: "green", reset: args.reset }) },
 
-    set_status_red(_$, args) { _$.act.set_status({ color: "red" }) },
+    set_status_red(_$, args) { _$.act.set_status({ color: "red", reset: args.reset }) },
 
-    set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow" }) },
+    set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow", reset: args.reset }) },
 
     priv: {
         set_status(_$, args) {
             _$.act.reset_status();
             _$(".status-indicator").classList.add(args.color);
-            const reset = _$.act.debounce({
-                func: _$.act.reset_status,
-                wait: 2000,
-            });
-            reset();
+
+            if (args.reset === undefined) args.reset = true;
+            if (args.reset) {
+                const reset = _$.act.debounce({
+                    func: _$.act.reset_status,
+                    wait: 2000,
+                });
+                reset();
+            }
         },
 
         update_review_status(_$, args) {
-            m.card.act.set_status_yellow();
+            _$.act.set_status_yellow({ reset: false });
             let new_status = "Pending Review";
             if (args.status > 0) new_status = "Approved";
             if (args.status < 0) new_status = "Rejected";
@@ -72,10 +76,10 @@ m.toolbar.acts({
                 fields: { "Review Status": new_status }
             }], function(err, records) {
                 if (err) {
-                    m.card.act.set_status_red();
+                    _$.act.set_status_red();
                     return console.error(err);
                 }
-                m.card.act.set_status_green();
+                _$.act.set_status_green();
             });
         },
 
