@@ -18,7 +18,7 @@ m.toolbar.acts({
 
         if (!key) missing_fields_array.push("Airtable Key");
         if (!base_id) missing_fields_array.push("Airtable Base ID");
-        if (key && base_id) return_obj.valid === true;
+        if (key && base_id) return_obj.valid = true;
 
         if (!return_obj.valid) return_obj.message = `${missing_fields_array.join(" and ")} missing.`
 
