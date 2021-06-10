@@ -7,6 +7,7 @@ m.card.act({
     },
 
     set_curtain_text(_$, args) {
+        _$.act.show_curtain();
         _$(".curtain h1").innerHTML = args.text;
     },
 
@@ -56,6 +57,12 @@ m.card.act({
 
     advance_to_next_card(_$, args) {
         if (m.card.this_card != null) m.card.cards_processed.push(m.card.this_card);
+
+        if (!m.card.data.length) {
+            m.toolbar.act.hide();
+            _$.set_curtain_text({ text: "Nothing to review" });
+        }
+
         m.card.this_card = m.card.data.pop();
         _$.act.format_card();
         _$.act.set_card_values();
@@ -117,6 +124,10 @@ m.card.act({
                     });
                 });
             });
+        },
+
+        show_curtain(_$, args) {
+            _$(".curtain").classList.remove("hide");
         }
     }
 })

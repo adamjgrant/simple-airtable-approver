@@ -394,6 +394,12 @@ textarea {
     left: 0;
     bottom: 0;
     right: 0;
+    transition: opacity 1s;
+}
+
+[data-component~="toolbar"].hide {
+    pointer-events: none;
+    opacity: 0;
 }
 
 [data-component~="toolbar"] button {

@@ -51,6 +51,10 @@ m.toolbar.acts({
 
     set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow", reset: (args && args.reset) }) },
 
+    hide(_$, args) {
+        document.querySelector("[data-component~='toolbar']").classList.add("hide");
+    },
+
     priv: {
         set_status(_$, args) {
             _$.act.reset_status();
