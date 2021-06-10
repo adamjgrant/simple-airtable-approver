@@ -45,11 +45,11 @@ m.toolbar.acts({
         _$(".status-indicator").classList.remove("yellow");
     },
 
-    set_status_green(_$, args) { _$.act.set_status({ color: "green", reset: args.reset }) },
+    set_status_green(_$, args) { _$.act.set_status({ color: "green", reset: (args && args.reset) }) },
 
-    set_status_red(_$, args) { _$.act.set_status({ color: "red", reset: args.reset }) },
+    set_status_red(_$, args) { _$.act.set_status({ color: "red", reset: (args && args.reset) }) },
 
-    set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow", reset: args.reset }) },
+    set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow", reset: (args && args.reset) }) },
 
     priv: {
         set_status(_$, args) {
