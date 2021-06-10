@@ -404,6 +404,53 @@ textarea {
     margin: 0 3px;
 }
 
+[data-component~="toolbar"] .status-indicator {
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    background: grey;
+    margin-left: 10px;
+    transition: background-color 1s;
+}
+
+@keyframes bouncing {
+    0% {
+        width: 4px;
+        height: 4px;
+    }
+    50% {
+        width: 16px;
+        height: 16px;
+    }
+    75% {
+        width: 14px;
+        height: 14px;
+    }
+    99% {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+[data-component~="toolbar"] .status-indicator.yellow {
+    background: gold;
+}
+
+[data-component~="toolbar"] .status-indicator.green {
+    background: chartreuse;
+}
+
+[data-component~="toolbar"] .status-indicator.red {
+    background: red;
+}
+
+[data-component~="toolbar"] .status-indicator.yellow,
+[data-component~="toolbar"] .status-indicator.green,
+[data-component~="toolbar"] .status-indicator.red {
+    animation-iteration-count: 2;
+    animation: 1s bouncing;
+}
+
 [data-component~="toolbar"] button#approve {
     background: green;
     color: white;
