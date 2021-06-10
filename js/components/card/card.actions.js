@@ -60,7 +60,7 @@ m.card.act({
 
         if (!m.card.data.length) {
             m.toolbar.act.hide();
-            return _$.set_curtain_text({ text: "Nothing to review" });
+            return _$.set_curtain_text({ text: "Session complete. Refresh for more tweets" });
         }
 
         m.card.this_card = m.card.data.pop();
