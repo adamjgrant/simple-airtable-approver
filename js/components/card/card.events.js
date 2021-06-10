@@ -8,8 +8,6 @@ m.card.events(_$ => {
         const validation = m.toolbar.act.validate_settings();
         if (!validation.valid) {
             _$.act.set_curtain_text({ text: validation.message });
-        } else {
-            _$.act.remove_curtain();
         }
 
         // TODO: Status update: Loading data...
@@ -32,6 +30,8 @@ m.card.events(_$ => {
             // TODO: Status update: Waiting for joined data...
 
             Promise.allSettled(load_in_data_promises).then(data => {
+                _$.act.set_curtain_text({ text: "Done" });
+                _$.act.remove_curtain();
                 _$.act.start();
 
                 // TODO: Status update: Done.
