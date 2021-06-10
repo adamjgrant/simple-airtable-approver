@@ -5,6 +5,13 @@ m.card.events(_$ => {
     let load_in_data_promises = [];
 
     if (!called) {
+        const validation = m.toolbar.act.validate_settings();
+        if (!validation.valid) {
+            _$.act.set_curtain_text({ text: validation.message });
+        } else {
+            _$.act.remove_curtain();
+        }
+
         // TODO: Status update: Loading data...
         called = true;
         _$.act.airtable_base()('💬 Tweets').select({
@@ -12,8 +19,9 @@ m.card.events(_$ => {
             maxRecords: 100
         }).eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
-                // There are a bunch of join ops for external tweets potentially
-                // needed for each of these, so we do a Promise.all on this later.
+                _$.act.set_curtain_text({ text: "Retrieving Data..." })
+                    // There are a bunch of join ops for external tweets potentially
+                    // needed for each of these, so we do a Promise.all on this later.
                 load_in_data_promises.push(_$.act.load_in_data({ record: record }));
             })
 

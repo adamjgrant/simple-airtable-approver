@@ -9,6 +9,22 @@ m.toolbar.acts({
         alert("Set.");
     },
 
+    validate_settings(_$, args) {
+        const key = localStorage.getItem("airtable_api_key");
+        const base_id = localStorage.getItem("airtable_base_id");
+
+        let return_obj = { valid: false, message: "" };
+        let missing_fields_array = [];
+
+        if (!key) missing_fields_array.push("Airtable Key");
+        if (!base_id) missing_fields_array.push("Airtable Base ID");
+        if (key && base_id) return_obj.valid === true;
+
+        if (!return_obj.valid) return_obj.message = `${missing_fields_array.join(" and ")} missing.`
+
+        return return_obj;
+    },
+
     approve(_$, args) {
         _$.act.update_review_status({ status: 1 });
         m.card.act.advance_to_next_card();

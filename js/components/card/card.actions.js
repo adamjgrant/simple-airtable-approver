@@ -6,6 +6,14 @@ m.card.act({
         return base;
     },
 
+    set_curtain_text(_$, args) {
+        _$(".curtain h1").innerHTML = args.text;
+    },
+
+    remove_curtain(_$, args) {
+        _$(".curtain").classList.add("hide");
+    },
+
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             let card_data = {
@@ -19,7 +27,7 @@ m.card.act({
                 card_data.previous_responses = previous_responses;
                 resolve(m.card.data.push(card_data));
             }).catch(err => {
-                console.log(err); 
+                console.log(err);
                 reject(err);
             });
         })
@@ -86,9 +94,7 @@ m.card.act({
                 let responses = [];
 
                 const get_tweet = (record_id) => {
-                    _$.act.get_external_tweet_for_record_id(
-                        { recordId: record_id }
-                    ).then(tweet => { 
+                    _$.act.get_external_tweet_for_record_id({ recordId: record_id }).then(tweet => {
                         console.log(responses);
                         responses.push(tweet);
                         if (tweet.responds_to) get_tweet(tweet.responds_to[0]);
