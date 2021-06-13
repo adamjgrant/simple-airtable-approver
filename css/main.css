@@ -316,7 +316,8 @@ textarea {
     right: 0;
     bottom: 0;
     text-align: center;
-    opacity: 1
+    opacity: 1;
+    z-index: 2;
 }
 
 [data-component~="card"] .curtain.hide {
@@ -413,50 +414,26 @@ textarea {
 }
 
 [data-component="status_indicator"] {
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
     background: grey;
-    margin-left: 10px;
-    transition: background-color 1s;
+    transition: background-color 0.5s;
+    z-index: 0;
 }
 
-@keyframes bouncing {
-    0% {
-        width: 4px;
-        height: 4px;
-    }
-    50% {
-        width: 16px;
-        height: 16px;
-    }
-    75% {
-        width: 14px;
-        height: 14px;
-    }
-    99% {
-        width: 12px;
-        height: 12px;
-    }
-}
-
-[data-component~="toolbar"] .status-indicator.yellow {
+[data-component="status_indicator"].yellow {
     background: gold;
 }
 
-[data-component~="toolbar"] .status-indicator.green {
+[data-component="status_indicator"].green {
     background: chartreuse;
 }
 
-[data-component~="toolbar"] .status-indicator.red {
+[data-component="status_indicator"].red {
     background: red;
-}
-
-[data-component~="toolbar"] .status-indicator.yellow,
-[data-component~="toolbar"] .status-indicator.green,
-[data-component~="toolbar"] .status-indicator.red {
-    animation-iteration-count: 2;
-    animation: 1s bouncing;
 }
 
 [data-component~="toolbar"] button#approve {
