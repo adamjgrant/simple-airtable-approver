@@ -476,8 +476,13 @@ textarea {
     [data-component~="card"] img.profile {
         border-color: var(--twitter-bar-color);
     }
+
      :root {
         --twitter-black-text: white;
         --twitter-bar-color: rgb(84, 89, 92);
+    }
+
+    [data-component~="card"] .curtain {
+        background: black;
     }
 }
