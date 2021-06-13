@@ -1,0 +1,102 @@
+[data-component~="card"] {
+    font-size: 20px;
+    height: 100%;
+    max-width: 600px;
+    margin: 0px auto;
+    color: var(--twitter-black-text);
+}
+
+[data-component~="card"] a {
+    color: var(--twitter-blue-link);
+}
+
+[data-component~="card"] .curtain {
+    background: white;
+    transition: opacity 0.5s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    opacity: 1;
+    z-index: 2;
+}
+
+[data-component~="card"] .curtain.hide {
+    pointer-events: none;
+    opacity: 0;
+}
+
+[data-component~="card"] .twitter-box {
+    display: flex;
+    width: 100%;
+}
+
+[data-component~="card"] .twitter-box p {
+    margin-top: 0;
+    margin-block-start: 0;
+    font-size: var(--font-size);
+    word-break: break-word;
+}
+
+[data-component~="card"] .twitter-box.tweet-minus-1,
+[data-component~="card"] .twitter-box.tweet-minus-2 {
+    display: none;
+}
+
+[data-component~="card"] .twitter-box.tweet-minus-1.show,
+[data-component~="card"] .twitter-box.tweet-minus-2.show {
+    display: flex;
+}
+
+[data-component~="card"] .twitter-box:before {
+    content: "";
+    border-left: 2px solid var(--twitter-bar-color);
+    margin-right: calc(-0.5208 * var(--profile-photo-size));
+    margin-left: calc(0.5208 * var(--profile-photo-size));
+    margin-top: calc(1.0833 * var(--profile-photo-size));
+    margin-bottom: 3px;
+}
+
+[data-component~="card"] .twitter-box:last-child:before {
+    display: none;
+}
+
+[data-component~="card"] img.profile {
+    width: var(--profile-photo-size);
+    height: var(--profile-photo-size);
+    border-radius: 50%;
+    border: 1px solid #eee;
+    background: white;
+}
+
+[data-component~="card"] article {
+    flex: 1;
+    margin-left: 12px;
+}
+
+[data-component~="card"] article h1 {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    margin: 0;
+    margin-bottom: 4px;
+}
+
+[data-component~="card"] #tweet,
+[data-component~="card"] #response {
+    margin-top: 0;
+    margin-bottom: 60px;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-component~="card"] img.profile {
+        border-color: var(--twitter-bar-color);
+    }
+
+    [data-component~="card"] .curtain {
+        background: black;
+    }
+}

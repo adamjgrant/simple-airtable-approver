@@ -1,0 +1,22 @@
+[data-component="status_indicator"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: grey;
+    transition: background-color 0.5s;
+    z-index: 0;
+}
+
+[data-component="status_indicator"].yellow {
+    background: gold;
+}
+
+[data-component="status_indicator"].green {
+    background: chartreuse;
+}
+
+[data-component="status_indicator"].red {
+    background: red;
+}
