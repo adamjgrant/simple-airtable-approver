@@ -20,7 +20,10 @@ m.toolbar.acts({
         if (!base_id) missing_fields_array.push("Airtable Base ID");
         if (key && base_id) return_obj.valid = true;
 
-        if (!return_obj.valid) return_obj.message = `${missing_fields_array.join(" and ")} missing.`
+        if (!return_obj.valid) {
+            return_obj.message = `${missing_fields_array.join(" and ")} missing.`
+            _$.act.get_settings();
+        }
 
         return return_obj;
     },
