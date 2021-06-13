@@ -1,0 +1,23 @@
+[data-component~="curtain"] {
+    background: white;
+    transition: opacity 0.5s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    opacity: 1;
+    z-index: 2;
+}
+
+[data-component~="curtain"].hide {
+    pointer-events: none;
+    opacity: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-component~="curtain"] {
+        background: black;
+    }
+}

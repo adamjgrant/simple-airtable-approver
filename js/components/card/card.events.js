@@ -7,7 +7,7 @@ m.card.events(_$ => {
     if (!called) {
         const validation = m.toolbar.act.validate_settings();
         if (!validation.valid) {
-            _$.act.set_curtain_text({ text: validation.message });
+            m.curtain.act.set_curtain_text({ text: validation.message });
         }
 
         // TODO: Status update: Loading data...
@@ -17,7 +17,7 @@ m.card.events(_$ => {
             maxRecords: 100
         }).eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
-                _$.act.set_curtain_text({ text: "Retrieving Data..." })
+                m.curtain.act.set_curtain_text({ text: "Retrieving Data..." })
                     // There are a bunch of join ops for external tweets potentially
                     // needed for each of these, so we do a Promise.all on this later.
                 load_in_data_promises.push(_$.act.load_in_data({ record: record }));
@@ -30,8 +30,8 @@ m.card.events(_$ => {
             // TODO: Status update: Waiting for joined data...
 
             Promise.allSettled(load_in_data_promises).then(data => {
-                _$.act.set_curtain_text({ text: "Done" });
-                if (data.length) { _$.act.remove_curtain() };
+                m.curtain.act.set_curtain_text({ text: "Done" });
+                if (data.length) { m.curtain.act.remove_curtain() };
                 _$.act.start();
 
                 // TODO: Status update: Done.

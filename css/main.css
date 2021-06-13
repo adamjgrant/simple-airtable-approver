@@ -3,7 +3,4 @@
 @import url('reset.css');
 @import url('viewport-fix.css');
 
-/* COMPONENTS */
-@import url('components/card.css');
-@import url('components/toolbar.css');
-@import url('components/status_indicator.css');
+/* COMPONENTS ARE LOADED VIA MAIN.JS */

@@ -6,15 +6,6 @@ m.card.act({
         return base;
     },
 
-    set_curtain_text(_$, args) {
-        _$.act.show_curtain();
-        _$(".curtain h1").innerHTML = args.text;
-    },
-
-    remove_curtain(_$, args) {
-        _$(".curtain").classList.add("hide");
-    },
-
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             let card_data = {
@@ -60,7 +51,7 @@ m.card.act({
 
         if (!m.card.data.length) {
             m.toolbar.act.hide();
-            return _$.set_curtain_text({ text: "Session complete. Refresh for more tweets" });
+            return m.curtain.act.set_curtain_text({ text: "Session complete. Refresh for more tweets" });
         }
 
         m.card.this_card = m.card.data.pop();
@@ -123,10 +114,6 @@ m.card.act({
                     });
                 });
             });
-        },
-
-        show_curtain(_$, args) {
-            _$(".curtain").classList.remove("hide");
         }
     }
 })
