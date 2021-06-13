@@ -4,6 +4,7 @@
     max-width: 600px;
     margin: 0px auto;
     color: var(--twitter-black-text);
+    width: 100%;
 }
 
 [data-component~="card"] a {
@@ -89,6 +90,12 @@
     margin-bottom: 60px;
     font-size: var(--font-size);
     line-height: var(--line-height);
+}
+
+@media screen and (min-width: 600px) {
+    [data-component~="card"] {
+        padding-top: 25px;
+    }
 }
 
 @media (prefers-color-scheme: dark) {

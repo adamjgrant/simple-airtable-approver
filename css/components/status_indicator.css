@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: grey;
+    background: black;
     transition: background-color 0.5s;
     z-index: 0;
 }
