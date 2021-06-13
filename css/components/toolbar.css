@@ -17,18 +17,30 @@
 
 [data-component~="toolbar"] button {
     padding: 10px 15px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #EEE;
+    border: none;
     border-radius: 8px;
     margin: 0 3px;
+    color: #333;
+    cursor: pointer;
 }
 
-[data-component~="toolbar"] button#approve {
-    background: green;
-    color: white;
+[data-component~="toolbar"] button:hover {
+    background: #DDD;
 }
 
 [data-component~="toolbar"] button#reject {
-    background: red;
+    background: var(--twitter-blue-link);
     color: white;
+}
+
+[data-component~="toolbar"] button#reject:hover {
+    background: rgb(46, 171, 248);
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-component~="toolbar"] button {
+        background: rgba(255,255,255,0.1);
+        color: white;
+    }
 }

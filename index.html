@@ -19,6 +19,15 @@
     <link rel="stylesheet" href="css/main.css">
 
     <meta name="theme-color" content="#fafafa">
+    <script>
+        const components = [
+            "card", 
+            "toolbar", 
+            "status_indicator", 
+            "curtain"
+        ];
+    </script>
+    <script src="js/components.js"></script>
 </head>
 
 <body>
@@ -57,8 +66,8 @@
                 </div>
             </div>
             <div data-component="toolbar">
-                <button id="undo">⎌</button>
-                <button id="set-localstorage-values">⚙️</button>
+                <button id="undo"><i class="icofont-undo"></i></button>
+                <button id="set-localstorage-values"><i class="icofont-settings-alt"></i>️</button>
                 <button id="approve">Approve</button>
                 <button id="reject">Reject</button>
             </div>
@@ -72,6 +81,7 @@
     <script>
         new VVP()
     </script>
+    <link rel="stylesheet" href="css/icofont.min.css">
 </body>
 
 </html>

@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: black;
+    background-color: white;
     transition: background-color 0.5s;
     z-index: 0;
 }
@@ -19,4 +19,10 @@
 
 [data-component="status_indicator"].red {
     background: red;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-component="status_indicator"] {
+        background-color: black;
+    }
 }
