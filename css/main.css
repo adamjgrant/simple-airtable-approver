@@ -333,6 +333,7 @@ textarea {
     margin-top: 0;
     margin-block-start: 0;
     font-size: var(--font-size);
+    word-break: break-word;
 }
 
 [data-component~="card"] .twitter-box.tweet-minus-1,
