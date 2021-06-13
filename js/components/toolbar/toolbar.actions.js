@@ -44,22 +44,8 @@ m.toolbar.acts({
     },
 
     priv: {
-        set_status(_$, args) {
-            _$.act.reset_status();
-            _$(".status-indicator").classList.add(args.color);
-
-            if (args.reset === undefined) args.reset = true;
-            if (args.reset) {
-                const reset = _$.act.debounce({
-                    func: _$.act.reset_status,
-                    wait: 2000,
-                });
-                reset();
-            }
-        },
-
         update_review_status(_$, args) {
-            _$.act.set_status_yellow({ reset: false });
+            m.status_indicator.act.set_status_yellow({ reset: false });
             let new_status = "Pending Review";
             if (args.status > 0) new_status = "Approved";
             if (args.status < 0) new_status = "Rejected";
@@ -68,10 +54,10 @@ m.toolbar.acts({
                 fields: { "Review Status": new_status }
             }], function(err, records) {
                 if (err) {
-                    _$.act.set_status_red();
+                    m.status_indicator.act.set_status_red();
                     return console.error(err);
                 }
-                _$.act.set_status_green();
+                m.status_indicator.act.set_status_green();
             });
         },
 
