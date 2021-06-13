@@ -102,7 +102,6 @@ m.card.act({
 
                 const get_tweet = (record_id) => {
                     _$.act.get_external_tweet_for_record_id({ recordId: record_id }).then(tweet => {
-                        console.log(responses);
                         responses.push(tweet);
                         if (tweet.responds_to) get_tweet(tweet.responds_to[0]);
                         else return resolve(responses);

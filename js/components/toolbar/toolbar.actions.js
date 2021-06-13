@@ -39,18 +39,6 @@ m.toolbar.acts({
         _$.act.update_review_status({ status: 0 });
     },
 
-    reset_status(_$, args) {
-        _$(".status-indicator").classList.remove("green");
-        _$(".status-indicator").classList.remove("red");
-        _$(".status-indicator").classList.remove("yellow");
-    },
-
-    set_status_green(_$, args) { _$.act.set_status({ color: "green", reset: (args && args.reset) }) },
-
-    set_status_red(_$, args) { _$.act.set_status({ color: "red", reset: (args && args.reset) }) },
-
-    set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow", reset: (args && args.reset) }) },
-
     hide(_$, args) {
         document.querySelector("[data-component~='toolbar']").classList.add("hide");
     },

@@ -412,7 +412,7 @@ textarea {
     margin: 0 3px;
 }
 
-[data-component~="toolbar"] .status-indicator {
+[data-component="status_indicator"] {
     border-radius: 50%;
     width: 12px;
     height: 12px;
