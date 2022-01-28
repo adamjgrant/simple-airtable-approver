@@ -133,6 +133,19 @@ m.card.act({
     },
 
     edit_response(_$, args) {
+        m.toolbar.act.disable();
+        m.status_indicator.act.set_status_yellow({ reset: false });
+
+        const edit = common.debounce({
+            func: () => {
+                // TODO: Send edits to airtable
+                // TODO: In promise return
+                // m.toolbar.act.enable();
+                // m.status_indicator.act.set_status_green();
+            },
+            wait: 1000,
+        });
+        edit();
         console.log(args);
     }
 })

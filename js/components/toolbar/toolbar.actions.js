@@ -54,6 +54,14 @@ m.toolbar.acts({
         document.querySelector("[data-component~='toolbar']").classList.add("hide");
     },
 
+    disable(_$, args) {
+        document.querySelector("[data-component~='toolbar']").classList.add("disabled");
+    },
+
+    enable(_$, args) {
+        document.querySelector("[data-component~='toolbar']").classList.remove("disabled");
+    },
+
     priv: {
         update_review_status(_$, args) {
             m.status_indicator.act.set_status_yellow({ reset: false });

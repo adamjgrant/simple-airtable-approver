@@ -16,6 +16,11 @@
     opacity: 0;
 }
 
+[data-component~="toolbar"].disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 [data-component~="toolbar"] button {
     padding: 10px 15px;
     background: transparent;
