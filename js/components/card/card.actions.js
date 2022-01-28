@@ -90,6 +90,7 @@ m.card.act({
 
         _$("#tweet").innerHTML = m.card.this_card.tweet;
         _$("#response").innerHTML = m.card.this_card.response;
+        _$("#response").value = m.card.this_card.response;
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
 
         m.card.this_card.previous_responses.forEach((response, i) => {
@@ -154,7 +155,6 @@ m.card.act({
             wait: 1000,
         });
         edit();
-        console.log(args);
     }
 })
 
