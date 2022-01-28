@@ -46,12 +46,28 @@ m.card.act({
         m.card.this_card.response = turn_hashtags_into_links(m.card.this_card.response);
     },
 
+    no_more_cards(_$, args) {
+        // Don't confuse a bad connection with a good connection with no cards.
+        if (_$.act.bad_connection_details()) return false;
+        return !m.card.data.length;
+    },
+
+    bad_connection_details(_$, args) {
+        const settings_validation = m.toolbar.valid_settings;
+        return !settings_validation.valid;
+    },
+
     advance_to_next_card(_$, args) {
         if (m.card.this_card != null) m.card.cards_processed.push(m.card.this_card);
 
-        if (!m.card.data.length) {
+        if (_$.act.no_more_cards()) {
             m.toolbar.act.hide();
             return m.curtain.act.set_curtain_text({ text: "Session complete. Refresh for more tweets" });
+        }
+
+        if (_$.act.bad_connection_details()) {
+            m.toolbar.act.show();
+            return m.curtain.act.set_curtain_text({ text: "Could not find Airtable Connection Key/Base ID" });
         }
 
         m.card.this_card = m.card.data.pop();

@@ -10,11 +10,16 @@ m.toolbar.acts({
     },
 
     validate_settings(_$, args) {
-        const key = localStorage.getItem("airtable_api_key");
-        const base_id = localStorage.getItem("airtable_base_id");
+        let key = localStorage.getItem("airtable_api_key");
+        let base_id = localStorage.getItem("airtable_base_id");
 
         let return_obj = { valid: false, message: "" };
         let missing_fields_array = [];
+
+        if (key == "null") key = undefined;
+        if (base_id == "null") base_id = undefined;
+
+        console.log(key)
 
         if (!key) missing_fields_array.push("Airtable Key");
         if (!base_id) missing_fields_array.push("Airtable Base ID");
@@ -25,6 +30,7 @@ m.toolbar.acts({
             _$.act.get_settings();
         }
 
+        m.toolbar.valid_settings = return_obj.valid;
         return return_obj;
     },
 
@@ -40,6 +46,10 @@ m.toolbar.acts({
 
     in_review(_$, args) {
         _$.act.update_review_status({ status: 0 });
+    },
+
+    show(_$, args) {
+        document.querySelector("[data-component~='toolbar']").classList.remove("hide");
     },
 
     hide(_$, args) {

@@ -8,6 +8,7 @@
     bottom: 0;
     right: 0;
     transition: opacity 1s;
+    z-index: 2;
 }
 
 [data-component~="toolbar"].hide {
@@ -42,8 +43,7 @@
     [data-component~="toolbar"] button {
         color: white;
     }
-
     [data-component~="toolbar"] button:hover {
-        background: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
     }
 }
