@@ -53,8 +53,7 @@ m.card.act({
     },
 
     bad_connection_details(_$, args) {
-        const settings_validation = m.toolbar.valid_settings;
-        return !settings_validation.valid;
+        return !m.toolbar.valid_settings;
     },
 
     advance_to_next_card(_$, args) {

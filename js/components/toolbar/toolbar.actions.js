@@ -19,8 +19,6 @@ m.toolbar.acts({
         if (key == "null") key = undefined;
         if (base_id == "null") base_id = undefined;
 
-        console.log(key)
-
         if (!key) missing_fields_array.push("Airtable Key");
         if (!base_id) missing_fields_array.push("Airtable Base ID");
         if (key && base_id) return_obj.valid = true;
