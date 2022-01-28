@@ -4,6 +4,8 @@ let called = false;
 m.card.events(_$ => {
     let load_in_data_promises = [];
 
+    _$("#response").addEventListener("keyup", (e) => { _$.act.edit_response({ text: e.target.value }) });
+
     if (!called) {
         const validation = m.toolbar.act.validate_settings();
         if (!validation.valid) {

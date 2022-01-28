@@ -130,6 +130,10 @@ m.card.act({
                 });
             });
         }
+    },
+
+    edit_response(_$, args) {
+        console.log(args);
     }
 })
 
