@@ -18,32 +18,12 @@ m.status_indicator.acts({
 
             if (args.reset === undefined) args.reset = true;
             if (args.reset) {
-                const reset = _$.act.debounce({
+                const reset = common.debounce({
                     func: _$.act.reset_status,
                     wait: 500,
                 });
                 reset();
             }
-        },
-
-        debounce(_$, args) {
-            const func = args.func;
-            const wait = args.wait;
-            const immediate = args.immediate;
-
-            var timeout;
-            return function() {
-                var context = this,
-                    args = arguments;
-                var later = function() {
-                    timeout = null;
-                    if (!immediate) func.apply(context, args);
-                };
-                var callNow = immediate && !timeout;
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-                if (callNow) func.apply(context, args);
-            };
         }
     }
 });
