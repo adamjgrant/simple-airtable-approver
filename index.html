@@ -15,7 +15,6 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="apple-touch-icon" href="icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="css/main.css">
@@ -34,45 +33,43 @@
 
 <body>
     <div id="viewport">
-        <div id="area">
-            <div data-component="card">
-                <div data-component="curtain">
-                    <h1>Loading...</h1>
-                </div>
-                <div data-component="status_indicator"></div>
-                <div class="twitter-box tweet-minus-2">
-                    <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
-                    <article>
-                        <p id="tweet-minus-2">This is the tweet</p>
-                    </article>
-                </div>
-                <div class="twitter-box tweet-minus-1">
-                    <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
-                    <article>
-                        <p id="tweet-minus-1">This is the tweet</p>
-                    </article>
-                </div>
-                <div class="twitter-box">
-                    <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
-                    <article>
-                        <h1>They say</h1>
-                        <p id="tweet">This is the tweet</p>
-                    </article>
-                </div>
-                <div class="twitter-box">
-                    <img src="" class="profile" id="response-thumbnail">
-                    <article>
-                        <h1>Responding with</h1>
-                        <textarea id="response">This is the response</textarea>
-                    </article>
-                </div>
+        <div data-component="card">
+            <div data-component="curtain">
+                <h1>Loading...</h1>
             </div>
-            <div data-component="toolbar">
-                <button id="undo"><i class="icofont-undo"></i></button>
-                <button id="set-localstorage-values"><i class="icofont-settings-alt"></i>️</button>
-                <button id="approve">Approve</button>
-                <button id="reject">Reject</button>
+            <div data-component="status_indicator"></div>
+            <div class="twitter-box tweet-minus-2">
+                <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
+                <article>
+                    <p id="tweet-minus-2">This is the tweet</p>
+                </article>
             </div>
+            <div class="twitter-box tweet-minus-1">
+                <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
+                <article>
+                    <p id="tweet-minus-1">This is the tweet</p>
+                </article>
+            </div>
+            <div class="twitter-box">
+                <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
+                <article>
+                    <h1>They say</h1>
+                    <p id="tweet">This is the tweet</p>
+                </article>
+            </div>
+            <div class="twitter-box">
+                <img src="" class="profile" id="response-thumbnail">
+                <article>
+                    <h1>Responding with</h1>
+                    <textarea id="response">This is the response</textarea>
+                </article>
+            </div>
+        </div>
+        <div data-component="toolbar">
+            <button id="undo"><i class="icofont-undo"></i></button>
+            <button id="set-localstorage-values"><i class="icofont-settings-alt"></i>️</button>
+            <button id="approve">Approve</button>
+            <button id="reject">Reject</button>
         </div>
     </div>
     <script src="js/common.js"></script>
@@ -80,7 +77,6 @@
     <script src="js/vendor/mozart.js"></script>
     <script id="main_script" src="js/main.js"></script>
 
-    <script src="js/vendor/viewport-fix.js"></script>
     <script>
         new VVP()
     </script>
@@ -88,9 +84,17 @@
 
     <!-- Testing -->
     <style>
-        #area {
-            position: fixed;
-            bottom: 0;
+        body {
+            background: red
+        }
+        
+        html {
+            background: orange
+        }
+        
+        #viewport {
+            background: yellow;
+            height: 100sv;
         }
     </style>
 </body>

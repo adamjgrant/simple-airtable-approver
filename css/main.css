@@ -1,6 +1,6 @@
 /* FOUNDATIONAL STYLES */
+
 @import url('normalize.css');
 @import url('reset.css');
-@import url('viewport-fix.css');
 
 /* COMPONENTS ARE LOADED VIA MAIN.JS */
