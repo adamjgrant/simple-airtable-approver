@@ -138,10 +138,18 @@ m.card.act({
 
         const edit = common.debounce({
             func: () => {
-                // TODO: Send edits to airtable
-                // TODO: In promise return
-                // m.toolbar.act.enable();
-                // m.status_indicator.act.set_status_green();
+                m.card.act.airtable_base()('💬 Tweets').update([{
+                    id: m.card.this_card.id,
+                    fields: { "Tweet": args.text }
+                }], function(err, records) {
+                    if (err) {
+                        m.status_indicator.act.set_status_red();
+                        return console.error(err);
+                    } else {
+                        m.toolbar.act.enable();
+                        m.status_indicator.act.set_status_green();
+                    }
+                });
             },
             wait: 1000,
         });
