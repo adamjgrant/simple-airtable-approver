@@ -12,6 +12,7 @@ m.card.act({
                 id: args.record.getId(),
                 tweet: args.record.get("Responds to (Text) cleaned up"),
                 response: args.record.get("Full tweet"),
+                link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
                 thumbnail: _$.act.get_twitter_photo({ record: args.record })
             }
 
@@ -92,6 +93,10 @@ m.card.act({
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response").value = m.card.this_card.response;
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
+
+        _$(".link-to-tweet").forEach(link => {
+            link.href = m.card.this_card.link_to_tweet;
+        });
 
         m.card.this_card.previous_responses.forEach((response, i) => {
             _$(`#tweet-minus-${i + 1}`).innerHTML = response.tweet;
