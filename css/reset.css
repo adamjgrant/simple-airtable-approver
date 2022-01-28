@@ -284,15 +284,10 @@ textarea {
 }
 
 #viewport {
-    max-height: var(--100vh, 100vh);
-}
-
-#area {
     padding: 15px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    height: var(--100vh, 100vh);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -300,8 +295,7 @@ textarea {
         background: black;
         color: white;
     }
-    
-    :root {
+     :root {
         --twitter-black-text: white;
         --twitter-bar-color: rgb(84, 89, 92);
     }
