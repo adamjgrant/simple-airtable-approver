@@ -10,7 +10,7 @@ m.card.events(_$ => {
     _$("#select-all").addEventListener("dblclick", _$.act.clear);
 
     if (!called) {
-        const validation = m.toolbar.act.validate_settings();
+        const validation = m.bottom_nav.act.validate_settings();
         if (!validation.valid) {
             m.curtain.act.set_curtain_text({ text: validation.message });
         }

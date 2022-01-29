@@ -1,4 +1,4 @@
-[data-component~="toolbar"] {
+[data-component~="bottom_nav"] {
     height: 85px;
     margin: 0;
     display: flex;
@@ -15,17 +15,17 @@
     padding-bottom: 25px;
 }
 
-[data-component~="toolbar"].hide {
+[data-component~="bottom_nav"].hide {
     pointer-events: none;
     opacity: 0;
 }
 
-[data-component~="toolbar"].disabled {
+[data-component~="bottom_nav"].disabled {
     pointer-events: none;
     opacity: 0.5;
 }
 
-[data-component~="toolbar"] button {
+[data-component~="bottom_nav"] button {
     padding: 10px 15px;
     background: transparent;
     border: none;
@@ -35,28 +35,28 @@
     cursor: pointer;
 }
 
-[data-component~="toolbar"] button:hover {
+[data-component~="bottom_nav"] button:hover {
     background: #EEE;
 }
 
-[data-component~="toolbar"] button#reject {
+[data-component~="bottom_nav"] button#reject {
     background: crimson;
     color: white;
 }
 
-[data-component~="toolbar"] button#reject:hover {
+[data-component~="bottom_nav"] button#reject:hover {
     background: rgb(46, 171, 248);
 }
 
 @media (prefers-color-scheme: dark) {
-    [data-component~="toolbar"] {
+    [data-component~="bottom_nav"] {
         background: black;
         border-top-color: #333;
     }
-    [data-component~="toolbar"] button {
+    [data-component~="bottom_nav"] button {
         color: white;
     }
-    [data-component~="toolbar"] button:hover {
+    [data-component~="bottom_nav"] button:hover {
         background: rgba(255, 255, 255, 0.1);
     }
 }

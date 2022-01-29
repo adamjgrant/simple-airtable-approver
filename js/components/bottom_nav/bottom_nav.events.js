@@ -1,4 +1,4 @@
-m.toolbar.events(_$ => {
+m.bottom_nav.events(_$ => {
     _$("#set-localstorage-values").addEventListener("click", _$.act.get_settings);
 
     _$("#approve").addEventListener("click", _$.act.approve);

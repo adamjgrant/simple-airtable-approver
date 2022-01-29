@@ -1,4 +1,4 @@
-m.toolbar.acts({
+m.bottom_nav.acts({
     get_settings(_$, args) {
         const api_key = prompt("Airtable API Key");
         const base = prompt("Airtable base ID");
@@ -28,7 +28,7 @@ m.toolbar.acts({
             _$.act.get_settings();
         }
 
-        m.toolbar.valid_settings = return_obj.valid;
+        m.bottom_nav.valid_settings = return_obj.valid;
         return return_obj;
     },
 

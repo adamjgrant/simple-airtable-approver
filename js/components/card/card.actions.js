@@ -54,19 +54,19 @@ m.card.act({
     },
 
     bad_connection_details(_$, args) {
-        return !m.toolbar.valid_settings;
+        return !m.bottom_nav.valid_settings;
     },
 
     advance_to_next_card(_$, args) {
         if (m.card.this_card != null) m.card.cards_processed.push(m.card.this_card);
 
         if (_$.act.no_more_cards()) {
-            m.toolbar.act.hide();
+            m.bottom_nav.act.hide();
             return m.curtain.act.set_curtain_text({ text: "Session complete. Refresh for more tweets" });
         }
 
         if (_$.act.bad_connection_details()) {
-            m.toolbar.act.show();
+            m.bottom_nav.act.show();
             return m.curtain.act.set_curtain_text({ text: "Could not find Airtable Connection Key/Base ID" });
         }
 
@@ -79,7 +79,7 @@ m.card.act({
         if (!m.card.cards_processed.length) return console.error("No card to go back to");
         m.card.data.unshift(m.card.this_card);
         m.card.this_card = m.card.cards_processed.pop();
-        m.toolbar.act.in_review();
+        m.bottom_nav.act.in_review();
         _$.act.format_card();
         _$.act.set_card_values();
     },
@@ -139,7 +139,7 @@ m.card.act({
     },
 
     edit_response(_$, args) {
-        m.toolbar.act.disable();
+        m.bottom_nav.act.disable();
         m.status_indicator.act.set_status_yellow({ reset: false });
 
         const edit = common.debounce({
@@ -152,7 +152,7 @@ m.card.act({
                         m.status_indicator.act.set_status_red();
                         return console.error(err);
                     } else {
-                        m.toolbar.act.enable();
+                        m.bottom_nav.act.enable();
                         m.status_indicator.act.set_status_green();
                     }
                 });
