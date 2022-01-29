@@ -1,5 +1,5 @@
 [data-component~="toolbar"] {
-    height: 60px;
+    height: 85px;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -12,6 +12,7 @@
     z-index: 2;
     background: white;
     border-top: 1px solid #eee;
+    padding-bottom: 25px;
 }
 
 [data-component~="toolbar"].hide {
