@@ -1,14 +1,19 @@
 [data-component~="toolbar"] {
-    height: 120px;
+    border-radius: 15px;
+    height: 60px;
+    margin: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
-    left: 0;
+    left: 40px;
     bottom: 0;
-    right: 0;
+    right: 40px;
     transition: opacity 1s;
     z-index: 2;
+    background: white;
+    border: 1px solid #eee;
+    box-shadow: 0px 0px 5px #ccc;
 }
 
 [data-component~="toolbar"].hide {
@@ -36,7 +41,7 @@
 }
 
 [data-component~="toolbar"] button#reject {
-    background: var(--twitter-blue-link);
+    background: crimson;
     color: white;
 }
 
