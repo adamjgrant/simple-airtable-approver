@@ -90,4 +90,9 @@
     [data-component~="card"] img.profile {
         border-color: var(--twitter-bar-color);
     }
+    [data-component~="card"] #response {
+        background: black;
+        color: white;
+        border-color: #333;
+    }
 }
