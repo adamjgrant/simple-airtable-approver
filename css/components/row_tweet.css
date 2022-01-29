@@ -1,0 +1,37 @@
+[data-component~="row_tweet"] {
+    border-bottom: 1px solid #EEE;
+    display: flex;
+    padding: 8px 15px;
+    padding-bottom: 20px;
+}
+
+[data-component~="row_tweet"] .profile {
+    --size: 50px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+}
+
+[data-component~="row_tweet"] article {
+    margin-left: 5px;
+}
+
+[data-component~="row_tweet"] h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+[data-component~="row_tweet"] .tweet {
+    margin: 0;
+}
+
+[data-component~="row_tweet"] h1,
+[data-component~="row_tweet"] .tweet {
+    font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-component~="row_tweet"] {
+        border-bottom: 1px solid #333;
+    }
+}

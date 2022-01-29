@@ -1,0 +1,1 @@
+m.row_tweet.events((_$) => {});
