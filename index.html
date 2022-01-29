@@ -35,59 +35,72 @@
 
 <body>
     <div data-component="viewport">
-        <div data-component="card">
-            <div data-component="curtain">
-                <div class="text">
-                    <i class="icofont-twitter"></i>
-                    <h1>Loading...</h1>
-                </div>
-            </div>
-            <div data-component="status_indicator"></div>
-            <nav data-component="top_nav">
-                <ul>
-                    <li>
-                        <a href="./"><i class="icofont-twitter"></i> Tweet Approver</a>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <a href="./"><i class="icofont-refresh"></i></a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="twitter-box tweet-minus-2">
-                <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
-                <article>
-                    <p id="tweet-minus-2">This is the tweet</p>
-                </article>
-            </div>
-            <div class="twitter-box tweet-minus-1">
-                <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
-                <article>
-                    <p id="tweet-minus-1">This is the tweet</p>
-                </article>
-            </div>
-            <div class="twitter-box">
-                <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
-                <article>
-                    <h1>They say</h1>
-                    <p id="tweet">This is the tweet</p>
-                </article>
-            </div>
-            <div class="twitter-box">
-                <a id="select-all"><img src="" class="profile" id="response-thumbnail"></a>
-                <article>
-                    <h1>Responding with</h1>
-                    <textarea id="response">This is the response</textarea>
-                </article>
+        <div data-component="curtain">
+            <div class="text">
+                <i class="icofont-twitter"></i>
+                <h1>Loading...</h1>
             </div>
         </div>
-        <div data-component="bottom_nav" class="hide">
-            <button id="undo"><i class="icofont-undo"></i></button>
-            <button id="set-localstorage-values"><i class="icofont-settings-alt"></i>️</button>
-            <button id="approve">Approve</button>
-            <button id="reject">Reject</button>
+
+        <div data-component="status_indicator"></div>
+        <nav data-component="top_nav">
+            <ul>
+                <li>
+                    <a href="./"><i class="icofont-twitter"></i> Tweet Approver</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li>
+                    <a id="tinder" href="#"><i class="icofont-card"></i></a>
+                </li>
+
+                <li>
+                    <a id="timeline" href="#"><i class="icofont-home"></i></a>
+                </li>
+
+            </ul>
+        </nav>
+
+        <div class="view-tinder">
+            <div data-component="card">
+                <div class="twitter-box tweet-minus-2">
+                    <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
+                    <article>
+                        <p id="tweet-minus-2">This is the tweet</p>
+                    </article>
+                </div>
+                <div class="twitter-box tweet-minus-1">
+                    <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
+                    <article>
+                        <p id="tweet-minus-1">This is the tweet</p>
+                    </article>
+                </div>
+                <div class="twitter-box">
+                    <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
+                    <article>
+                        <h1>They say</h1>
+                        <p id="tweet">This is the tweet</p>
+                    </article>
+                </div>
+                <div class="twitter-box">
+                    <a id="select-all"><img src="" class="profile" id="response-thumbnail"></a>
+                    <article>
+                        <h1>Responding with</h1>
+                        <textarea id="response">This is the response</textarea>
+                    </article>
+                </div>
+            </div>
+            <div data-component="bottom_nav" class="hide">
+                <button id="undo"><i class="icofont-undo"></i></button>
+                <button id="set-localstorage-values"><i class="icofont-settings-alt"></i>️</button>
+                <button id="approve">Approve</button>
+                <button id="reject">Reject</button>
+            </div>
+        </div>
+
+        <div class="view-timeline">
+            <h1>(List view)</h1>
         </div>
     </div>
     <script src="js/common.js"></script>

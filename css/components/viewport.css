@@ -9,6 +9,33 @@
     overflow: auto;
 }
 
+
+/* By default, use tinder mode. */
+
+.view-tinder,
+#timeline {
+    display: block;
+}
+
+.view-timeline,
+#tinder {
+    display: none;
+}
+
+[data-component~="viewport"].timeline-view .view-timeline,
+[data-component~="viewport"].timeline-view #tinder,
+[data-component~="viewport"].tinder-view .view-tinder,
+[data-component~="viewport"].tinder-view #timeline {
+    display: block;
+}
+
+[data-component~="viewport"].timeline-view .view-tinder,
+[data-component~="viewport"].timeline-view #timeline,
+[data-component~="viewport"].tinder-view .view-timeline,
+[data-component~="viewport"].tinder-view #tinder {
+    display: none;
+}
+
 @media (prefers-color-scheme: dark) {
     [data-component~="viewport"] {
         background: black;

@@ -14,11 +14,30 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
 }
 
 [data-component="top_nav"] ul li,
 [data-component="top_nav"] a {
     color: white;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 16px;
 }
+
+[data-component="top_nav"] ul:last-child a {
+    padding-left: 5px;
+}
+
+[data-component="top_nav"] .hide {
+    display: none;
+}
+
+
+/*
+See viewport.css for toggling visibility of these
+
+[data-component="top_nav"] #tinder,
+[data-component="top_nav"] #timeline {
+  // ...
+}
+*/
