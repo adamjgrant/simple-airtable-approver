@@ -6,14 +6,13 @@
 }
 
 [data-component~="row_tweet"] .profile {
-    --size: 50px;
-    width: var(--size);
-    height: var(--size);
+    width: var(--profile-photo-size);
+    height: var(--profile-photo-size);
     border-radius: 50%;
 }
 
 [data-component~="row_tweet"] article {
-    margin-left: 5px;
+    margin-left: var(--profile-photo-margin-l);
 }
 
 [data-component~="row_tweet"] h1 {
@@ -27,7 +26,11 @@
 
 [data-component~="row_tweet"] h1,
 [data-component~="row_tweet"] .tweet {
-    font-size: 14px;
+    font-size: var(--font-size);
+}
+
+[data-component~="row_tweet"] .tweet {
+    line-height: var(--line-height);
 }
 
 @media (prefers-color-scheme: dark) {

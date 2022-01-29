@@ -5,7 +5,7 @@
     margin: 0px auto;
     color: var(--twitter-black-text);
     width: 100%;
-    padding-top: 15px;
+    padding-top: 8px;
 }
 
 [data-component~="card"] a {
@@ -15,6 +15,7 @@
 [data-component~="card"] .twitter-box {
     display: flex;
     width: 100%;
+    line-height: var(--line-height);
 }
 
 [data-component~="card"] .twitter-box p {
@@ -57,7 +58,7 @@
 
 [data-component~="card"] article {
     flex: 1;
-    margin-left: 12px;
+    margin-left: var(--profile-photo-margin-l);
 }
 
 [data-component~="card"] article h1 {
