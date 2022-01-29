@@ -285,7 +285,8 @@ textarea {
     box-sizing: border-box;
 }
 
-html {
+html,
+body {
     background: var(--twitter-blue-link);
 }
 
