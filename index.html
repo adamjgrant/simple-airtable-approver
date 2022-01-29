@@ -27,7 +27,8 @@
             "status_indicator",
             "curtain",
             "top_nav",
-            "viewport"
+            "viewport",
+            "row_tweet"
         ];
     </script>
     <script src="js/components.js"></script>
@@ -99,9 +100,28 @@
             </div>
         </div>
 
-        <div class="view-timeline">
-            <h1>(List view)</h1>
-        </div>
+        <ul class="view-timeline">
+            <template id="timeline-row">
+              <li>
+                <a data-component="row_tweet">
+                  <img src="img/twitter.jpg" class="profile">
+                  <article>
+                      <h1>Author</h1>
+                      <p class="tweet">This is the tweet</p>
+                  </article>
+                </a>
+            </li>
+          </template>
+            <li>
+                <a data-component="row_tweet">
+                    <img src="img/twitter.jpg" class="profile">
+                    <article>
+                        <h1>Author</h1>
+                        <p class="tweet">This is the tweet</p>
+                    </article>
+                </a>
+            </li>
+        </ul>
     </div>
     <script src="js/common.js"></script>
     <script src="js/vendor/airtable.js"></script>
