@@ -3,6 +3,20 @@ m.row_tweet.act({
         _$.act.clear();
         const cards = m.card.data;
         cards.forEach(card => _$.act.make_row({ card: card }));
+        _$.act.bind_events();
+    },
+
+    open_tweet(_$, args) {
+        // TODO:
+        //   Switch to card by index
+        //   Show tinder view
+        console.log(args.e.target);
+    },
+
+    bind_events(_$, args) {
+        _$.me().forEach(el => el.addEventListener("click", (e) => {
+            _$.act.open_tweet({ e: e })
+        }));
     },
 
     priv: {

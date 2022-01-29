@@ -75,6 +75,7 @@ m.card.act({
         m.card.this_card = m.card.data.pop();
         _$.act.format_card();
         _$.act.set_card_values();
+        m.row_tweet.act.populate();
     },
 
     undo(_$, args) {
