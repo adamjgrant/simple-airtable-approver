@@ -37,4 +37,7 @@
     [data-component~="curtain"] {
         background: black;
     }
+    [data-component~="curtain"] .icofont-twitter {
+        color: var(--twitter-blue-link);
+    }
 }
