@@ -6,6 +6,9 @@ m.card.events(_$ => {
 
     _$("#response").addEventListener("keyup", (e) => { _$.act.edit_response({ text: e.target.value }) });
 
+    _$("#select-all").addEventListener("click", _$.act.select_all);
+    _$("#select-all").addEventListener("dblclick", _$.act.clear);
+
     if (!called) {
         const validation = m.toolbar.act.validate_settings();
         if (!validation.valid) {

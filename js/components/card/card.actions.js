@@ -160,6 +160,15 @@ m.card.act({
             wait: 1000,
         });
         edit();
+    },
+
+    select_all(_$, args) {
+        _$("#response").select();
+    },
+
+    clear(_$, args) {
+        _$("#response").value = "";
+        _$("#response").innerHTML = "";
     }
 })
 
