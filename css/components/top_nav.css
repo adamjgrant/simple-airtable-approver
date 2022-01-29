@@ -6,6 +6,8 @@
     right: 0;
     padding: 10px;
     color: white;
+    display: flex;
+    justify-content: space-between;
 }
 
 [data-component="top_nav"] ul {
@@ -15,6 +17,8 @@
 }
 
 [data-component="top_nav"] ul li,
-[data-component="top_nav"] i {
+[data-component="top_nav"] a {
     color: white;
+    text-decoration: none;
+    font-size: 15px;
 }
