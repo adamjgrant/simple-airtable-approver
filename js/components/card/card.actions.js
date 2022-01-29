@@ -58,7 +58,7 @@ m.card.act({
         return !m.bottom_nav.valid_settings;
     },
 
-    advance_to_next_card(_$, args) {
+    advance_to_next_card(_$, args = {}) {
         if (m.card.this_card != null) m.card.cards_processed.push(m.card.this_card);
 
         if (_$.act.no_more_cards()) {
@@ -72,10 +72,19 @@ m.card.act({
         }
 
         m.bottom_nav.act.show();
-        m.card.this_card = m.card.data.pop();
+        if (args.this_card) {
+            m.card.data.splice(args.index, 1);
+            m.card.this_card = args.this_card;
+        } else {
+            m.card.this_card = m.card.data.pop();
+        }
         _$.act.format_card();
         _$.act.set_card_values();
-        m.row_tweet.act.populate();
+    },
+
+    advance_to_card_at_index(_$, args) {
+        const this_card = m.card.data[args.index];
+        _$.act.advance_to_next_card({ this_card: this_card, index: args.index });
     },
 
     undo(_$, args) {

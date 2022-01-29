@@ -2,20 +2,22 @@ m.row_tweet.act({
     populate(_$, args) {
         _$.act.clear();
         const cards = m.card.data;
-        cards.forEach(card => _$.act.make_row({ card: card }));
+        cards.forEach((card, index) => _$.act.make_row({ card: card, index: index }));
         _$.act.bind_events();
     },
 
     open_tweet(_$, args) {
-        // TODO:
         //   Switch to card by index
+        const row = args.row
+        const index = row.dataset.cardIndex;
+        m.card.act.advance_to_card_at_index({ index: parseInt(index) });
         //   Show tinder view
-        console.log(args.e.target);
+        m.viewport.act.show_tinder();
     },
 
     bind_events(_$, args) {
         _$.me().forEach(el => el.addEventListener("click", (e) => {
-            _$.act.open_tweet({ e: e })
+            _$.act.open_tweet({ row: el })
         }));
     },
 
@@ -31,7 +33,7 @@ m.row_tweet.act({
         make_row(_$, args) {
             const template = _$.act.get_template();
             const parent = _$.act.get_parent();
-
+            const index = args.index;
             const card = args.card;
 
             /*
@@ -44,7 +46,7 @@ m.row_tweet.act({
             */
             const card_element = template.content.cloneNode(true);
             card_element.querySelector(".tweet").innerHTML = card.tweet;
-
+            card_element.querySelector("[data-component='row_tweet']").dataset.cardIndex = index;
             parent.appendChild(card_element);
         },
 
