@@ -87,6 +87,13 @@ m.card.act({
         _$.act.advance_to_next_card({ this_card: this_card, index: args.index });
     },
 
+    reject_card_at_index(_$, args) {
+        const this_card = m.card.data[args.index];
+        m.bottom_nav.act
+            .reject_specific_card({ this_card: this_card, index: args.index })
+            .then(m.row_tweet.act.populate());
+    },
+
     undo(_$, args) {
         if (!m.card.cards_processed.length) return console.error("No card to go back to");
         m.card.data.unshift(m.card.this_card);

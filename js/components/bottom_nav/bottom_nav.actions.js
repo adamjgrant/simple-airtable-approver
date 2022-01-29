@@ -42,6 +42,17 @@ m.bottom_nav.acts({
         m.card.act.advance_to_next_card();
     },
 
+    reject_specific_card(_$, args) {
+        return new Promise((resolve, reject) => {
+            _$.act.update_review_status({
+                status: -1,
+                this_card: args.this_card,
+                cb: resolve,
+                ecb: reject
+            });
+        });
+    },
+
     in_review(_$, args) {
         _$.act.update_review_status({ status: 0 });
     },
@@ -63,19 +74,22 @@ m.bottom_nav.acts({
     },
 
     priv: {
-        update_review_status(_$, args) {
+        update_review_status(_$, args = {}) {
             m.status_indicator.act.set_status_yellow({ reset: false });
             let new_status = "Pending Review";
             if (args.status > 0) new_status = "Approved";
             if (args.status < 0) new_status = "Rejected";
+            const this_card = args.this_card || m.card.this_card;
             m.card.act.airtable_base()('💬 Tweets').update([{
-                id: m.card.this_card.id,
+                id: this_card.id,
                 fields: { "Review Status": new_status }
             }], function(err, records) {
                 if (err) {
+                    if (args.ecb) args.ecb();
                     m.status_indicator.act.set_status_red();
                     return console.error(err);
                 }
+                if (args.cb) args.cb();
                 m.status_indicator.act.set_status_green();
             });
         }

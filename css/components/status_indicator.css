@@ -4,9 +4,9 @@
     left: 0;
     right: 0;
     height: 3px;
-    background-color: white;
+    background-color: transparent;
     transition: background-color 0.5s;
-    z-index: 0;
+    z-index: 5;
 }
 
 [data-component="status_indicator"].yellow {

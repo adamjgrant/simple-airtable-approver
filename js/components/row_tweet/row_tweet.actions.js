@@ -15,7 +15,19 @@ m.row_tweet.act({
         m.viewport.act.show_tinder();
     },
 
+    reject_tweet(_$, args) {
+        //   Switch to card by index
+        const row = args.row
+        const index = row.dataset.cardIndex;
+        m.card.act.reject_card_at_index({ index: parseInt(index) });
+    },
+
     bind_events(_$, args) {
+        // TODO: Not working
+        _$.me().forEach(el => el.addEventListener("dblclick", (e) => {
+            _$.act.reject_tweet({ row: el })
+        }));
+
         _$.me().forEach(el => el.addEventListener("click", (e) => {
             _$.act.open_tweet({ row: el })
         }));
