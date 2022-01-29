@@ -70,6 +70,7 @@ m.card.act({
             return m.curtain.act.set_curtain_text({ text: "Could not find Airtable Connection Key/Base ID" });
         }
 
+        m.bottom_nav.act.show();
         m.card.this_card = m.card.data.pop();
         _$.act.format_card();
         _$.act.set_card_values();

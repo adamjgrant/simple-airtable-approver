@@ -47,19 +47,19 @@ m.bottom_nav.acts({
     },
 
     show(_$, args) {
-        document.querySelector("[data-component~='toolbar']").classList.remove("hide");
+        document.querySelector("[data-component~='bottom_nav']").classList.remove("hide");
     },
 
     hide(_$, args) {
-        document.querySelector("[data-component~='toolbar']").classList.add("hide");
+        document.querySelector("[data-component~='bottom_nav']").classList.add("hide");
     },
 
     disable(_$, args) {
-        document.querySelector("[data-component~='toolbar']").classList.add("disabled");
+        document.querySelector("[data-component~='bottom_nav']").classList.add("disabled");
     },
 
     enable(_$, args) {
-        document.querySelector("[data-component~='toolbar']").classList.remove("disabled");
+        document.querySelector("[data-component~='bottom_nav']").classList.remove("disabled");
     },
 
     priv: {

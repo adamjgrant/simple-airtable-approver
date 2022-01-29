@@ -1,5 +1,6 @@
 [data-component~="curtain"] {
-    background: white;
+    background: var(--twitter-blue-link);
+    color: white;
     transition: opacity 0.5s;
     position: fixed;
     top: 0;
@@ -14,6 +15,22 @@
 [data-component~="curtain"].hide {
     pointer-events: none;
     opacity: 0;
+}
+
+[data-component~="curtain"] .text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+[data-component~="curtain"] h1 {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+[data-component~="curtain"] .icofont-twitter {
+    font-size: 40px;
 }
 
 @media (prefers-color-scheme: dark) {
