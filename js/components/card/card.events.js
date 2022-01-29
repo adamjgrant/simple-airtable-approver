@@ -15,7 +15,6 @@ m.card.events(_$ => {
             m.curtain.act.set_curtain_text({ text: validation.message });
         }
 
-        // TODO: Status update: Loading data...
         called = true;
         _$.act.airtable_base()('💬 Tweets').select({
             view: "Permutations Review Board",
@@ -32,7 +31,7 @@ m.card.events(_$ => {
         }, function done(err) {
             if (err) { console.error(err); }
 
-            // TODO: Status update: Waiting for joined data...
+            // Status update: Waiting for joined data...
 
             Promise.allSettled(load_in_data_promises).then(data => {
                 m.curtain.act.set_curtain_text({ text: "Done" });

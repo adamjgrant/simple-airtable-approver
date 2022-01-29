@@ -33,6 +33,7 @@ m.card.act({
     },
 
     start(_$, args) {
+        m.row_tweet.act.populate();
         _$.act.advance_to_next_card();
     },
 
