@@ -5,6 +5,7 @@
     --font-size: 18px;
     --line-height: 24px;
     --profile-photo-size: 58px;
+    --bottom-nav-height: 85px;
 }
 
 
@@ -283,13 +284,18 @@ textarea {
     box-sizing: border-box;
 }
 
+body {
+    overflow: hidden;
+}
+
 #viewport {
     padding: 15px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    height: 100sv;
+    height: calc(100vh - 85px);
     padding-top: 50px;
+    overflow: auto;
 }
 
 @media (prefers-color-scheme: dark) {

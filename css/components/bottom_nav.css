@@ -1,5 +1,5 @@
 [data-component~="bottom_nav"] {
-    height: 85px;
+    height: var(--bottom-nav-height);
     margin: 0;
     display: flex;
     justify-content: center;
