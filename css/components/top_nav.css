@@ -1,0 +1,18 @@
+[data-component="top_nav"] {
+    background: var(--twitter-bar-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+[data-component="top_nav"] ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+[data-component="top_nav"] ul li {
+  color: white;
+}

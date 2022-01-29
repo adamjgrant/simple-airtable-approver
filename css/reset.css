@@ -289,6 +289,7 @@ textarea {
     display: flex;
     flex-direction: column;
     height: 100sv;
+    padding-top: 50px;
 }
 
 @media (prefers-color-scheme: dark) {
