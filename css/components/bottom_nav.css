@@ -20,6 +20,11 @@
     opacity: 0;
 }
 
+[data-component~="bottom_nav"] .spacer {
+    width: 15px;
+    height: 15px;
+}
+
 [data-component~="bottom_nav"].disabled {
     pointer-events: none;
     opacity: 0.5;
@@ -39,7 +44,16 @@
     background: #EEE;
 }
 
+[data-component~="bottom_nav"] button#approve,
+[data-component~="bottom_nav"] button#approve-and-go-back {
+    color: green;
+}
+
 [data-component~="bottom_nav"] button#reject {
+    color: crimson;
+}
+
+[data-component~="bottom_nav"] button#reject-and-go-back {
     background: crimson;
     color: white;
 }
