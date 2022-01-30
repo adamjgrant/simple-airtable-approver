@@ -24,6 +24,7 @@
     <script>
         const components = [
             "card",
+            "choice",
             "bottom_nav",
             "status_indicator",
             "curtain",
@@ -91,6 +92,12 @@
                         <h1>Responding with</h1>
                         <textarea id="response">This is the response</textarea>
                     </article>
+                </div>
+                <div class="choices">
+                    <div data-component="choice" class="choice-1"></div>
+                    <div data-component="choice" class="choice-2"></div>
+                    <div data-component="choice" class="choice-3"></div>
+                    <div data-component="choice" class="choice-autofill"></div>
                 </div>
             </div>
             <div data-component="bottom_nav" class="hide">
