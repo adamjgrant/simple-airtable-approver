@@ -9,6 +9,8 @@ m.card.events(_$ => {
     _$("#select-all").addEventListener("click", _$.act.select_all);
     _$("#select-all").addEventListener("dblclick", _$.act.clear);
 
+    _$("#disclose-response-edit").addEventListener("click", _$.act.toggle_response_edit);
+
     if (!called) {
         const validation = m.bottom_nav.act.validate_settings();
         if (!validation.valid) {

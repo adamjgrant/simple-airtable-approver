@@ -3,6 +3,11 @@ import { agreed } from '../../permutations/agreed.js';
 import { nice } from '../../permutations/nice.js';
 
 m.choice.acts({
+    reset_choices(_$, args) {
+        _$.act.unselect_all_choices();
+        _$.act.select_choice_at_index({ index: 0 });
+    },
+
     permute_lol(_$, args) { _$.act.permute({ json: lol }); },
     permute_nice(_$, args) { _$.act.permute({ json: nice }); },
     permute_agreed(_$, args) { _$.act.permute({ json: agreed }); },
@@ -11,6 +16,11 @@ m.choice.acts({
         _$.act.unselect_all_choices();
         const chosen_choice = _$.me()[args.index]
         chosen_choice.classList.add("selected");
+    },
+
+    set_text_for_choice_at_index(_$, args) {
+        const chosen_choice = _$.me()[args.index]
+        chosen_choice.querySelector("p").innerHTML = args.text;
     },
 
     priv: {

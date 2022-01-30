@@ -111,6 +111,10 @@ m.card.act({
         _$("#tweet").innerHTML = m.card.this_card.tweet;
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response").value = m.card.this_card.response;
+        m.choice.act.set_text_for_choice_at_index({
+            text: m.card.this_card.response,
+            index: 0
+        });
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
 
         _$(".link-to-tweet").forEach(link => {
@@ -121,6 +125,17 @@ m.card.act({
             _$(`#tweet-minus-${i + 1}`).innerHTML = response.tweet;
             _$(`.tweet-minus-${i + 1}`).classList.add("show");
         });
+
+        m.choice.act.reset_choices();
+    },
+
+    toggle_response_edit(_$, args) {
+        const twitter_box = _$(".twitter-box")[_$(".twitter-box").length - 1];
+        if (twitter_box.classList.contains("response-edit-hidden")) {
+            twitter_box.classList.remove("response-edit-hidden");
+        } else {
+            twitter_box.classList.add("response-edit-hidden");
+        }
     },
 
     priv: {
