@@ -11,6 +11,12 @@ m.card.events(_$ => {
 
     _$("#disclose-response-edit").addEventListener("click", _$.act.toggle_response_edit);
 
+    _$("[data-component='choice']").forEach((choice, index) => {
+        choice.addEventListener("click", () => {
+            m.choice.act.select_choice_at_index({ index: index });
+        });
+    });
+
     if (!called) {
         const validation = m.bottom_nav.act.validate_settings();
         if (!validation.valid) {

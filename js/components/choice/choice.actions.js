@@ -18,6 +18,15 @@ m.choice.acts({
         _$.act.unselect_all_choices();
         const chosen_choice = _$.me()[args.index]
         chosen_choice.classList.add("selected");
+        let choice_text;
+        const statically_filled = !!chosen_choice.querySelectorAll("p").length;
+        if (statically_filled) {
+            choice_text = chosen_choice.querySelector("p").innerHTML;
+        } else {
+            choice_text = chosen_choice.getElementById("choice-response").value;
+        }
+        m.card.act.change_response_field({ text: choice_text });
+        m.card.act.edit_response({ text: choice_text });
     },
 
     set_text_for_choice_at_index(_$, args) {
