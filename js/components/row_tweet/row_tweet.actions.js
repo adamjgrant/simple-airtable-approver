@@ -23,7 +23,8 @@ m.row_tweet.act({
     },
 
     bind_events(_$, args) {
-        _$.me().forEach(el => {
+        const rows = _$.me().length ? _$.me() : [_$.me()];
+        rows.forEach(el => {
             const tweet = el.querySelector("article");
             const reject = el.querySelector(".reject");
 
