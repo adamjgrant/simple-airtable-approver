@@ -1,9 +1,11 @@
 [data-component~="choice"] {
-    border: 1px solid #CCC;
+    border: 1px solid var(--twitter-bar-color);
     border-radius: 5px;
     margin: 5px 0;
     min-height: 65px;
     position: relative;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
 }
 
 [data-component~="choice"]:after {
@@ -13,9 +15,52 @@
     width: var(--bubble-height);
     height: var(--bubble-height);
     border-radius: 50%;
-    border: 1px solid #ccc;
+    border: 1px solid var(--twitter-bar-color);
     position: absolute;
     top: 50%;
     margin-top: calc(-1 * (var(--bubble-height) / 2));
     right: 5px;
+}
+
+[data-component~="choice"].selected:after {
+    content: '✔';
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    font-size: 25px;
+    line-height: 0.6;
+}
+
+[data-component~="choice"] nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--twitter-bar-color);
+}
+
+[data-component~="choice"] nav ul li {
+    display: inline-block;
+}
+
+[data-component~="choice"] nav ul a {
+    padding: 10px 7px;
+    display: block;
+    text-decoration: none;
+    font-size: var(--font-size);
+    color: var(--twitter-black-text);
+}
+
+[data-component~="choice"] #choice-response {
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 90px;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+[data-component~="choice"] #choice-response:focus {
+    outline: 0;
 }
