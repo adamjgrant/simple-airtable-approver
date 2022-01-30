@@ -1,8 +1,9 @@
 [data-component="status_indicator"] {
     position: absolute;
-    top: 0;
+    top: auto;
     left: 0;
     right: 0;
+    bottom: 0;
     height: 3px;
     background-color: transparent;
     transition: background-color 0.5s;
@@ -23,6 +24,6 @@
 
 @media (prefers-color-scheme: dark) {
     [data-component="status_indicator"] {
-        background-color: black;
+        background-color: transparent;
     }
 }
