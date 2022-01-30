@@ -65,7 +65,7 @@
     font-size: var(--font-size);
     display: inline-block;
     margin: 0;
-    margin-left: 5px;
+    margin-left: 0px;
 }
 
 @media (prefers-color-scheme: dark) {

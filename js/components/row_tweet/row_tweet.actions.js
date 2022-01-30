@@ -61,7 +61,8 @@ m.row_tweet.act({
             card_element.querySelector(".tiny-response img").src = card.thumbnail;
 
             const tiny_response_length_in_characters = 35;
-            const tiny_response = (card.response.length > tiny_response_length_in_characters) ? card.response.substr(0, tiny_response_length_in_characters - 1) + "&hellip;" : card.response;
+            const oversized = (card.response.length > tiny_response_length_in_characters);
+            const tiny_response = oversized ? card.response.substr(0, tiny_response_length_in_characters - 1) + "&hellip;" : card.response;
             card_element.querySelector(".tiny-response p").innerHTML = tiny_response;
             parent.appendChild(card_element);
         },
