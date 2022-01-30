@@ -288,9 +288,6 @@ textarea {
 html,
 body {
     background: var(--twitter-blue-link);
-}
-
-body {
     overflow: hidden;
 }
 
