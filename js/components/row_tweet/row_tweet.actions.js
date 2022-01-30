@@ -58,6 +58,11 @@ m.row_tweet.act({
             const card_element = template.content.cloneNode(true);
             card_element.querySelector(".tweet").innerHTML = card.tweet;
             card_element.querySelector("[data-component='row_tweet']").dataset.cardIndex = index;
+            card_element.querySelector(".tiny-response img").src = card.thumbnail;
+
+            const tiny_response_length_in_characters = 35;
+            const tiny_response = (card.response.length > tiny_response_length_in_characters) ? card.response.substr(0, tiny_response_length_in_characters - 1) + "&hellip;" : card.response;
+            card_element.querySelector(".tiny-response p").innerHTML = tiny_response;
             parent.appendChild(card_element);
         },
 
