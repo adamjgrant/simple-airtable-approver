@@ -60,6 +60,7 @@
 
 [data-component~="bottom_nav"] button#reject:hover {
     background: crimson;
+    color: white;
 }
 
 @media (prefers-color-scheme: dark) {
