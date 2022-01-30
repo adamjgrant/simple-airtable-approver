@@ -55,12 +55,13 @@ m.bottom_nav.acts({
     },
 
     reject_specific_card(_$, args) {
+        m.card.data.splice(args.index, 1);
+        m.row_tweet.act.populate();
         return new Promise((resolve, reject) => {
             _$.act.update_review_status({
                 status: -1,
                 this_card: args.this_card,
                 cb: () => {
-                    m.card.data.splice(args.index, 1);
                     resolve();
                 },
                 ecb: reject
