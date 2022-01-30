@@ -20,6 +20,8 @@
 [data-component~="row_tweet"] article {
     margin-left: var(--profile-photo-margin-l);
     width: 100%;
+    cursor: pointer;
+    display: block;
 }
 
 [data-component~="row_tweet"] .reject {
@@ -48,10 +50,6 @@
 
 [data-component~="row_tweet"] .tweet {
     line-height: var(--line-height);
-}
-
-[data-component~="row_tweet"] .tiny-response {
-    padding-left: 75px;
 }
 
 [data-component~="row_tweet"] .tiny-response img {

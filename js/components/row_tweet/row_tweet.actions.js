@@ -24,7 +24,7 @@ m.row_tweet.act({
 
     bind_events(_$, args) {
         _$.me().forEach(el => {
-            const tweet = el.querySelector(".tweet");
+            const tweet = el.querySelector("article");
             const reject = el.querySelector(".reject");
 
             tweet.addEventListener("click", () => { _$.act.open_tweet({ row: el }) });
@@ -60,7 +60,7 @@ m.row_tweet.act({
             card_element.querySelector("[data-component='row_tweet']").dataset.cardIndex = index;
             card_element.querySelector(".tiny-response img").src = card.thumbnail;
 
-            const tiny_response_length_in_characters = 35;
+            const tiny_response_length_in_characters = 50;
             const oversized = (card.response.length > tiny_response_length_in_characters);
             const tiny_response = oversized ? card.response.substr(0, tiny_response_length_in_characters - 1) + "&hellip;" : card.response;
             card_element.querySelector(".tiny-response p").innerHTML = tiny_response;
