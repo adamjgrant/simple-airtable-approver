@@ -18,9 +18,12 @@
     width: 100%;
 }
 
-[data-component~="row_tweet"] .delete {
+[data-component~="row_tweet"] .reject {
     width: var(--profile-photo-size);
-    height: var(--profile-photo-size);
+    margin-left: var(--profile-photo-margin-l);
+    text-align: center;
+    height: 100%;
+    color: #AAA;
 }
 
 [data-component~="row_tweet"] h1 {
