@@ -47,7 +47,10 @@ m.bottom_nav.acts({
             _$.act.update_review_status({
                 status: -1,
                 this_card: args.this_card,
-                cb: resolve,
+                cb: () => {
+                    m.card.data.splice(args.index, 1);
+                    resolve();
+                },
                 ecb: reject
             });
         });

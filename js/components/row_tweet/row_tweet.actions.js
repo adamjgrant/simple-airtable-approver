@@ -23,12 +23,10 @@ m.row_tweet.act({
     },
 
     bind_events(_$, args) {
-        // TODO: Not working
-        _$.me().forEach(el => el.addEventListener("dblclick", (e) => {
-            _$.act.reject_tweet({ row: el })
-        }));
-
         _$.me().forEach(el => el.addEventListener("click", (e) => {
+            if (e.target.classList.contains("reject")) {
+                return _$.act.reject_tweet({ row: el })
+            }
             _$.act.open_tweet({ row: el })
         }));
     },

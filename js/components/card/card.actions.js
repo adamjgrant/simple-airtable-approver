@@ -91,7 +91,7 @@ m.card.act({
         const this_card = m.card.data[args.index];
         m.bottom_nav.act
             .reject_specific_card({ this_card: this_card, index: args.index })
-            .then(m.row_tweet.act.populate());
+            .then(m.row_tweet.act.populate);
     },
 
     undo(_$, args) {

@@ -1,6 +1,7 @@
 [data-component~="row_tweet"] {
     border-bottom: 1px solid #EEE;
     display: flex;
+    align-items: center;
     padding: 8px 15px;
     padding-bottom: 20px;
     cursor: pointer;
@@ -14,6 +15,12 @@
 
 [data-component~="row_tweet"] article {
     margin-left: var(--profile-photo-margin-l);
+    width: 100%;
+}
+
+[data-component~="row_tweet"] .delete {
+    width: var(--profile-photo-size);
+    height: var(--profile-photo-size);
 }
 
 [data-component~="row_tweet"] h1 {
