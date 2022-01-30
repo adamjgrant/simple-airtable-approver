@@ -34,12 +34,24 @@ m.bottom_nav.acts({
 
     approve(_$, args) {
         _$.act.update_review_status({ status: 1 });
+        if (args.dont_advance) { return; }
         m.card.act.advance_to_next_card();
+    },
+
+    approve_and_go_back(_$, args) {
+        _$.act.approve({ dont_advance: true });
+        m.viewport.act.show_timeline();
     },
 
     reject(_$, args) {
         _$.act.update_review_status({ status: -1 });
+        if (args.dont_advance) { return; }
         m.card.act.advance_to_next_card();
+    },
+
+    reject_and_go_back(_$, args) {
+        _$.act.reject({ dont_advance: true });
+        m.viewport.act.show_timeline();
     },
 
     reject_specific_card(_$, args) {
