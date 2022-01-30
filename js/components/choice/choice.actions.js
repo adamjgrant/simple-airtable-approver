@@ -23,7 +23,7 @@ m.choice.acts({
         if (statically_filled) {
             choice_text = chosen_choice.querySelector("p").innerHTML;
         } else {
-            choice_text = chosen_choice.getElementById("choice-response").value;
+            choice_text = chosen_choice.querySelector("#choice-response").value;
         }
         m.card.act.change_response_field({ text: choice_text });
         m.card.act.edit_response({ text: choice_text });

@@ -12,6 +12,8 @@ m.card.act({
                 id: args.record.getId(),
                 tweet: args.record.get("Responds to (Text) cleaned up"),
                 response: args.record.get("Full tweet"),
+                tweetalt1: args.record.get("tweetalt1"),
+                tweetalt2: args.record.get("tweetalt2"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
                 thumbnail: _$.act.get_twitter_photo({ record: args.record })
             }
@@ -45,7 +47,7 @@ m.card.act({
         }
 
         m.card.this_card.tweet = turn_hashtags_into_links(m.card.this_card.tweet);
-        m.card.this_card.response = turn_hashtags_into_links(m.card.this_card.response);
+        m.card.this_card.response = m.card.this_card.response;
     },
 
     no_more_cards(_$, args) {
@@ -111,10 +113,11 @@ m.card.act({
         _$("#tweet").innerHTML = m.card.this_card.tweet;
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response").value = m.card.this_card.response;
-        m.choice.act.set_text_for_choice_at_index({
-            text: m.card.this_card.response,
-            index: 0
-        });
+
+        m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.response, index: 0 });
+        m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.tweetalt1, index: 1 });
+        m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.tweetalt2, index: 2 });
+
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
 
         _$(".link-to-tweet").forEach(link => {

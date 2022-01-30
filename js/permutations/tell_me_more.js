@@ -19,7 +19,7 @@ export const tell_me_more = {
     "what-do-you-mean": [
         "Interesting", [
             "...", ". ", ". If you don't mind me asking, ", ". If I may ask: ", [
-                { "ps": "what (is all that about|do you mean by that|is that about)( exactly|)?" }
+                { "ps": "what  (is all that about|do you mean by that|is that about)( exactly|)?" }
             ]
         ]
     ]
