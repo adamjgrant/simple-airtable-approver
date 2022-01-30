@@ -1,7 +1,6 @@
 [data-component~="choice"] {
     margin: 5px 0;
     margin-bottom: 15px;
-    min-height: 65px;
     position: relative;
     font-size: var(--font-size);
     line-height: var(--line-height);
