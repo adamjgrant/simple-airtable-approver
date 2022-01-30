@@ -157,6 +157,15 @@ m.card.act({
         }
     },
 
+    change_response_field(_$, args) {
+        // This exists because some external components need to both 
+        // change the textarea and change the remote data's response.
+        // Some components shouldn't use this because they are
+        // triggered by editing the textarea already.
+        _$("#response").value = args.text;
+        _$("#response").innerHTML = args.text;
+    },
+
     edit_response(_$, args) {
         m.bottom_nav.act.disable();
         m.status_indicator.act.set_status_yellow({ reset: false });

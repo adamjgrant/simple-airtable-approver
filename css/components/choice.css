@@ -8,6 +8,12 @@
     line-height: var(--line-height);
 }
 
+[data-component~="choice"] p {
+    margin: 0;
+    padding: 8px;
+    padding-right: 40px;
+}
+
 [data-component~="choice"]:after {
     --bubble-height: 20px;
     content: '';

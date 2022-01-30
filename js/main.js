@@ -10,7 +10,8 @@ components.forEach(component => {
 
     ["actions", "events", "routes"].forEach(mozart_type => {
         let script_tag = document.createElement("script");
-        script_tag.src=`js/components/${component}/${component}.${mozart_type}.js`;
+        script_tag.type = "module";
+        script_tag.src = `js/components/${component}/${component}.${mozart_type}.js`;
         script_tag_holder.appendChild(script_tag);
 
         promises.push(new Promise((resolve, reject) => {
@@ -21,10 +22,10 @@ components.forEach(component => {
 });
 
 Promise
-  .allSettled(promises)
-  .then(() => {
-    Mozart.init();
-});
+    .allSettled(promises)
+    .then(() => {
+        Mozart.init();
+    });
 
 document.head.appendChild(script_tag_holder);
 main_script.parentNode.insertBefore(script_tag_holder, script_tag_holder.nextSibling);
