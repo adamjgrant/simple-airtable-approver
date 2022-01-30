@@ -47,6 +47,7 @@
 
 [data-component~="card"] .choices {
     margin-top: 0;
+    margin-right: 0;
 }
 
 [data-component~="card"] .twitter-box:last-child:before {
