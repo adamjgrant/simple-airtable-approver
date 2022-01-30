@@ -7,7 +7,7 @@
     height: 100vh;
     padding-top: 50px;
     overflow: auto;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 [data-component~="viewport"].tinder-view {
@@ -31,7 +31,7 @@
 [data-component~="viewport"].timeline-view {
     padding-left: 0;
     padding-right: 0;
-    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 [data-component~="viewport"] ul.view-timeline {
