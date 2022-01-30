@@ -41,7 +41,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid var(--twitter-bar-color);
+    /* border-bottom: 1px solid var(--twitter-bar-color); */
 }
 
 [data-component~="choice"] nav ul li {
@@ -49,7 +49,9 @@
 }
 
 [data-component~="choice"] nav ul a {
-    padding: 10px 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 7px;
     display: block;
     text-decoration: none;
     font-size: var(--font-size);
@@ -60,7 +62,7 @@
     margin: 0;
     border: 0;
     width: 100%;
-    height: 90px;
+    height: 60px;
     font-size: var(--font-size);
     line-height: var(--line-height);
     box-sizing: border-box;
