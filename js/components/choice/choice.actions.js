@@ -1,6 +1,7 @@
 import { lol } from '../../permutations/lol.js';
 import { agreed } from '../../permutations/agreed.js';
 import { nice } from '../../permutations/nice.js';
+import { tell_me_more } from '../../permutations/tell_me_more.js';
 
 m.choice.acts({
     reset_choices(_$, args) {
@@ -11,6 +12,7 @@ m.choice.acts({
     permute_lol(_$, args) { _$.act.permute({ json: lol }); },
     permute_nice(_$, args) { _$.act.permute({ json: nice }); },
     permute_agreed(_$, args) { _$.act.permute({ json: agreed }); },
+    permute_oh(_$, args) { _$.act.permute({ json: tell_me_more }); },
 
     select_choice_at_index(_$, args) {
         _$.act.unselect_all_choices();
