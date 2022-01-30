@@ -35,13 +35,18 @@
     display: flex;
 }
 
-[data-component~="card"] .twitter-box:before {
+[data-component~="card"] .twitter-box:before,
+[data-component~="card"] .choices {
     content: "";
     border-left: 2px solid var(--twitter-bar-color);
     margin-right: calc(-0.5208 * var(--profile-photo-size));
     margin-left: calc(0.5208 * var(--profile-photo-size));
     margin-top: calc(1.0833 * var(--profile-photo-size));
     margin-bottom: 3px;
+}
+
+[data-component~="card"] .choices {
+    margin-top: 0;
 }
 
 [data-component~="card"] .twitter-box:last-child:before {

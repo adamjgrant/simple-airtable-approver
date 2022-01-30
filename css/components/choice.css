@@ -6,7 +6,9 @@
     font-size: var(--font-size);
     line-height: var(--line-height);
     cursor: pointer;
-    border-left: 3px solid transparent;
+    border-left: 5px solid transparent;
+    margin-left: -2px;
+    padding-left: 20px;
 }
 
 [data-component~="choice"] p {
