@@ -1,7 +1,7 @@
 [data-component~="row_tweet"] {
     border-bottom: 1px solid #EEE;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     padding: 8px 15px;
     padding-bottom: 20px;
     cursor: pointer;
@@ -22,8 +22,10 @@
     width: var(--profile-photo-size);
     margin-left: var(--profile-photo-margin-l);
     text-align: center;
-    height: 100%;
     color: #AAA;
+    background: transparent;
+    border-color: transparent;
+    cursor: pointer;
 }
 
 [data-component~="row_tweet"] h1 {
