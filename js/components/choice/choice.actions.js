@@ -9,7 +9,8 @@ m.choice.acts({
 
     select_choice_at_index(_$, args) {
         _$.act.unselect_all_choices();
-        _$.me()[args.index].classList.add("selected");
+        const chosen_choice = _$.me()[args.index]
+        chosen_choice.classList.add("selected");
     },
 
     priv: {
