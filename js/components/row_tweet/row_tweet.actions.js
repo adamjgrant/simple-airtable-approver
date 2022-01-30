@@ -23,12 +23,13 @@ m.row_tweet.act({
     },
 
     bind_events(_$, args) {
-        _$.me().forEach(el => el.addEventListener("click", (e) => {
-            if (e.target.classList.contains("reject")) {
-                return _$.act.reject_tweet({ row: el })
-            }
-            _$.act.open_tweet({ row: el })
-        }));
+        _$.me().forEach(el => {
+            const tweet = el.querySelector(".tweet");
+            const reject = el.querySelector(".reject");
+
+            tweet.addEventListener("click", () => { _$.act.open_tweet({ row: el }) });
+            reject.addEventListener("click", () => { _$.act.reject_tweet({ row: el }) });
+        })
     },
 
     priv: {
