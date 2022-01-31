@@ -8,6 +8,33 @@ m.choice.acts({
         _$.act.unselect_all_choices();
         _$.act.select_choice_at_index({ index: 0 });
         _$.act.reset_permutation_field();
+        _$.act.show_all_choices();
+        _$.act.hide_empty_choices();
+        _$.act.select_the_next_nonempty_choice();
+    },
+
+    show_all_choices(_$, args) {
+        _$.me().forEach(choice => { choice.classList.remove("hide"); });
+    },
+
+    select_the_next_nonempty_choice(_$, args) {
+        let index = 0;
+        while (index < _$.me().length) {
+            const text_for_this_choice = _$.act.get_text_for_choice_at_index({ index: index }).trim();
+            if (!text_for_this_choice.length) {
+                index++;
+                _$.act.select_choice_at_index({ index: index });
+            } else {
+                break;
+            }
+        }
+    },
+
+    hide_empty_choices(_$, args) {
+        _$.me().forEach((choice, index) => {
+            const text = (_$.act.get_text_for_choice_at_index({ index: index })).trim();
+            if (text === "" || text === "undefined" || !text) choice.classList.add("hide");
+        });
     },
 
     permute_lol(_$, args) { _$.act.permute({ json: lol }); },
@@ -15,17 +42,21 @@ m.choice.acts({
     permute_agreed(_$, args) { _$.act.permute({ json: agreed }); },
     permute_oh(_$, args) { _$.act.permute({ json: tell_me_more }); },
 
+    get_text_for_choice_at_index(_$, args) {
+        const chosen_choice = _$.me()[args.index];
+        const statically_filled = !!chosen_choice.querySelectorAll("p").length;
+        if (statically_filled) {
+            return chosen_choice.querySelector("p").innerHTML;
+        } else {
+            return chosen_choice.querySelector("#choice-response").value;
+        }
+    },
+
     select_choice_at_index(_$, args) {
         _$.act.unselect_all_choices();
         const chosen_choice = _$.me()[args.index]
         chosen_choice.classList.add("selected");
-        let choice_text;
-        const statically_filled = !!chosen_choice.querySelectorAll("p").length;
-        if (statically_filled) {
-            choice_text = chosen_choice.querySelector("p").innerHTML;
-        } else {
-            choice_text = chosen_choice.querySelector("#choice-response").value;
-        }
+        let choice_text = _$.act.get_text_for_choice_at_index({ index: args.index });
         m.card.act.change_response_field({ text: choice_text });
         m.card.act.edit_response({ text: choice_text });
     },
