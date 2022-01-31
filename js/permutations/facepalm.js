@@ -22,10 +22,10 @@ export const facepalm = {
         ]
     }],
     "smh": [{
-        "ps": "(smh|smdh|#smh|#smdh)"
+        "ps": "(smh|smdh|#smh|#smdh) "
     }],
     "facepalm": [{
-        "ps": "(facepalm|#facepalm)"
+        "ps": "(facepalm|#facepalm) "
     }],
     "for-real": [
         "For real?",
