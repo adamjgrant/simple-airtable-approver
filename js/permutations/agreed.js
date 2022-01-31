@@ -1,7 +1,8 @@
 export const agreed = {
     "main": [
         { "branch": "totally-agree" },
-        { "branch": "yes" }
+        { "branch": "yes" },
+        { "branch": "im-with-you" }
     ],
     "yes": [
         "Yep", "Yes", "Correct", "Truth", [
@@ -16,6 +17,15 @@ export const agreed = {
             [" ", [
                 "agree", "with you on that", "agree with you", [".", "!"]
             ]]
+        ]
+    ],
+    "im-with-you": [
+        "I'm ", "I am ", "", [
+            "with you", [
+                " on that ", " all the way ", " ", [
+                    ".", ". 🎯", ". 💯", "👍"
+                ]
+            ]
         ]
     ]
 }
