@@ -64,6 +64,15 @@
     color: white;
 }
 
+[data-component~="bottom_nav"].disabled button#reject,
+[data-component~="bottom_nav"].disabled button#reject-and-go-back,
+[data-component~="bottom_nav"].disabled button#approve-and-go-back,
+[data-component~="bottom_nav"].disabled button,
+[data-component~="bottom_nav"].disabled button#approve {
+    color: #BBB;
+    background: transparent;
+}
+
 @media (prefers-color-scheme: dark) {
     [data-component~="bottom_nav"] {
         background: black;
