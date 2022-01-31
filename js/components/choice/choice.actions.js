@@ -1,7 +1,7 @@
 m.choice.acts({
     reset_choices(_$, args) {
         _$.act.unselect_all_choices();
-        _$.act.select_choice_at_index({ index: 0 });
+        _$.act.select_choice_at_index({ index: 0, skip_update: true });
         _$.act.reset_permutation_field();
         _$.act.show_all_choices();
         _$.act.hide_empty_choices();
@@ -47,8 +47,11 @@ m.choice.acts({
         const chosen_choice = _$.me()[args.index]
         chosen_choice.classList.add("selected");
         let choice_text = _$.act.get_text_for_choice_at_index({ index: args.index });
-        m.card.act.change_response_field({ text: choice_text });
-        m.card.act.edit_response({ text: choice_text });
+
+        if (!args.skip_update) {
+            m.card.act.change_response_field({ text: choice_text });
+            m.card.act.edit_response({ text: choice_text });
+        }
     },
 
     set_text_for_choice_at_index(_$, args) {
