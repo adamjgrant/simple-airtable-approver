@@ -55,13 +55,14 @@
 }
 
 [data-component~="choice"] nav ul a {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 7px;
+    padding: 5px 7px;
+    margin: 0px 2px;
     display: block;
     text-decoration: none;
     font-size: var(--font-size);
     color: var(--twitter-black-text);
+    background: var(--twitter-bar-color);
+    border-radius: 5px;
 }
 
 [data-component~="choice"] #choice-response {

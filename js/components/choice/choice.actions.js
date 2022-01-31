@@ -7,6 +7,7 @@ m.choice.acts({
     reset_choices(_$, args) {
         _$.act.unselect_all_choices();
         _$.act.select_choice_at_index({ index: 0 });
+        _$.act.reset_permutation_field();
     },
 
     permute_lol(_$, args) { _$.act.permute({ json: lol }); },
@@ -49,6 +50,11 @@ m.choice.acts({
 
         unselect_all_choices(_$, args) {
             _$.me().forEach(choice => choice.classList.remove("selected"));
+        },
+
+        reset_permutation_field(_$, args) {
+            _$("#choice-response").innerHTML = "...";
+            _$("#choice-response").value = "...";
         }
     }
 });
