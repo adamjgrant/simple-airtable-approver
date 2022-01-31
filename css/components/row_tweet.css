@@ -51,12 +51,15 @@
 [data-component~="row_tweet"] .tweet {
     line-height: var(--line-height);
     margin-bottom: 5px;
+    word-break: break-word;
 }
 
 [data-component~="row_tweet"] .tiny-response {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: var(--font-size);
+    line-height: var(--line-height);
 }
 
 [data-component~="row_tweet"] .tiny-response img {
