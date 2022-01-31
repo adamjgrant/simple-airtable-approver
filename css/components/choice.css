@@ -73,6 +73,7 @@
 [data-component~="choice"] #choice-response {
     margin: 0;
     border: 0;
+    outline: 0;
     width: calc(100% - 50px);
     height: 60px;
     font-size: var(--font-size);
@@ -80,6 +81,7 @@
     box-sizing: border-box;
     padding: 8px;
     color: var(--twitter-black-text);
+    background: transparent;
 }
 
 [data-component~="choice"] #choice-response:focus {
