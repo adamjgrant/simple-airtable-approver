@@ -3,5 +3,5 @@ m.top_nav.events((_$) => {
     _$("#tinder").addEventListener("click", m.viewport.act.show_tinder);
 
     _$.act.set_scores();
-    setTimeout(_$.act.set_scores, 3000);
+    setInterval(_$.act.set_scores, 3000);
 });
