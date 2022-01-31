@@ -5,7 +5,7 @@ export const agreed = {
         { "branch": "im-with-you" }
     ],
     "yes": [
-        "Yep", "Yes", "Correct", "Truth", [
+        "Yep", "Yes", "Correct", "Truth", "Exactly", [
             ". ", [
                 "100%", "💯", "🎯"
             ]
@@ -21,9 +21,11 @@ export const agreed = {
     ],
     "im-with-you": [
         "I'm ", "I am ", "", [
-            "with you", [
-                " on that ", " all the way ", " ", [
-                    ".", ". 🎯", ". 💯", "👍"
+            "100% ", "totally ", "completely ", "", "absolutely ", [
+                "with you", [
+                    " on that ", " all the way ", " ", [
+                        ".", ". 🎯", ". 💯", "👍"
+                    ]
                 ]
             ]
         ]
