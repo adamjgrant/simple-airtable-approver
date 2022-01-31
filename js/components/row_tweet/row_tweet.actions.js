@@ -2,6 +2,7 @@ m.row_tweet.act({
     populate(_$, args) {
         _$.act.clear();
         const cards = m.card.data;
+        if (!m.card.data.length) return console.log("No cards loaded yet. Skipping population");
         cards.forEach((card, index) => _$.act.make_row({ card: card, index: index }));
         _$.act.bind_events();
     },
@@ -23,6 +24,7 @@ m.row_tweet.act({
     },
 
     bind_events(_$, args) {
+        debugger;
         const rows = _$.me().length ? _$.me() : [_$.me()];
         rows.forEach(el => {
             const tweet = el.querySelector("article");
