@@ -5,9 +5,9 @@
     font-size: var(--font-size);
     line-height: var(--line-height);
     cursor: pointer;
-    border-left: 5px solid transparent;
     margin-left: -2px;
-    padding-left: 20px;
+    padding-left: 26px;
+    color: #888;
 }
 
 [data-component~="choice"].hide {
@@ -35,7 +35,7 @@
 }
 
 [data-component~="choice"].selected {
-    border-color: var(--twitter-blue-link);
+    color: var(--twitter-black-text);
 }
 
 [data-component~="choice"].selected:after {
@@ -79,6 +79,7 @@
     line-height: var(--line-height);
     box-sizing: border-box;
     padding: 8px;
+    color: inherit;
 }
 
 [data-component~="choice"] #choice-response:focus {

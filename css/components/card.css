@@ -46,7 +46,7 @@
 }
 
 [data-component~="card"] .choices {
-    margin-top: 0;
+    margin-top: -45px;
     margin-right: 0;
 }
 
