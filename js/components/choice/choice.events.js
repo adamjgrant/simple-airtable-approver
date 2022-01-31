@@ -1,7 +1,30 @@
+let choice_permutations = {};
+
+import { lol } from '../../permutations/lol.js'
+choice_permutations.lol = lol;
+
+import { agreed } from '../../permutations/agreed.js';
+choice_permutations.agreed = agreed;
+
+import { nice } from '../../permutations/nice.js';
+choice_permutations.nice = nice;
+
+import { oh } from '../../permutations/oh.js';
+choice_permutations.oh = oh;
+
+import { sorry } from '../../permutations/sorry.js';
+choice_permutations.sorry = sorry;
+
+import { facepalm } from '../../permutations/facepalm.js';
+choice_permutations.facepalm = facepalm;
+
 m.choice.events(_$ => {
-    _$("#choice-lol").addEventListener("click", _$.act.permute_lol);
-    _$("#choice-nice").addEventListener("click", _$.act.permute_nice);
-    _$("#choice-agreed").addEventListener("click", _$.act.permute_agreed);
-    _$("#choice-oh").addEventListener("click", _$.act.permute_oh);
-    _$("#choice-sorry").addEventListener("click", _$.act.permute_sorry);
+    _$("nav ul a.choice-row").forEach(a => {
+        a.addEventListener("click", () => {
+            const choice_name = a.dataset.choice;
+            const permutations = choice_permutations[choice_name];
+            _$.act.permute({ json: permutations });
+        });
+    });
+
 })

@@ -1,9 +1,3 @@
-import { lol } from '../../permutations/lol.js';
-import { agreed } from '../../permutations/agreed.js';
-import { nice } from '../../permutations/nice.js';
-import { tell_me_more } from '../../permutations/tell_me_more.js';
-import { sorry } from '../../permutations/sorry.js';
-
 m.choice.acts({
     reset_choices(_$, args) {
         _$.act.unselect_all_choices();
@@ -38,12 +32,6 @@ m.choice.acts({
         });
     },
 
-    permute_lol(_$, args) { _$.act.permute({ json: lol }); },
-    permute_nice(_$, args) { _$.act.permute({ json: nice }); },
-    permute_agreed(_$, args) { _$.act.permute({ json: agreed }); },
-    permute_oh(_$, args) { _$.act.permute({ json: tell_me_more }); },
-    permute_sorry(_$, args) { _$.act.permute({ json: sorry }); },
-
     get_text_for_choice_at_index(_$, args) {
         const chosen_choice = _$.me()[args.index];
         const statically_filled = !!chosen_choice.querySelectorAll("p").length;
@@ -68,19 +56,20 @@ m.choice.acts({
         chosen_choice.querySelector("p").innerHTML = args.text;
     },
 
-    priv: {
-        permute(_$, args) {
-            const tree = new Tree(args.json);
-            const generated_text = tree.one;
-            console.log(generated_text);
-            _$("#choice-response").innerHTML = generated_text;
-            _$("#choice-response").value = generated_text;
-            m.card.act.change_response_field({ text: generated_text });
-            m.card.act.edit_response({ text: generated_text });
-            const last_index = _$.me().length - 1;
-            _$.act.select_choice_at_index({ index: last_index });
-        },
+    permute(_$, args) {
+        const tree = new Tree(args.json);
+        const generated_text = tree.one;
+        console.log(generated_text);
+        _$("#choice-response").innerHTML = generated_text;
+        _$("#choice-response").value = generated_text;
+        m.card.act.change_response_field({ text: generated_text });
+        m.card.act.edit_response({ text: generated_text });
+        const last_index = _$.me().length - 1;
+        _$.act.select_choice_at_index({ index: last_index });
+    },
 
+
+    priv: {
         unselect_all_choices(_$, args) {
             _$.me().forEach(choice => choice.classList.remove("selected"));
         },
