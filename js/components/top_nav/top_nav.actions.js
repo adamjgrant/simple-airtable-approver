@@ -1,9 +1,9 @@
 m.top_nav.act({
     set_scores: function set_scores(_$, args) {
         _$.act.get_scores().then(scores => {
-            _$("#score-rejected").innerText = scores.rejected;
-            _$("#score-approved").innerText = scores.approved;
-            _$("#score-in-review").innerText = scores.in_review;
+            _$("#score-rejected").innerText = String(scores.rejected).padStart(3, '0');
+            _$("#score-in-review").innerText = String(scores.in_review).padStart(3, '0');
+            _$("#score-approved").innerText = String(scores.approved).padStart(3, '0');
         });
     },
 
