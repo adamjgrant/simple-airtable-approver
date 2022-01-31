@@ -28,7 +28,6 @@
 
 [data-component~="bottom_nav"].disabled {
     pointer-events: none;
-    background: #CCC;
 }
 
 [data-component~="bottom_nav"] button {
