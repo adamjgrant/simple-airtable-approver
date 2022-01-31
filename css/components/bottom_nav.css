@@ -13,6 +13,7 @@
     background: white;
     border-top: 1px solid #eee;
     padding-bottom: 25px;
+    transition: background-color 0.25s;
 }
 
 [data-component~="bottom_nav"].hide {
@@ -27,7 +28,7 @@
 
 [data-component~="bottom_nav"].disabled {
     pointer-events: none;
-    opacity: 0.5;
+    background: #CCC;
 }
 
 [data-component~="bottom_nav"] button {
@@ -73,5 +74,8 @@
     }
     [data-component~="bottom_nav"] button:hover {
         background: rgba(255, 255, 255, 0.1);
+    }
+    [data-component~="bottom_nav"].disabled {
+        background: #333;
     }
 }
