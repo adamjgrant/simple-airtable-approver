@@ -12,11 +12,11 @@ export const sorry = {
         ]
     ],
     "that-sucks": [
-        "Shoot", "Shoot...", "", "Man,", "Man...", [
+        "Shoot ", "Shoot...", "", "Man, ", "Man...", [
             "That sucks", "That sucks...", "That really sucks", [
                 ["."],
                 [
-                    { "branch": "sorry-to-hear-that", "then": { "branch": "emojis" } }
+                    ". ", [{ "branch": "sorry-to-hear-that", "then": { "branch": "emojis" } }]
                 ]
             ]
         ]

@@ -5,11 +5,18 @@ export const lol = {
         { "branch": "thats-funny" }
     ],
     "haha": [
-        "ha!", "ha ha ha", "hahaha", "HA HA HA", "HA!"
+        "ha!", "ha ha ha", "hahaha", "HA HA HA", "HA!", [
+            "", "", "", [
+                ". ", [
+                    "I love it", "Amazing", "That's amazing", "Love it", "Perfect", ["."]
+                ]
+            ]
+        ]
     ],
     "lol": ["lol", "LOL", ["!", "", "!!!"]],
     "thats-funny": [
-        "That's", "", [
+        "That's ", "", [
+
             "Hillarious", "So funny", [
                 "", [{ "ps": "(😆|🤣|😹|😂)" }]
             ]

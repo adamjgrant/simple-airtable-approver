@@ -13,7 +13,7 @@ export const oh = {
                                 "what", [
                                     "'s", " is", [
                                         " ", [
-                                            "all that about", "the story there", [
+                                            "all that about", "the story there", "this all about", "this now", [
                                                 "?"
                                             ]
                                         ]
@@ -27,7 +27,7 @@ export const oh = {
         ]
     ],
     "what-do-you-mean": [
-        "Interesting", [
+        "Interesting", "I see", "Hmm", [
             "...", ". ", ". If you don't mind me asking, ", ". If I may ask: ", [
                 [
                     "what", [
