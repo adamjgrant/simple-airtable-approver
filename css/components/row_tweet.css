@@ -50,6 +50,13 @@
 
 [data-component~="row_tweet"] .tweet {
     line-height: var(--line-height);
+    margin-bottom: 5px;
+}
+
+[data-component~="row_tweet"] .tiny-response {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 [data-component~="row_tweet"] .tiny-response img {
@@ -63,7 +70,8 @@
     font-size: var(--font-size);
     display: inline-block;
     margin: 0;
-    margin-left: 0px;
+    margin-left: 5px;
+    width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
