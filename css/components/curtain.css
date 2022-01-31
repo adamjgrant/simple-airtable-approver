@@ -12,6 +12,11 @@
     z-index: 2;
 }
 
+[data-component~="curtain"] a {
+    text-decoration: none;
+    color: white;
+}
+
 [data-component~="curtain"].hide {
     pointer-events: none;
     opacity: 0;
@@ -37,7 +42,8 @@
     [data-component~="curtain"] {
         background: black;
     }
-    [data-component~="curtain"] .icofont-twitter {
+    [data-component~="curtain"] .icofont-twitter,
+    [data-component~="curtain"] a {
         color: var(--twitter-blue-link);
     }
 }
