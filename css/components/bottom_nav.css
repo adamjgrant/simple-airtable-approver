@@ -51,6 +51,7 @@
 }
 
 [data-component~="bottom_nav"] button#reject {
+    border: 1px solid crimson;
     color: crimson;
 }
 
