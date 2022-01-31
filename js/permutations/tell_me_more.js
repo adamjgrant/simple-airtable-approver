@@ -9,7 +9,17 @@ export const tell_me_more = {
                 "actually ", "", [
                     "really ", "", [
                         "interesting ", [
-                            { "ps": "what('s|is) (all that about|the story there)?" }
+                            [
+                                "what", [
+                                    "'s", " is", [
+                                        " ", [
+                                            "all that about", "the story there", [
+                                                "?"
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
                         ]
                     ]
                 ]
@@ -19,7 +29,15 @@ export const tell_me_more = {
     "what-do-you-mean": [
         "Interesting", [
             "...", ". ", ". If you don't mind me asking, ", ". If I may ask: ", [
-                { "ps": "what  (is all that about|do you mean by that|is that about)( exactly|)?" }
+                [
+                    "what", [
+                        " ", [
+                            "is all that about", "do you mean by that", "is that about", [
+                                " exactly", "", ["?"]
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ]
     ]
