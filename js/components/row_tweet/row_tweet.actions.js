@@ -24,7 +24,6 @@ m.row_tweet.act({
     },
 
     bind_events(_$, args) {
-        debugger;
         const rows = _$.me().length ? _$.me() : [_$.me()];
         rows.forEach(el => {
             const tweet = el.querySelector("article");

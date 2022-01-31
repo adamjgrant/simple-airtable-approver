@@ -79,7 +79,7 @@
     line-height: var(--line-height);
     box-sizing: border-box;
     padding: 8px;
-    color: inherit;
+    color: var(--twitter-black-text);
 }
 
 [data-component~="choice"] #choice-response:focus {
