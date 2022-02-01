@@ -111,7 +111,7 @@ m.card.act({
         _$(".tweet-minus-1").classList.remove("show");
         _$(".tweet-minus-2").classList.remove("show");
 
-        _$("#tweet").innerHTML = m.card.this_card.tweet;
+        _$("#tweet").innerHTML = _$.act.format_embedded_tweet_at_index({ tweet: m.card.this_card.tweet, index: 0 });
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response").value = m.card.this_card.response;
 
@@ -126,7 +126,7 @@ m.card.act({
         });
 
         m.card.this_card.previous_responses.forEach((response, i) => {
-            _$(`#tweet-minus-${i + 1}`).innerHTML = response.tweet;
+            _$(`#tweet-minus-${i + 1}`).innerHTML = _$.act.format_embedded_tweet_at_index({ tweet: response.tweet, index: i + 1 });
             _$(`.tweet-minus-${i + 1}`).classList.add("show");
         });
 
@@ -143,6 +143,18 @@ m.card.act({
     },
 
     priv: {
+        format_embedded_tweet_at_index(_$, args) {
+            const embed_regex = /https\:\/\/t\.co\/\w+/
+            const matches = args.tweet.match(embed_regex);
+            if (matches && matches[0]) {
+                m.embedded_tweet.act.set_tweet_at_index({
+                    url: matches[0],
+                    index: (2 - args.index)
+                })
+            }
+            return args.tweet.replace(embed_regex, "");
+        },
+
         get_previous_responses(_$, args) {
             return new Promise((resolve, reject) => {
                 const external_tweet = args.record.get("External tweets");
