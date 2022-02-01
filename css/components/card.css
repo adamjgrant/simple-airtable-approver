@@ -77,7 +77,7 @@
 [data-component~="card"] #tweet,
 [data-component~="card"] #response {
     margin-top: 0;
-    margin-bottom: 60px;
+    margin-bottom: 25px;
     font-size: var(--font-size);
     line-height: var(--line-height);
 }
