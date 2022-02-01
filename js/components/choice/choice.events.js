@@ -18,6 +18,9 @@ choice_permutations.sorry = sorry;
 import { facepalm } from '../../permutations/facepalm.js';
 choice_permutations.facepalm = facepalm;
 
+import { wtf } from '../../permutations/wtf.js';
+choice_permutations.wtf = wtf;
+
 m.choice.events(_$ => {
     _$("nav ul a.choice-row").forEach(a => {
         a.addEventListener("click", () => {
@@ -26,5 +29,4 @@ m.choice.events(_$ => {
             _$.act.permute({ json: permutations });
         });
     });
-
 })
