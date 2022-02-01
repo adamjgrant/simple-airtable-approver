@@ -23,14 +23,15 @@
     <meta name="theme-color" content="#fafafa">
     <script>
         const components = [
+            "bottom_nav",
             "card",
             "choice",
-            "bottom_nav",
-            "status_indicator",
             "curtain",
+            "embedded_tweet",
+            "row_tweet",
+            "status_indicator",
             "top_nav",
-            "viewport",
-            "row_tweet"
+            "viewport"
         ];
     </script>
     <script src="js/components.js"></script>
@@ -75,12 +76,14 @@
                     <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
                     <article>
                         <p id="tweet-minus-2">This is the tweet</p>
+                        <div data-component="embedded_tweet" class="hide"></div>
                     </article>
                 </div>
                 <div class="twitter-box tweet-minus-1">
                     <a class="link-to-tweet" href=""><img src="img/twitter.jpg" class="profile"></a>
                     <article>
                         <p id="tweet-minus-1">This is the tweet</p>
+                        <div data-component="embedded_tweet" class="hide"></div>
                     </article>
                 </div>
                 <div class="twitter-box">
@@ -88,6 +91,7 @@
                     <article>
                         <h1>They say</h1>
                         <p id="tweet">This is the tweet</p>
+                        <div data-component="embedded_tweet" class="hide"></div>
                     </article>
                 </div>
                 <div class="twitter-box response-edit-hidden">

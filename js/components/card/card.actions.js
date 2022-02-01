@@ -80,6 +80,7 @@ m.card.act({
         } else {
             m.card.this_card = m.card.data.pop();
         }
+        m.embedded_tweet.act.hide_all();
         _$.act.format_card();
         _$.act.set_card_values();
     },
