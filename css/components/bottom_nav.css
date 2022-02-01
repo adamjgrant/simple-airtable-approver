@@ -13,7 +13,12 @@
     background: white;
     border-top: 1px solid #eee;
     padding-bottom: 25px;
-    transition: background-color 0.25s;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+[data-component~="bottom_nav"] * {
+    transition: all 0.20s;
 }
 
 [data-component~="bottom_nav"] #undo {
