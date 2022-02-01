@@ -65,7 +65,6 @@
     text-decoration: none;
     font-size: var(--font-size);
     color: var(--twitter-black-text);
-    background: var(--twitter-bar-color);
     border-radius: 5px;
 }
 
