@@ -66,6 +66,11 @@
     font-size: var(--font-size);
     color: var(--twitter-black-text);
     border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+[data-component~="choice"] nav ul a:hover {
+    border-color: var(--twitter-blue-link);
 }
 
 [data-component~="choice"].selected #choice-response,
