@@ -42,6 +42,10 @@ m.account.acts({
         //       objects that should be shown.
     },
 
+    handle_is_in_filter(_$, args) {
+        // TODO: Confirm if a passed in (raw) handle is in the filter.
+    },
+
     priv: {
         get_scores(_$, args = {}) {
             return new Promise((resolve, reject) => {
