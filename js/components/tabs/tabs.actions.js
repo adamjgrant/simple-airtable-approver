@@ -5,5 +5,9 @@ m.tabs.acts({
             if (index === args.index) tab.classList.add("active");
             else tab.classList.remove("active");
         });
+
+        m.row_tweet.act.show_only_these_rows_by_name({
+            name: args.name
+        })
     }
 });

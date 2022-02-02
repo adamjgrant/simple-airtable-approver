@@ -14,6 +14,8 @@ m.card.act({
                 response: args.record.get("Full tweet"),
                 tweetalt1: args.record.get("tweetalt1"),
                 tweetalt2: args.record.get("tweetalt2"),
+                reply_to_handle: args.record.get("Reply To Handle"),
+                sending_account_handle: args.record.get("Sending account handle"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
                 thumbnail: _$.act.get_twitter_photo({ record: args.record })
             }

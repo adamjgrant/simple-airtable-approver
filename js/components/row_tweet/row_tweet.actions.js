@@ -1,4 +1,15 @@
 m.row_tweet.act({
+    show_only_these_rows_by_name(_$, args) {
+        const actual_name = `show-${args.name.replace("#", "")}`;
+
+        if (actual_name === "show-tab-all") {
+            _$.me().forEach(row => row.classList.remove("hide"));
+        } else {
+            _$.me().forEach(row => row.classList.add("hide"));
+            document.querySelectorAll(`.${actual_name}`).forEach(row => row.classList.remove("hide"));
+        }
+    },
+
     populate(_$, args) {
         _$.act.clear();
         const cards = m.card.data;
@@ -58,9 +69,11 @@ m.row_tweet.act({
               tweet: "We should watch how people with adhd probably had a narcissist parent and were beat up as a child .This fear of not doing things perfectl…"
             */
             const card_element = template.content.cloneNode(true);
+            const card_row_tweet = card_element.querySelector("[data-component='row_tweet']");
             card_element.querySelector(".tweet").innerHTML = card.tweet;
-            card_element.querySelector("[data-component='row_tweet']").dataset.cardIndex = index;
+            card_row_tweet.dataset.cardIndex = index;
             card_element.querySelector(".tiny-response img").src = card.thumbnail;
+            card_row_tweet.classList.add(`show-tab-${card.sending_account_handle}`);
 
             const tiny_response_length_in_characters = 50;
             const oversized = (card.response.length > tiny_response_length_in_characters);
