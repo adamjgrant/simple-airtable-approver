@@ -21,6 +21,12 @@ choice_permutations.facepalm = facepalm;
 import { wtf } from '../../permutations/wtf.js';
 choice_permutations.wtf = wtf;
 
+import { yes } from '../../permutations/yes.js';
+choice_permutations.yes = yes;
+
+import { no } from '../../permutations/no.js';
+choice_permutations.no = no;
+
 m.choice.events(_$ => {
     _$("nav ul a.choice-row").forEach(a => {
         a.addEventListener("click", () => {
