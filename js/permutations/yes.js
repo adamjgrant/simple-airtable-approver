@@ -15,7 +15,7 @@ export const yes = {
         "ps": "(Yes|Yep|Oh yeah|Yeah)"
     }],
     "extra": [{
-        "ps": "(Totally|Absolutely|Yes indeed|For sure|100%)"
+        "ps": "(Totally|Absolutely|Yes indeed|For sure|100%|I believe so|Pretty sure|I think so|I'd say so|I'm pretty sure)"
     }],
     "emojis": [
         { "ps": "(👍|👏|🙆🏻‍♂️|❤️|💯)" }
