@@ -107,7 +107,7 @@ m.bottom_nav.acts({
                 }
                 if (args.cb) args.cb();
                 m.status_indicator.act.set_status_green();
-                m.top_nav.act.set_scores();
+                m.account.act.set_scores();
             });
         }
     }

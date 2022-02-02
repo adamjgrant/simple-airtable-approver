@@ -23,6 +23,7 @@
     <meta name="theme-color" content="#fafafa">
     <script>
         const components = [
+            "account",
             "bottom_nav",
             "card",
             "choice",
@@ -53,7 +54,7 @@
                     <a href="./"><i class="icofont-twitter"></i> Tweet Approver</a>
                 </li>
 
-                <li class="scores">
+                <li data-component="account">
                     <i class="icofont-not-allowed"></i><span id="score-rejected">0</span> <i class="icofont-hour-glass"></i><span id="score-in-review">0</span> <i class="icofont-check"></i><span id="score-approved">0</span>
                 </li>
             </ul>
