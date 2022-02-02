@@ -1,7 +1,6 @@
 m.row_tweet.act({
     show_only_these_rows_by_name(_$, args) {
         const class_name = `show-tab-${args.name}`;
-        console.log(class_name);
 
         if (class_name === "show-tab-all") {
             _$.me().forEach(row => row.classList.remove("hide"));

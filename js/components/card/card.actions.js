@@ -91,7 +91,7 @@ m.card.act({
             m.card.this_card = m.card.data.pop();
 
             // In case there is a filter, let's skip next items that don't match the filter.
-            if (m.card.filter.handle && m.card.this_card.sending_account_handle === m.card.filter.handle) {
+            if (m.card.filter.handle && m.card.this_card.sending_account_handle !== m.card.filter.handle) {
                 _$.act.advance_to_next_card();
             }
         }
