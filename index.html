@@ -29,6 +29,7 @@
             "choice",
             "curtain",
             "embedded_tweet",
+            "metadata",
             "row_tweet",
             "status_indicator",
             "tabs",
@@ -155,6 +156,12 @@
                                 <li>
                                     <a class="choice-row" data-choice="wtf" href="#">😳 WTF</a>
                                 </li>
+                                <li>
+                                    <a class="choice-row" data-choice="no" href="#">👎 No</a>
+                                </li>
+                                <li>
+                                    <a class="choice-row" data-choice="yes" href="#">👍 Yes</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -206,6 +213,10 @@
             </li>
           </template>
         </ul>
+
+        <footer data-component="metadata">
+            <!-- Nice place for some metadata-->
+        </footer>
     </div>
     <script src="js/common.js"></script>
     <script src="js/vendor/airtable.js"></script>
