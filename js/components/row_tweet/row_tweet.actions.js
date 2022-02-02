@@ -1,16 +1,14 @@
 m.row_tweet.act({
     show_only_these_rows_by_name(_$, args) {
-        const actual_name = `show-${args.name.replace("#", "")}`;
+        const class_name = `show-tab-${args.name}`;
+        console.log(class_name);
 
-        if (actual_name === "show-tab-all") {
+        if (class_name === "show-tab-all") {
             _$.me().forEach(row => row.classList.remove("hide"));
         } else {
             _$.me().forEach(row => row.classList.add("hide"));
-            document.querySelectorAll(`.${actual_name}`).forEach(row => row.classList.remove("hide"));
+            document.querySelectorAll(`.${class_name}`).forEach(row => row.classList.remove("hide"));
         }
-
-        const handle = actual_name.replace("show-tab-");
-        m.card.act.set_filter({ key: "handle", value: handle });
     },
 
     populate(_$, args) {

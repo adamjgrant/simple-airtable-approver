@@ -10,6 +10,10 @@ m.card.act({
         m.card.filter[args.key] = args.value;
     },
 
+    get_filter(_$, args) {
+        return m.card.filter[args.key];
+    },
+
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             let card_data = {
@@ -115,6 +119,7 @@ m.card.act({
         m.bottom_nav.act.in_review();
         _$.act.format_card();
         _$.act.set_card_values();
+        m.tabs.act.set_tab_filter();
     },
 
     set_card_values(_$, args) {
