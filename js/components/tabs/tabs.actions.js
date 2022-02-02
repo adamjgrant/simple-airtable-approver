@@ -8,6 +8,7 @@ m.tabs.acts({
             if (index === args.index) tab.classList.add("active");
             else tab.classList.remove("active");
         });
+        m.viewport.act.show_timeline();
         _$.act.set_tab_filter(args);
     },
 
