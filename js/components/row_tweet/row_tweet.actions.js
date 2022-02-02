@@ -8,6 +8,9 @@ m.row_tweet.act({
             _$.me().forEach(row => row.classList.add("hide"));
             document.querySelectorAll(`.${actual_name}`).forEach(row => row.classList.remove("hide"));
         }
+
+        const handle = actual_name.replace("show-tab-");
+        m.card.act.set_filter({ key: "handle", value: handle });
     },
 
     populate(_$, args) {

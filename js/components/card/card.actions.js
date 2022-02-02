@@ -6,6 +6,10 @@ m.card.act({
         return base;
     },
 
+    set_filter(_$, args) {
+        m.card.filter[args.key] = args.value;
+    },
+
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             let card_data = {
@@ -81,6 +85,11 @@ m.card.act({
             m.card.this_card = args.this_card;
         } else {
             m.card.this_card = m.card.data.pop();
+
+            // In case there is a filter, let's skip next items that don't match the filter.
+            if (m.card.filter.handle && m.card.this_card.sending_account_handle === m.card.filter.handle) {
+                _$.act.advance_to_next_card();
+            }
         }
         m.embedded_tweet.act.hide_all();
         _$.act.format_card();
@@ -236,3 +245,6 @@ m.card.act({
 m.card.data = [];
 m.card.cards_processed = [];
 m.card.this_card = null;
+m.card.filter = {
+    handle: ""
+}
