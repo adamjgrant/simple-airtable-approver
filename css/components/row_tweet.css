@@ -1,7 +1,7 @@
 [data-component~="row_tweet"] {
     border-bottom: 1px solid #EEE;
-    padding-bottom: 20px;
     display: block;
+    padding: 7px 0;
 }
 
 [data-component~="row_tweet"] .original {
