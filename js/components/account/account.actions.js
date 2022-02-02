@@ -26,7 +26,8 @@ m.account.acts({
     set_scores: function set_scores(_$, args) {
         // TODO: This should only update the UI and shows summed-up scores for the
         //       filtered accounts.
-        _$.act.get_scores().then(scores => {
+        // TODO: Pass in account object
+        _$.act.get_scores_for_account().then(scores => {
             _$("#score-rejected").innerText = String(scores.rejected).padStart(3, '0');
             _$("#score-in-review").innerText = String(scores.in_review).padStart(3, '0');
             _$("#score-approved").innerText = String(scores.approved).padStart(3, '0');
@@ -55,7 +56,28 @@ m.account.acts({
     },
 
     priv: {
-        get_scores(_$, args = {}) {
+        get_accounts(_$, args = {}) {
+            let all_records = [];
+            return new Promise((resolve, reject) => {
+                m.card.act.airtable_base()('🙂 Accounts').select({
+                    view: "Active permutations"
+                }).eachPage(function page(records, fetchNextPage) {
+                    all_records = all_records.concat(records);
+                    fetchNextPage();
+
+                }, function done(err) {
+                    if (err) {
+                        console.error(err);
+                        reject(err);
+                    }
+                    resolve(all_records);
+                });
+            });
+        },
+
+
+        get_scores_for_account(_$, args = {}) {
+            // TODO: Takes an account object as input
             return new Promise((resolve, reject) => {
                 // TODO: Make this work with any account
                 m.card.act.airtable_base()('🙂 Accounts').find('rec1IPb2uSQz3GKrf', function(err, record) {
