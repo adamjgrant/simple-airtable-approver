@@ -33,11 +33,19 @@ m.account.acts({
         });
     },
 
+    find_account_by_handle(_$, args) {
+        const accounts = _$.act.get_accounts_available()
+        return accounts.find(account => account.raw_handle === args.handle);
+    },
+
     get_accounts_available(_$, args) {
-        // TODO: Populate m.account.accounts with m.account.Account objects
+        // TODO: Return m.account.Account objects
+        // TODO: Memoize the results so we don't pull from AT each time.
+        if (!m.account.accounts) return
     },
 
     set_account_filter(_$, args) {
+        const account = _$.act.find_account_by_handle({ handle: args.handle });
         // TODO: Set m.account.account_filter to an array with the m.account.Account
         //       objects that should be shown.
     },
