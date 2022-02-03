@@ -35,14 +35,23 @@ m.account.acts({
     },
 
     find_account_by_handle(_$, args) {
-        const accounts = _$.act.get_accounts_available()
-        return accounts.find(account => account.raw_handle === args.handle);
+        _$.act.get_accounts_available();
+        // To prevent making everything a promise up the chain, we'll have
+        // a retry somewhere upwards from here.
+        return m.account.accounts.find(account => account.raw_handle === args.handle);
     },
 
     get_accounts_available(_$, args) {
-        // TODO: Return m.account.Account objects
-        // TODO: Memoize the results so we don't pull from AT each time.
-        if (!m.account.accounts) return
+        return new Promise((resolve, reject) => {
+            if (!m.account.accounts) {
+                _$.act.get_accounts().then((accounts) => {
+                    m.account.accounts = accounts;
+                    resolve(m.account.accounts);
+                });
+            } else {
+                resolve(m.account.accounts);
+            }
+        })
     },
 
     set_account_filter(_$, args) {
