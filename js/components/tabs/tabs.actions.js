@@ -2,7 +2,6 @@ m.tabs.acts({
     select_tab(_$, args) {
         const all_tabs = _$("a");
         const handle = args.name.replace("#tab-", "");
-        console.log(handle);
         m.account.act.set_account_filter_to_one_account_by_handle({ handle });
 
         all_tabs.forEach((tab, index) => {

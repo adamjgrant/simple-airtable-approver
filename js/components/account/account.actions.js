@@ -28,13 +28,21 @@ m.account.acts({
         // After this is run, the application can then start (curtain removed)
         // and we can expect things like m.account.accounts to be populated.
         return new Promise((resolve, reject) => {
-            _$.act.get_accounts().then(accounts => {
-                _$.act.add_all_accounts_to_filter();
-                _$.act.set_scores();
-                setInterval(_$.act.set_scores, 5000);
+            _$.act.refresh_accounts().then(accounts => {
+                setInterval(_$.act.refresh_accounts, 5000);
                 resolve(accounts);
             });
         });
+    },
+
+    refresh_accounts(_$, args) {
+        return new Promise((resolve, reject) => {
+            _$.act.get_accounts().then(accounts => {
+                _$.act.add_all_accounts_to_filter();
+                _$.act.set_scores();
+                resolve(accounts);
+            });
+        })
     },
 
     set_scores: function set_scores(_$, args) {
@@ -102,6 +110,7 @@ m.account.acts({
             return new Promise((resolve, reject) => {
                 const accounts_as_airtable_records = args.all_records;
                 const retrieval_promises = [];
+                m.account.accounts = [];
                 accounts_as_airtable_records.forEach(record => {
                     retrieval_promises.push(new Promise((_resolve, _reject) => {
                         const rejected = record.get("# Rejected");
