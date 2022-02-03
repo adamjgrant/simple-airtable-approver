@@ -60,6 +60,7 @@ m.account.acts({
     },
 
     set_account_filter_to_one_account_by_handle(_$, args) {
+        if (args.handle === "all") return m.account.account_filter = m.account.accounts;
         const account = _$.act.find_account_by_handle({ handle: args.handle });
         m.account.account_filter = [account];
     },
