@@ -77,11 +77,25 @@ m.account.acts({
                         console.error(err);
                         reject(err);
                     }
-                    resolve(all_records);
+                    _$.act.turn_account_records_into_account_objects({ all_records })
+                        .then(accounts => resolve(accounts));
                 });
             });
         },
 
+        turn_account_records_into_account_objects(_$, args) {
+            return new Promise((resolve, reject) => {
+                const accounts_as_airtable_records = args.all_records;
+                const retrieval_promises = [];
+                accounts_as_airtable_records.forEach(record => {
+                    retrieval_promises.push(new Promise((resolve, reject) => {
+                        const account = new m.account.Account(record.get("Handle"), record.id);
+                        m.account.accounts.push(account);
+                        resolve(account);
+                    }));
+                })
+            });
+        },
 
         get_scores_for_account(_$, args = {}) {
             // TODO: Takes an account object as input
