@@ -81,10 +81,6 @@ m.account.acts({
         m.account.account_filter = m.account.accounts;
     },
 
-    handle_is_in_filter(_$, args) {
-        // TODO: Confirm if a passed in (raw) handle is in the filter.
-    },
-
     priv: {
         get_accounts(_$, args = {}) {
             let all_records = [];
