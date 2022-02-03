@@ -19,14 +19,6 @@ m.account.Account = class {
             accepted: 0
         }
     }
-
-    update_score() {
-        // TODO: Just set the in-memory data. The remote call should 
-        //       have already happened, is already updated on this 
-        //       instance and across all accounts.
-
-        // TODO: Is this necessary?
-    }
 }
 
 m.account.acts({
@@ -52,7 +44,7 @@ m.account.acts({
             approved: 0
         };
 
-        m.account.accounts.forEach(account => {
+        m.account.account_filter.forEach(account => {
             scores.rejected += account.scores.rejected;
             scores.in_review += account.scores.in_review;
             scores.approved += account.scores.approved;
