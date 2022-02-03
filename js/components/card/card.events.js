@@ -2,7 +2,9 @@
 let called = false;
 
 m.card.events(_$ => {
-    let load_in_data_promises = [];
+    let load_in_data_promises = [
+        m.account.act.init()
+    ];
 
     _$("#response").addEventListener("keyup", (e) => { _$.act.edit_response({ text: e.target.value }) });
 

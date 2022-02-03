@@ -23,6 +23,20 @@ m.account.Account = class {
 }
 
 m.account.acts({
+    init(_$, args) {
+        // The Promise object to remove the need for a bunch of downstream
+        // promise objects.
+        // After this is run, the application can then start (curtain removed)
+        // and we can expect things like m.account.accounts to be populated.
+        return new Promise((resolve, reject) => {
+            _$.act.get_accounts().then(accounts => {
+                _$.act.set_scores();
+                setInterval(_$.act.set_scores, 5000);
+                resolve(accounts);
+            });
+        });
+    },
+
     set_scores: function set_scores(_$, args) {
         // TODO: This should only update the UI and shows summed-up scores for the
         //       filtered accounts.
@@ -35,23 +49,7 @@ m.account.acts({
     },
 
     find_account_by_handle(_$, args) {
-        _$.act.get_accounts_available();
-        // To prevent making everything a promise up the chain, we'll have
-        // a retry somewhere upwards from here.
         return m.account.accounts.find(account => account.raw_handle === args.handle);
-    },
-
-    get_accounts_available(_$, args) {
-        return new Promise((resolve, reject) => {
-            if (!m.account.accounts) {
-                _$.act.get_accounts().then((accounts) => {
-                    m.account.accounts = accounts;
-                    resolve(m.account.accounts);
-                });
-            } else {
-                resolve(m.account.accounts);
-            }
-        })
     },
 
     set_account_filter(_$, args) {
