@@ -1,24 +1,31 @@
 m.account.accounts = [];
+m.account.account_filter = [];
 
 m.account.Account = class {
-    constructor(handle, airtable_record_id) {
+    constructor(handle, airtable_record_id, scores) {
         this.handle = handle;
         this.airtable_record_id = airtable_record_id;
-        this.scores = {
-            rejected: 0,
-            in_review: 0,
-            approved: 0
-        }
+        this._scores = scores;
     }
 
     get raw_handle() {
-        // TODO: Use a regex instead to get everything between the "@" and the next space.
-        return this.handle.replace("Permutations", "").replace("@", "").trim();
+        return this.handle.replace(/\w*\s?@/, "").trim();
+    }
+
+    get scores() {
+        return this._scores || {
+            rejected: 0,
+            in_review: 0,
+            accepted: 0
+        }
     }
 
     update_score() {
-        // TODO: Just set the in-memory data. The remote call should happen elsewhere
-        //       and across all accounts.
+        // TODO: Just set the in-memory data. The remote call should 
+        //       have already happened, is already updated on this 
+        //       instance and across all accounts.
+
+        // TODO: Is this necessary?
     }
 }
 
@@ -30,6 +37,7 @@ m.account.acts({
         // and we can expect things like m.account.accounts to be populated.
         return new Promise((resolve, reject) => {
             _$.act.get_accounts().then(accounts => {
+                _$.act.add_all_accounts_to_filter();
                 _$.act.set_scores();
                 setInterval(_$.act.set_scores, 5000);
                 resolve(accounts);
@@ -38,24 +46,38 @@ m.account.acts({
     },
 
     set_scores: function set_scores(_$, args) {
-        // TODO: This should only update the UI and shows summed-up scores for the
-        //       filtered accounts.
-        // TODO: Pass in account object
-        _$.act.get_scores_for_account().then(scores => {
-            _$("#score-rejected").innerText = String(scores.rejected).padStart(3, '0');
-            _$("#score-in-review").innerText = String(scores.in_review).padStart(3, '0');
-            _$("#score-approved").innerText = String(scores.approved).padStart(3, '0');
-        });
+        let scores = {
+            rejected: 0,
+            in_review: 0,
+            approved: 0
+        };
+
+        m.account.accounts.forEach(account => {
+            scores.rejected += account.scores.rejected;
+            scores.in_review += account.scores.in_review;
+            scores.approved += account.scores.approved;
+        })
+
+        _$("#score-rejected").innerText = String(scores.rejected).padStart(3, '0');
+        _$("#score-in-review").innerText = String(scores.in_review).padStart(3, '0');
+        _$("#score-approved").innerText = String(scores.approved).padStart(3, '0');
     },
 
     find_account_by_handle(_$, args) {
         return m.account.accounts.find(account => account.raw_handle === args.handle);
     },
 
-    set_account_filter(_$, args) {
+    set_account_filter_to_one_account_by_handle(_$, args) {
         const account = _$.act.find_account_by_handle({ handle: args.handle });
-        // TODO: Set m.account.account_filter to an array with the m.account.Account
-        //       objects that should be shown.
+        m.account.account_filter = [account];
+    },
+
+    get_account_filter_handles(_$, args) {
+        return m.account.account_filter.map(account => account.raw_handle);
+    },
+
+    add_all_accounts_to_filter(_$, args) {
+        m.account.account_filter = m.account.accounts;
     },
 
     handle_is_in_filter(_$, args) {
@@ -78,7 +100,7 @@ m.account.acts({
                         reject(err);
                     }
                     _$.act.turn_account_records_into_account_objects({ all_records })
-                        .then(accounts => resolve(accounts));
+                        .then(accounts => resolve());
                 });
             });
         },
@@ -88,32 +110,25 @@ m.account.acts({
                 const accounts_as_airtable_records = args.all_records;
                 const retrieval_promises = [];
                 accounts_as_airtable_records.forEach(record => {
-                    retrieval_promises.push(new Promise((resolve, reject) => {
-                        const account = new m.account.Account(record.get("Handle"), record.id);
+                    retrieval_promises.push(new Promise((_resolve, _reject) => {
+                        const rejected = record.get("# Rejected");
+                        const in_review = record.get("# In Review");
+                        const approved = record.get("# Approved");
+                        const handle = record.get("Handle");
+                        const scores = {
+                            rejected: rejected,
+                            in_review: in_review,
+                            approved: approved
+                        };
+
+                        const account = new m.account.Account(handle, record.id, scores);
+
                         m.account.accounts.push(account);
-                        resolve(account);
+                        _resolve(account);
                     }));
                 })
-            });
-        },
-
-        get_scores_for_account(_$, args = {}) {
-            // TODO: Takes an account object as input
-            return new Promise((resolve, reject) => {
-                // TODO: Make this work with any account
-                m.card.act.airtable_base()('🙂 Accounts').find('rec1IPb2uSQz3GKrf', function(err, record) {
-                    if (err) {
-                        if (args.ecb) args.ecb();
-                        m.status_indicator.act.set_status_red();
-                        return console.error(err);
-                    }
-                    if (args.cb) args.cb();
-                    const scores = {
-                        rejected: record.get("# Rejected"),
-                        in_review: record.get("# In Review"),
-                        approved: record.get("# Approved")
-                    }
-                    resolve(scores);
+                Promise.allSettled(retrieval_promises).then(results => {
+                    resolve(m.account.accounts);
                 });
             });
         }

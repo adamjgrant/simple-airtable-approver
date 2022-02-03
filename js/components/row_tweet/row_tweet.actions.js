@@ -1,13 +1,10 @@
 m.row_tweet.act({
     show_only_these_rows_by_name(_$, args) {
-        const class_name = `show-tab-${args.name}`;
-
-        if (class_name === "show-tab-all") {
-            _$.me().forEach(row => row.classList.remove("hide"));
-        } else {
-            _$.me().forEach(row => row.classList.add("hide"));
+        _$.me().forEach(row => row.classList.add("hide"));
+        args.handles.forEach(handle => {
+            const class_name = `show-tab-${handle}`;
             document.querySelectorAll(`.${class_name}`).forEach(row => row.classList.remove("hide"));
-        }
+        });
     },
 
     populate(_$, args) {

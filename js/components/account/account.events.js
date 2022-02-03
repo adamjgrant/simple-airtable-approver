@@ -1,1 +1,3 @@
-m.account.events(_$ => {});
+m.account.events(_$ => {
+    // See card.events.js for the initialization.
+});
