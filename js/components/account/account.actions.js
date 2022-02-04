@@ -43,7 +43,7 @@ m.account.acts({
     refresh_accounts(_$, args) {
         return new Promise((resolve, reject) => {
             _$.act.get_accounts().then(accounts => {
-                _$.act.add_all_accounts_to_filter();
+                if (!m.account.account_filter.length) _$.act.add_all_accounts_to_filter();
                 _$.act.set_scores();
                 resolve(accounts);
             });
@@ -83,7 +83,6 @@ m.account.acts({
     },
 
     add_all_accounts_to_filter(_$, args) {
-        if (m.account.account_filter.length) return; // We shouldn't reset to all each time we refresh.
         m.account.account_filter = m.account.accounts.map(account => account.raw_handle);
     },
 
