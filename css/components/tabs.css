@@ -17,6 +17,7 @@
 
 [data-component="tabs"] ul li {
     display: block;
+    overflow: hidden;
     
 }
 
@@ -29,6 +30,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+[data-component="tabs"] ul li:first-child {
+    width: 80px;
 }
 
 [data-component="tabs"] ul li a.active {
