@@ -78,6 +78,7 @@ m.account.acts({
     },
 
     add_all_accounts_to_filter(_$, args) {
+        if (m.account.account_filter.length) return; // We shouldn't reset to all each time we refresh.
         m.account.account_filter = m.account.accounts.map(account => account.raw_handle);
     },
 
