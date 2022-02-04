@@ -101,12 +101,12 @@ m.bottom_nav.acts({
             score_modification[args.status > 0 ? "approved" : "rejected"] = 1;
             score_modification["in_review"] = -1;
 
+            const this_card = args.this_card || m.card.this_card;
             m.account.act.offline_score_update_for_handle({
-                handle: args.this_card.sending_account_handle,
+                handle: this_card.sending_account_handle,
                 score: score_modification
             })
 
-            const this_card = args.this_card || m.card.this_card;
             m.card.act.airtable_base()('💬 Tweets').update([{
                 id: this_card.id,
                 fields: { "Review Status": new_status }
