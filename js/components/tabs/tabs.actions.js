@@ -17,5 +17,18 @@ m.tabs.acts({
         m.row_tweet.act.show_only_these_rows_by_name({
             handles: m.account.act.get_account_filter_handles()
         });
+    },
+
+    generate_tabs(_$, args) {
+
+    },
+
+    priv: {
+        get_tab_all_template(_$, args) {
+            return document.getElementById("tab-template-all");
+        },
+        get_tab_template(_$, args) {
+            return document.getElementById("tab-template");
+        },
     }
 });

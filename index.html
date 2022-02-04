@@ -74,18 +74,14 @@
 
         <nav data-component="tabs">
             <ul>
-                <li>
-                    <a href="#tab-all" class="active">All</a>
-                </li>
-                <li>
-                    <a href="#tab-nicegoingadam">@nice&hellip;</a>
-                </li>
-                <li>
-                    <a href="#tab-buckflug">@buck&hellip;</a>
-                </li>
-                <li>
-                    <a href="#tab-vegankitdotcom">@vega&hellip;</a>
-                </li>
+                <template id="tab-template-all">
+                    <li><a href="#tab-all" class="active">All</a></li>
+                </template>
+                <template id="tab-template">
+                    <li>
+                        <a href="#tab-template">@<span class="handle">tab</span>&hellip;</a>
+                    </li>
+                </template>
             </ul>
             <div data-component="status_indicator"></div>
         </nav>
