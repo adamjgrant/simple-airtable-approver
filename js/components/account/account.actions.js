@@ -52,7 +52,8 @@ m.account.acts({
             approved: 0
         };
 
-        m.account.account_filter.forEach(account => {
+        m.account.account_filter.forEach(handle => {
+            const account = _$.act.find_account_by_handle({ handle });
             scores.rejected += account.scores.rejected;
             scores.in_review += account.scores.in_review;
             scores.approved += account.scores.approved;
@@ -68,21 +69,16 @@ m.account.acts({
     },
 
     set_account_filter_to_one_account_by_handle(_$, args) {
-        if (args.handle === "all") return m.account.account_filter = m.account.accounts;
-        const account = _$.act.find_account_by_handle({ handle: args.handle });
-        m.account.account_filter = [account];
-    },
-
-    get_account_filter_handles(_$, args) {
-        return m.account.account_filter.map(account => account.raw_handle);
+        if (args.handle === "all") return _$.act.add_all_accounts_to_filter();
+        m.account.account_filter = [args.handle];
     },
 
     add_all_accounts_to_filter(_$, args) {
-        m.account.account_filter = m.account.accounts;
+        m.account.account_filter = m.account.accounts.map(account => account.raw_handle);
     },
 
     handle_is_in_filter(_$, args) {
-        return m.account.account_filter.map(account => account.raw_handle).find(raw_handle => {
+        return m.account.account_filter.find(raw_handle => {
             const arg_raw_handle = new m.account.Account(args.handle, "", {}).raw_handle;
             return raw_handle === arg_raw_handle;
         });
