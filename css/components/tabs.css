@@ -33,7 +33,7 @@
 }
 
 [data-component="tabs"] ul li:first-child {
-    width: 80px;
+    width: 60px;
 }
 
 [data-component="tabs"] ul li a.active {
