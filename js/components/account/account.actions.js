@@ -115,6 +115,11 @@ m.account.acts({
         return _$.act.set_scores();
     },
 
+    get_raw_handle_for_handle(_$, args) {
+        const throwaway_account = new m.account.Account(args.handle, "", {});
+        return throwaway_account.raw_handle;
+    },
+
     priv: {
         get_accounts(_$, args = {}) {
             let all_records = [];
@@ -134,11 +139,6 @@ m.account.acts({
                         .then(accounts => resolve());
                 });
             });
-        },
-
-        get_raw_handle_for_handle(_$, args) {
-            const throwaway_account = new m.account.Account(args.handle, "", {});
-            return throwaway_account.raw_handle;
         },
 
         turn_account_records_into_account_objects(_$, args) {
