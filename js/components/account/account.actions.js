@@ -73,6 +73,10 @@ m.account.acts({
         m.account.account_filter = [args.handle];
     },
 
+    get_account_filter_handles(_$, args) {
+        return m.account.account_filter;
+    },
+
     add_all_accounts_to_filter(_$, args) {
         m.account.account_filter = m.account.accounts.map(account => account.raw_handle);
     },
