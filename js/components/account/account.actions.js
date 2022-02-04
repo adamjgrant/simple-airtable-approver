@@ -34,6 +34,7 @@ m.account.acts({
         return new Promise((resolve, reject) => {
             _$.act.refresh_accounts().then(accounts => {
                 setInterval(_$.act.refresh_accounts, 5000);
+                m.tabs.act.generate_all_tabs();
                 resolve(accounts);
             });
         });

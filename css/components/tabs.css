@@ -11,10 +11,13 @@
     padding: 0 15px;
     list-style: none;
     border-bottom: 3px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 [data-component="tabs"] ul li {
-    display: inline-block;
+    display: block;
+    
 }
 
 [data-component="tabs"] ul li a {
@@ -23,6 +26,9 @@
     padding: 4px 10px;
     margin-top: 3px;
     display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 [data-component="tabs"] ul li a.active {

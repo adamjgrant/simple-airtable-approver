@@ -73,15 +73,15 @@
         </nav>
 
         <nav data-component="tabs">
+            <template id="tab-template-all">
+                <li><a href="#tab-all" class="active">All</a></li>
+            </template>
+            <template id="tab-template">
+                <li>
+                    <a href="#tab-template">@<span class="handle">tab</span></a>
+                </li>
+            </template>
             <ul>
-                <template id="tab-template-all">
-                    <li><a href="#tab-all" class="active">All</a></li>
-                </template>
-                <template id="tab-template">
-                    <li>
-                        <a href="#tab-template">@<span class="handle">tab</span>&hellip;</a>
-                    </li>
-                </template>
             </ul>
             <div data-component="status_indicator"></div>
         </nav>

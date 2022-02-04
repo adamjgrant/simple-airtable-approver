@@ -21,8 +21,10 @@ m.tabs.acts({
 
     generate_all_tabs(_$, args) {
         _$.act.clear_out_tabs();
-        // TODO: Get all the handles available and generate the tabs.
-
+        _$.act.generate_tab_for_handle({ handle: "all" });
+        m.account.accounts.forEach(account => {
+            _$.act.generate_tab_for_handle({ handle: account.raw_handle });
+        });
         _$.act.bind_tabs();
     },
 
@@ -33,22 +35,22 @@ m.tabs.acts({
         get_tab_template(_$, args) {
             return document.getElementById("tab-template");
         },
-        clear_out_tabs(_$, args) {},
+        clear_out_tabs(_$, args) {
+            _$.me().querySelector("ul").innerHTML = "";
+        },
 
         generate_tab_for_handle(_$, args) {
-            const all_tab = !!handle === "all";
+            const all_tab = !!args.handle === "all";
             const handle = m.account.act.get_raw_handle_for_handle({ handle: args.handle });
             const template =  all_tab ? _$.act.get_tab_all_template() : _$.act.get_tab_template();
             const template_element = template.content.cloneNode(true);
-            const tab_element = template_element.querySelector("[data-component='row_tweet']");
+            const tab_element = template_element.querySelector("li");
 
             if (!all_tab) {
-                tab_element.href = `#tab-${args.handle}`
+                tab_element.querySelector("a").href = `#tab-${handle}`;
+                tab_element.querySelector(".handle").innerText = handle;
             }
-            else {
-
-            }
-            // tab_element.querySelector(".tweet").innerHTML = card.tweet;
+            _$.me().querySelector("ul").appendChild(tab_element);
         },
         bind_tabs(_$,args) {
 
