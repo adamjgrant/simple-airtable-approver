@@ -95,6 +95,17 @@ m.bottom_nav.acts({
             let new_status = "Pending Review";
             if (args.status > 0) new_status = "Approved";
             if (args.status < 0) new_status = "Rejected";
+
+            // Offline update of review status
+            let score_modification = {};
+            score_modification[args.status > 0 ? "approved" : "rejected"] = 1;
+            score_modification["in_review"] = -1;
+
+            m.account.act.offline_score_update_for_handle({
+                handle: args.this_card.sending_account_handle,
+                score: score_modification
+            })
+
             const this_card = args.this_card || m.card.this_card;
             m.card.act.airtable_base()('💬 Tweets').update([{
                 id: this_card.id,

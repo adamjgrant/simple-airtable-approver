@@ -105,12 +105,13 @@ m.account.acts({
             return;
         }
 
-        const key = Object.keys(args.score)[0];
-        const value = Object.values(args.score)[0];
-
         let modified_scores = m.account.accounts[account_index].scores;
-        modified_scores[key] += value; 
-        m.account.accounts[account_index].scores = modified_scores;
+        Object.keys(args.score).forEach(key => {
+            const value = args.score[key];
+            modified_scores[key] += value; 
+            m.account.accounts[account_index].scores = modified_scores;
+        });
+
         return _$.act.set_scores();
     },
 
