@@ -84,8 +84,8 @@ m.card.act({
 
             const handle = m.card.this_card.sending_account_handle;
 
-            // In case there is a filter, let's skip next items that don't match the filter.
-            if (m.account.act.handle_is_in_filter({ handle })) {
+            // In case there is a filter, let's skip next items that match the filter.
+            if (!m.account.act.handle_is_in_filter({ handle })) {
                 _$.act.advance_to_next_card();
             }
         }

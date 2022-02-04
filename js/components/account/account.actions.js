@@ -81,6 +81,13 @@ m.account.acts({
         m.account.account_filter = m.account.accounts;
     },
 
+    handle_is_in_filter(_$, args) {
+        return m.account.account_filter.map(account => account.raw_handle).find(raw_handle => {
+            const arg_raw_handle = new m.account.Account(args.handle, "", {}).raw_handle;
+            return raw_handle === arg_raw_handle;
+        });
+    },
+
     priv: {
         get_accounts(_$, args = {}) {
             let all_records = [];
