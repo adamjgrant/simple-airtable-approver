@@ -19,6 +19,10 @@ m.account.Account = class {
             accepted: 0
         }
     }
+
+    set scores(modified_scores) {
+        this._scores = modified_scores;
+    }
 }
 
 m.account.acts({
@@ -89,6 +93,27 @@ m.account.acts({
         });
     },
 
+    offline_score_update_for_handle(_$, args) {
+        // For a little UX boost, when a vote is made, update the score immediately
+        // while we're waiting for the remote update.
+        // e.g. { handle: "nicegoingadam", score: { approved: 1 } }
+        const raw_handle = _$.act.get_raw_handle_for_handle({ handle: args.handle });
+        const account_index = m.account.accounts.findIndex(account => account.raw_handle === raw_handle);
+
+        if (account_index < 0) {
+            console.error("Could not find account for handle " + raw_handle);
+            return;
+        }
+
+        const key = Object.keys(args.score)[0];
+        const value = Object.values(args.score)[0];
+
+        let modified_scores = m.account.accounts[account_index].scores;
+        modified_scores[key] += value; 
+        m.account.accounts[account_index].scores = modified_scores;
+        return _$.act.set_scores();
+    },
+
     priv: {
         get_accounts(_$, args = {}) {
             let all_records = [];
@@ -108,6 +133,11 @@ m.account.acts({
                         .then(accounts => resolve());
                 });
             });
+        },
+
+        get_raw_handle_for_handle(_$, args) {
+            const throwaway_account = new m.account.Account(args.handle, "", {});
+            return throwaway_account.raw_handle;
         },
 
         turn_account_records_into_account_objects(_$, args) {
