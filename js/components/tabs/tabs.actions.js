@@ -53,7 +53,10 @@ m.tabs.acts({
             _$.me().querySelector("ul").appendChild(tab_element);
         },
         bind_tabs(_$,args) {
-
+            _$("a").forEach((a, index) => {
+                const name = a.getAttribute("href");
+                a.addEventListener("click", () => _$.act.select_tab({ index, name }));
+            });
         },
     }
 });
