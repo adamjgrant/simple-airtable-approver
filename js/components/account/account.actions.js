@@ -33,8 +33,9 @@ m.account.acts({
         // and we can expect things like m.account.accounts to be populated.
         return new Promise((resolve, reject) => {
             _$.act.refresh_accounts().then(accounts => {
-                setInterval(_$.act.refresh_accounts, 5000);
+                setInterval(_$.act.refresh_accounts, 60000);
                 m.tabs.act.generate_all_tabs();
+                m.tabs.act.select_tab({ name: "all" });
                 resolve(accounts);
             });
         });

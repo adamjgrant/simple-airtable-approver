@@ -1,9 +1,10 @@
 m.tabs.acts({
     select_tab(_$, args) {
-        const all_tabs = _$("a");
+        const all_tabs = document.querySelectorAll("[data-component='tabs'] a")
         const handle = args.name.replace("#tab-", "");
         if (handle === "all") {
             m.account.act.add_all_accounts_to_filter();
+            args.index = 0;
         } else {
             m.account.act.set_account_filter_to_one_account_by_handle({ handle });
         }
