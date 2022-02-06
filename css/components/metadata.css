@@ -1,0 +1,19 @@
+[data-component="metadata"] {
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+[data-component="metadata"] #badge {
+    border-radius: 15px;
+    background: var(--twitter-blue-link);
+    color: white;
+    line-height: var(--line-height);
+    font-size: var(--font-size);
+    display: inline-block;
+    padding: 3px 12px;
+}
+
+[data-component="metadata"] #badge.hide {
+    display: none;
+}

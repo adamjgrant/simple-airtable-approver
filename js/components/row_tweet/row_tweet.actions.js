@@ -1,6 +1,10 @@
 m.row_tweet.act({
     show_only_these_rows_by_name(_$, args) {
-        _$.me().forEach(row => row.classList.add("hide"));
+        const rows = [].concat(_$.me());
+        rows.forEach(row => {
+            if (!row || row.length === 0) return;
+            row.classList.add("hide");
+        });
         args.handles.forEach(handle => {
             const class_name = `show-tab-${handle}`;
             document.querySelectorAll(`.${class_name}`).forEach(row => row.classList.remove("hide"));

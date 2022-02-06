@@ -14,6 +14,7 @@ m.card.act({
                 response: args.record.get("Full tweet"),
                 tweetalt1: args.record.get("tweetalt1"),
                 tweetalt2: args.record.get("tweetalt2"),
+                badge: args.record.get("Badge")[0],
                 reply_to_handle: args.record.get("Reply To Handle"),
                 sending_account_handle: args.record.get("Sending account handle"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
@@ -63,6 +64,7 @@ m.card.act({
     },
 
     advance_to_next_card(_$, args = {}) {
+        m.metadata.act.hide_badge();
         if (m.card.this_card != null) m.card.cards_processed.push(m.card.this_card);
 
         if (_$.act.no_more_cards()) {
@@ -92,6 +94,7 @@ m.card.act({
         m.embedded_tweet.act.hide_all();
         _$.act.format_card();
         _$.act.set_card_values();
+        m.metadata.act.set_badge({ text: m.card.this_card.badge });
     },
 
     advance_to_card_at_index(_$, args) {
