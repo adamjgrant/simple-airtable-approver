@@ -42,8 +42,8 @@ m.account.acts({
     post_init(_$, args) {
         m.tabs.act.generate_all_tabs();
         m.row_tweet.act.populate();
-        m.curtain.act.remove_curtain() 
         m.tabs.act.select_tab({ name: "all" });
+        m.curtain.act.remove_curtain() 
     },
 
     refresh_accounts(_$, args) {
