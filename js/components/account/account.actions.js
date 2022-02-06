@@ -34,11 +34,16 @@ m.account.acts({
         return new Promise((resolve, reject) => {
             _$.act.refresh_accounts().then(accounts => {
                 setInterval(_$.act.refresh_accounts, 60000);
-                m.tabs.act.generate_all_tabs();
-                m.tabs.act.select_tab({ name: "all" });
                 resolve(accounts);
             });
         });
+    },
+
+    post_init(_$, args) {
+        m.tabs.act.generate_all_tabs();
+        m.row_tweet.act.populate();
+        m.curtain.act.remove_curtain() 
+        m.tabs.act.select_tab({ name: "all" });
     },
 
     refresh_accounts(_$, args) {

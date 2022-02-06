@@ -1,6 +1,9 @@
 m.row_tweet.act({
     show_only_these_rows_by_name(_$, args) {
-        const rows = [].concat(_$.me());
+        _$.me = () => {
+            return document.querySelectorAll("[data-component='row_tweet']");
+        }
+        const rows = _$.me();
         rows.forEach(row => {
             if (!row || row.length === 0) return;
             row.classList.add("hide");

@@ -45,10 +45,10 @@ m.card.events(_$ => {
 
             Promise.allSettled(load_in_data_promises).then(data => {
                 m.curtain.act.set_curtain_text({ text: "Done" });
-                if (data.length) { m.curtain.act.remove_curtain() };
+                if (data.length) { 
+                    m.account.act.post_init();
+                };
                 _$.act.start();
-
-                // TODO: Status update: Done.
             });
         });
     }
