@@ -20,9 +20,11 @@ m.metadata.act({
     priv: {
         format_badge(_$, args) {
             let number_parsed = args.text.match(/(\d+\.\d+)/);
+            if (!number_parsed && args.text.match(/\s0$/)) {
+                return args.text.replace(/\s0$/, " (Not enough votes)");
+            }
             let number = number_parsed ? number_parsed[0] : args.text;
             number = parseFloat(number.substr(0, 6)) * 100;
-            if (number == 0) number = "---";
             return args.text.replace(/(\d+\.\d+)/, `${number}%`);
         }
     }
