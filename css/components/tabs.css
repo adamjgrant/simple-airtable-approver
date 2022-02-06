@@ -18,7 +18,6 @@
 [data-component="tabs"] ul li {
     display: block;
     overflow: hidden;
-    
 }
 
 [data-component="tabs"] ul li a {
@@ -34,6 +33,7 @@
 
 [data-component="tabs"] ul li:first-child {
     width: 60px;
+    flex-shrink: 0;
 }
 
 [data-component="tabs"] ul li a.active {
