@@ -43,7 +43,7 @@ m.account.acts({
         m.tabs.act.generate_all_tabs();
         m.row_tweet.act.populate();
         m.tabs.act.select_tab({ name: "all" });
-        m.curtain.act.remove_curtain() 
+        m.curtain.act.remove_curtain()
     },
 
     refresh_accounts(_$, args) {
@@ -114,7 +114,7 @@ m.account.acts({
         let modified_scores = m.account.accounts[account_index].scores;
         Object.keys(args.score).forEach(key => {
             const value = args.score[key];
-            modified_scores[key] += value; 
+            modified_scores[key] += value;
             m.account.accounts[account_index].scores = modified_scores;
         });
 
@@ -156,12 +156,12 @@ m.account.acts({
                     retrieval_promises.push(new Promise((_resolve, _reject) => {
                         const rejected = record.get("# Rejected");
                         const in_review = record.get("# In Review");
-                        const approved = record.get("# Approved");
+                        const approved_and_waiting = record.get("# Approved and waiting");
                         const handle = record.get("Handle");
                         const scores = {
                             rejected: rejected,
                             in_review: in_review,
-                            approved: approved
+                            approved: approved_and_waiting
                         };
 
                         const account = new m.account.Account(handle, record.id, scores);
