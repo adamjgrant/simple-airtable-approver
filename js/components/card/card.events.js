@@ -28,7 +28,7 @@ m.card.events(_$ => {
         called = true;
         _$.act.airtable_base()('💬 Tweets').select({
             view: "Permutations Review Board",
-            maxRecords: 300
+            maxRecords: 100
         }).eachPage(function page(records, fetchNextPage) {
             records.forEach(record => {
                 m.curtain.act.set_curtain_text({ text: "Retrieving Data..." })
@@ -45,7 +45,7 @@ m.card.events(_$ => {
 
             Promise.allSettled(load_in_data_promises).then(data => {
                 m.curtain.act.set_curtain_text({ text: "Done" });
-                if (data.length) { 
+                if (data.length) {
                     m.account.act.post_init();
                 };
                 _$.act.start();
