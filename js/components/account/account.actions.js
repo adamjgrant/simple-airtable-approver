@@ -40,6 +40,7 @@ m.account.acts({
     },
 
     post_init(_$, args) {
+        m.card.act.sort_cards();
         m.tabs.act.generate_all_tabs();
         m.row_tweet.act.populate();
         m.tabs.act.select_tab({ name: "all" });

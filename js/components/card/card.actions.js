@@ -14,6 +14,7 @@ m.card.act({
                 response: args.record.get("Full tweet"),
                 tweetalt1: args.record.get("tweetalt1"),
                 tweetalt2: args.record.get("tweetalt2"),
+                order: args.record.get("Optional Sort Ordering"),
                 job_name: args.record.get("Permutation Job Name")[0],
                 job_approval_rate: args.record.get("Permutation Job Approval Rate")[0],
                 reply_to_handle: args.record.get("Reply To Handle"),
@@ -39,7 +40,7 @@ m.card.act({
     },
 
     start(_$, args) {
-        _$.act.advance_to_next_card();
+        // _$.act.advance_to_next_card();
     },
 
     format_card(_$, args) {
@@ -82,7 +83,7 @@ m.card.act({
             m.card.data.splice(args.index, 1);
             m.card.this_card = args.this_card;
         } else {
-            m.card.this_card = m.card.data.pop();
+            m.card.this_card = m.card.data.shift();
 
             const handle = m.card.this_card.sending_account_handle;
 
@@ -244,6 +245,14 @@ m.card.act({
     clear(_$, args) {
         _$("#response").value = "";
         _$("#response").innerHTML = "";
+    },
+
+    sort_cards(_$, args) {
+        m.card.data.sort((a, b) => {
+            if (a.order > b.order) return 1;
+            if (a.order < b.order) return -1;
+            return 0;
+        });
     }
 })
 
