@@ -123,11 +123,17 @@ m.card.act({
         m.tabs.act.set_tab_filter();
     },
 
-    set_card_values(_$, args) {
+    reset_card_values(_$, args) {
         // Reset
         _$(".tweet-minus-1").classList.remove("show");
         _$(".tweet-minus-2").classList.remove("show");
+        m.choice.act.set_text_for_choice_at_index({ text: "", index: 0 });
+        m.choice.act.set_text_for_choice_at_index({ text: "", index: 1 });
+        m.choice.act.set_text_for_choice_at_index({ text: "", index: 2 });
+    },
 
+    set_card_values(_$, args) {
+        _$.act.reset_card_values();
         _$("#tweet").innerHTML = _$.act.format_embedded_tweet_at_index({ tweet: m.card.this_card.tweet, index: 0 });
         _$("#response").innerHTML = m.card.this_card.response;
         _$("#response").value = m.card.this_card.response;
