@@ -13,16 +13,17 @@ m.card.act({
             let card_data = {
                 id: args.record.getId(),
                 tweet: args.record.get("Responds to (Text) cleaned up"),
-                response: response_options ? (responses[0] || "") : args.record.get("Full tweet"),
-                tweetalt1: response_options ? responses[1] : "",
-                tweetalt2: response_options ? responses[2] : "",
+                response: response_options.length ? (responses[0] || "") : args.record.get("Full tweet"),
+                tweetalt1: response_options.length ? responses[1] : "",
+                tweetalt2: response_options.length ? responses[2] : "",
                 order: args.record.get("Optional Sort Ordering"),
                 job_name: args.record.get("Permutation Job Name")[0],
                 job_approval_rate: args.record.get("Permutation Job Approval Rate")[0],
                 reply_to_handle: args.record.get("Reply To Handle"),
                 sending_account_handle: args.record.get("Sending account handle"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
-                thumbnail: _$.act.get_twitter_photo({ record: args.record })
+                thumbnail: _$.act.get_twitter_photo({ record: args.record }),
+                response_quality: args.record.get("Response Quality")
             }
 
             _$.act.get_previous_responses({ record: args.record }).then(previous_responses => {
@@ -101,6 +102,9 @@ m.card.act({
             job_name: m.card.this_card.job_name,
             job_approval_rate: m.card.this_card.job_approval_rate
         });
+        m.metadata.act.set_response_quality({
+            response_quality: m.card.this_card.response_quality
+        })
     },
 
     advance_to_card_at_index(_$, args) {

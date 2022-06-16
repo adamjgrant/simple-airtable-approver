@@ -4,7 +4,8 @@
     width: 100%;
 }
 
-[data-component="metadata"] #badge {
+[data-component="metadata"] #badge,
+[data-component="metadata"] #response_quality {
     border-radius: 15px;
     background: var(--twitter-blue-link);
     color: white;
@@ -14,6 +15,12 @@
     padding: 3px 12px;
 }
 
+[data-component="metadata"] #response_quality {
+    background: #CCC;
+    color: black;
+}
+
+[data-component="metadata"] #response_quality.hide,
 [data-component="metadata"] #badge.hide {
     display: none;
 }
