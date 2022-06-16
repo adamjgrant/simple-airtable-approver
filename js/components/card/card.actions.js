@@ -13,7 +13,7 @@ m.card.act({
             let card_data = {
                 id: args.record.getId(),
                 tweet: args.record.get("Responds to (Text) cleaned up"),
-                response: response_options ? responses[0]: args.record.get("Full tweet"),
+                response: response_options ? (responses[0] || "") : args.record.get("Full tweet"),
                 tweetalt1: response_options ? responses[1] : "",
                 tweetalt2: response_options ? responses[2] : "",
                 order: args.record.get("Optional Sort Ordering"),

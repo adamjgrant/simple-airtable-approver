@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Wed Jun 15 16:40:02 2022
+# Make data base, printed on Thu Jun 16 10:59:51 2022
 
 # Variables
 
@@ -25,6 +25,7 @@ VSCODE_LOG_NATIVE = false
 # environment
 twitter_token_secret = rsdIhAltS1UBTykHGVrfDEVKuvf3KBZxNRm3ooM5cD9zc
 # automatic
+ 
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/adamgrant/repos/simple-airtable-approver
@@ -43,7 +44,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/w9/r7_p3fh14mdfj9g8wj685tsm0000gn/T/vscode-ipc-dc130216-22d6-4a37-a147-0f5643b6f89a.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/w9/r7_p3fh14mdfj9g8wj685tsm0000gn/T/vscode-ipc-78983f52-5275-4b17-b797-a46a386594f4.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -59,10 +60,9 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
- 
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.0P7xJXhBCM/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AGguBWUGDb/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -160,7 +160,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 14096
+VSCODE_PID = 1486
 # variable set hash-table stats:
 # Load=73/1024=7%, Rehash=0, Collisions=2/97=2%
 
@@ -170,9 +170,9 @@ VSCODE_PID = 14096
 
 # Directories
 
-# . (device 16777233, inode 16605715): 23 files, no impossibilities.
+# . (device 16777231, inode 16605715): 24 files, no impossibilities.
 
-# 23 files, no impossibilities in 1 directories.
+# 24 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -198,7 +198,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-15 16:39:55
+#  Last modified 2022-06-15 16:40:15
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -219,8 +219,16 @@ build:
 #  Modification time never checked.
 #  File has not been updated.
 
+install:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 6):
+	npm install
+	
+
 # files hash-table stats:
-# Load=5/1024=0%, Rehash=0, Collisions=0/17=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/18=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -232,6 +240,6 @@ build:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Jun 15 16:40:02 2022
+# Finished Make data base on Thu Jun 16 10:59:51 2022
 
  
