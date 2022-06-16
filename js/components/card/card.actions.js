@@ -8,12 +8,13 @@ m.card.act({
 
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
+            let responses = JSON.parse(args.record.get("Response Options"));
             let card_data = {
                 id: args.record.getId(),
                 tweet: args.record.get("Responds to (Text) cleaned up"),
-                response: args.record.get("Full tweet"),
-                tweetalt1: args.record.get("tweetalt1"),
-                tweetalt2: args.record.get("tweetalt2"),
+                response: responses[0],
+                tweetalt1: responses[1],
+                tweetalt2: responses[2],
                 order: args.record.get("Optional Sort Ordering"),
                 job_name: args.record.get("Permutation Job Name")[0],
                 job_approval_rate: args.record.get("Permutation Job Approval Rate")[0],
