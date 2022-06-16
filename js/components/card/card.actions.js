@@ -6,6 +6,12 @@ m.card.act({
         return base;
     },
 
+    sort_cards(_$, args) {
+        m.card.data = m.card.data.sort((card, card2) => {
+            return card.response_quality - card2.response_quality;
+        });
+    },
+
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             const response_options = args.record.get("Response Options");

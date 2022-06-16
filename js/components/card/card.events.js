@@ -44,6 +44,7 @@ m.card.events(_$ => {
             // Status update: Waiting for joined data...
 
             Promise.allSettled(load_in_data_promises).then(data => {
+                _$.act.sort_cards();
                 m.curtain.act.set_curtain_text({ text: "Done" });
                 if (data.length) {
                     m.account.act.post_init();
