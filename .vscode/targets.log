@@ -6,8 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
+ 
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Thu Jun 16 16:57:32 2022
+
+# Make data base, printed on Fri Jun 17 11:17:11 2022
 
 # Variables
 
@@ -40,7 +43,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/w9/r7_p3fh14mdfj9g8wj685tsm0000gn/T/vscode-ipc-0092cd6c-918d-4cb1-a05c-738c6dd13815.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/w9/r7_p3fh14mdfj9g8wj685tsm0000gn/T/vscode-ipc-41ee0d7a-0f23-4897-93ca-7065c4481050.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -64,7 +67,7 @@ SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.AGguBWUGDb/Listeners
 # environment
 airtable_buffer_base = app2X2gnPXhFKDs1t
 # environment
-OPENAI_API_KEY = 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
+OPENAI_API_KEY = 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
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -156,7 +159,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1486
+VSCODE_PID = 22799
 # variable set hash-table stats:
 # Load=73/1024=7%, Rehash=0, Collisions=2/97=2%
 
@@ -236,8 +239,6 @@ install:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun 16 16:57:32 2022
+# Finished Make data base on Fri Jun 17 11:17:11 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-
