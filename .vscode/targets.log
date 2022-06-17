@@ -6,11 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Thu Jun 16 10:59:51 2022
+# Make data base, printed on Thu Jun 16 16:57:32 2022
 
 # Variables
 
@@ -25,7 +22,6 @@ VSCODE_LOG_NATIVE = false
 # environment
 twitter_token_secret = rsdIhAltS1UBTykHGVrfDEVKuvf3KBZxNRm3ooM5cD9zc
 # automatic
- 
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/adamgrant/repos/simple-airtable-approver
@@ -44,7 +40,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/w9/r7_p3fh14mdfj9g8wj685tsm0000gn/T/vscode-ipc-78983f52-5275-4b17-b797-a46a386594f4.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/w9/r7_p3fh14mdfj9g8wj685tsm0000gn/T/vscode-ipc-0092cd6c-918d-4cb1-a05c-738c6dd13815.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -240,6 +236,8 @@ install:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun 16 10:59:51 2022
+# Finished Make data base on Thu Jun 16 16:57:32 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+

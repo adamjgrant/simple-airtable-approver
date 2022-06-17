@@ -15,11 +15,11 @@ m.card.act({
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             const response_options = args.record.get("Response Options");
-            let responses = response_options ? JSON.parse(response_options) : [];
+            let responses = JSON.parse(response_options).length ? JSON.parse(response_options) : [args.record.get("Full tweet")];
             let card_data = {
                 id: args.record.getId(),
                 tweet: args.record.get("Responds to (Text) cleaned up"),
-                response: response_options.length ? (responses[0] || "") : args.record.get("Full tweet"),
+                response: (responses[0] || ""),
                 tweetalt1: response_options.length ? responses[1] : "",
                 tweetalt2: response_options.length ? responses[2] : "",
                 order: args.record.get("Optional Sort Ordering"),
