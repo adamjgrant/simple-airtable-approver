@@ -6,12 +6,6 @@ m.card.act({
         return base;
     },
 
-    sort_cards(_$, args) {
-        m.card.data = m.card.data.sort((card, card2) => {
-            return card2.response_quality - card.response_quality;
-        });
-    },
-
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             const response_options = args.record.get("Response Options");
@@ -266,10 +260,13 @@ m.card.act({
     },
 
     sort_cards(_$, args) {
-        m.card.data.sort((a, b) => {
+        m.card.data = m.card.data.sort((a, b) => {
             if (a.order > b.order) return 1;
             if (a.order < b.order) return -1;
             return 0;
+        });
+        m.card.data = m.card.data.sort((card, card2) => {
+            return card2.response_quality - card.response_quality;
         });
     }
 })
