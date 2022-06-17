@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/adamgrant/repos/simple-airtable-approver'
-sleep 3; open http://localhost:3001 &
-python3 -m http.server 3001
-make: Leaving directory `/Users/adamgrant/repos/simple-airtable-approver'
- 
