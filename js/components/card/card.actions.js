@@ -8,7 +8,7 @@ m.card.act({
 
     sort_cards(_$, args) {
         m.card.data = m.card.data.sort((card, card2) => {
-            return card.response_quality - card2.response_quality;
+            return card2.response_quality - card.response_quality;
         });
     },
 
