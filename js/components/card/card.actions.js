@@ -266,6 +266,8 @@ m.card.act({
             return 0;
         });
         m.card.data = m.card.data.sort((card, card2) => {
+            return card2.job_approval_rate - card.job_approval_rate;
+        }).sort((card, card2) => {
             return card2.response_quality - card.response_quality;
         });
     }
