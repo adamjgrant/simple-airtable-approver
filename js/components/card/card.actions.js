@@ -227,7 +227,7 @@ m.card.act({
     },
 
     edit_response(_$, args) {
-        m.bottom_nav.act.disable();
+        // m.bottom_nav.act.disable();
         m.status_indicator.act.set_status_yellow({ reset: false });
 
         const edit = common.debounce({
