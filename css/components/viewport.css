@@ -20,7 +20,7 @@
 }
 
 [data-component~="viewport"].tinder-view {
-    height: calc(100vh - 85px);
+    height: 100vh;
 }
 
 [data-component~="viewport"].timeline-view .view-timeline,

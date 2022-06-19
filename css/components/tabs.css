@@ -4,6 +4,7 @@
     top: 75px;
     left: 0;
     right: 0;
+    z-index: 2;
 }
 
 [data-component="tabs"] ul {

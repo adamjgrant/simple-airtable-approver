@@ -16,7 +16,7 @@
 
 [data-component~="bottom_nav"] * {
     transition: all 0.20s;
-    padding-right: 20px;
+    margin-right: 20px;
 }
 
 [data-component~="bottom_nav"] #undo {
@@ -26,6 +26,7 @@
 
 [data-component~="bottom_nav"] #approve {
     margin-bottom: 25px;
+    border: 1px solid green;
 }
 
 [data-component~="bottom_nav"].hide {
@@ -50,6 +51,8 @@
     margin: 0 3px;
     color: #333;
     cursor: pointer;
+    margin-right: 20px;
+    width: 45px;
 }
 
 [data-component~="bottom_nav"] button:hover {
