@@ -21,8 +21,8 @@ choice_permutations.facepalm = facepalm;
 import { wtf } from '../../permutations/wtf.js';
 choice_permutations.wtf = wtf;
 
-import { yes } from '../../permutations/yes.js';
-choice_permutations.yes = yes;
+import { goodjob } from '../../permutations/goodjob.js';
+choice_permutations.goodjob = goodjob;
 
 import { no } from '../../permutations/no.js';
 choice_permutations.no = no;
