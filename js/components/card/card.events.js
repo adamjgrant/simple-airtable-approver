@@ -48,6 +48,8 @@ m.card.events(_$ => {
                 m.curtain.act.set_curtain_text({ text: "Done" });
                 if (data.length) {
                     m.account.act.post_init();
+                    const el = document.querySelector("[data-component='row_tweet']");
+                    m.row_tweet.act.open_tweet({ row: el });
                 };
                 _$.act.start();
             });
