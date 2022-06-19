@@ -2,27 +2,30 @@
     height: var(--bottom-nav-height);
     margin: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     position: fixed;
-    left: 0;
+    justify-content: center;
+    align-items: center;
     bottom: 0;
     right: 0;
+    top: 0;
     transition: opacity 1s;
+    flex-direction: column;
     z-index: 2;
-    background: white;
-    border-top: 1px solid #eee;
-    padding-bottom: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
+    background: transparent;
 }
 
 [data-component~="bottom_nav"] * {
     transition: all 0.20s;
+    padding-right: 20px;
 }
 
 [data-component~="bottom_nav"] #undo {
     transform: rotate(180deg);
+    margin-bottom: 50px;
+}
+
+[data-component~="bottom_nav"] #approve {
+    margin-bottom: 25px;
 }
 
 [data-component~="bottom_nav"].hide {
@@ -85,7 +88,6 @@
 
 @media (prefers-color-scheme: dark) {
     [data-component~="bottom_nav"] {
-        background: black;
         border-top-color: #333;
     }
     [data-component~="bottom_nav"] button {

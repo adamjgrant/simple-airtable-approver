@@ -6,7 +6,7 @@
     --line-height: 1.3;
     --profile-photo-size: 50px;
     --profile-photo-margin-l: 8px;
-    --bottom-nav-height: 85px;
+    --bottom-nav-height: auto;
 }
 
 
