@@ -106,7 +106,9 @@ m.card.act({
         });
         m.metadata.act.set_response_quality({
             response_quality: m.card.this_card.response_quality
-        })
+        });
+
+        m.viewport.act.scroll_to_top();
     },
 
     advance_to_card_at_index(_$, args) {

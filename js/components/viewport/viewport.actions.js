@@ -13,4 +13,8 @@ m.viewport.acts({
         m.viewport.current_view = "tinder";
         m.metadata.act.show_badge();
     },
+
+    scroll_to_top(_$, args) {
+        _$.me().scrollTo(0, 0);
+    }
 });
