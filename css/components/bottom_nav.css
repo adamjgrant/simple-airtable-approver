@@ -25,11 +25,6 @@
     background: hsla(125, 0%, 35%, 0.1);
 }
 
-[data-component~="bottom_nav"] #approve {
-    margin-bottom: 18px;
-    background: hsla(125, 100%, 35%, 0.1);
-}
-
 [data-component~="bottom_nav"].hide {
     pointer-events: none;
     opacity: 0;
@@ -58,13 +53,14 @@
     height: var(--size);
 }
 
-[data-component~="bottom_nav"] button:hover {
-    background: #EEE;
-}
-
 [data-component~="bottom_nav"] button#approve,
 [data-component~="bottom_nav"] button#approve-and-go-back {
     color: green;
+}
+
+[data-component~="bottom_nav"] #approve {
+    margin-bottom: 18px;
+    background: hsla(125, 100%, 35%, 0.1);
 }
 
 [data-component~="bottom_nav"] button#reject {
@@ -72,12 +68,17 @@
     background: hsla(34, 100%, 35%, 0.1);
 }
 
-[data-component~="bottom_nav"] button#reject-and-go-back {
-    background: crimson;
+[data-component~="bottom_nav"] #approve:active {
     color: white;
+    background: hsla(125, 100%, 35%, 1);
 }
 
-[data-component~="bottom_nav"] button#reject:hover {
+[data-component~="bottom_nav"] button#reject:active {
+    color: white;
+    background: hsla(34, 100%, 35%, 1.0);
+}
+
+[data-component~="bottom_nav"] button#reject-and-go-back {
     background: crimson;
     color: white;
 }
@@ -92,15 +93,29 @@
     border-color: transparent;
 }
 
+@media (hover: hover) {
+    [data-component~="bottom_nav"] button#reject:hover {
+        background: crimson;
+        color: white;
+    }
+
+    [data-component~="bottom_nav"] button:hover {
+        background: #EEE;
+    }
+}
+
+@media (hover: hover) and (prefers-color-scheme: dark) {
+    [data-component~="bottom_nav"] button:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
 @media (prefers-color-scheme: dark) {
     [data-component~="bottom_nav"] {
         border-top-color: #333;
     }
     [data-component~="bottom_nav"] button {
         color: white;
-    }
-    [data-component~="bottom_nav"] button:hover {
-        background: rgba(255, 255, 255, 0.1);
     }
     [data-component~="bottom_nav"].disabled {
         background: #333;
