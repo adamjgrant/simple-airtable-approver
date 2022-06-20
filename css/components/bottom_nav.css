@@ -22,11 +22,12 @@
 [data-component~="bottom_nav"] #undo {
     transform: rotate(180deg);
     margin-bottom: 50px;
+    background: hsla(125, 0%, 35%, 0.1);
 }
 
 [data-component~="bottom_nav"] #approve {
     margin-bottom: 25px;
-    border: 1px solid green;
+    background: hsla(125, 100%, 35%, 0.1);
 }
 
 [data-component~="bottom_nav"].hide {
@@ -65,8 +66,8 @@
 }
 
 [data-component~="bottom_nav"] button#reject {
-    border: 1px solid crimson;
     color: crimson;
+    background: hsla(34, 100%, 35%, 0.1);
 }
 
 [data-component~="bottom_nav"] button#reject-and-go-back {
