@@ -51,6 +51,7 @@ m.choice.acts({
         if (!args.skip_update) {
             m.card.act.change_response_field({ text: choice_text });
             m.card.act.edit_response({ text: choice_text });
+            _$.act.set_choice_response({ text: choice_text });
         }
     },
 
@@ -81,7 +82,7 @@ m.choice.acts({
         },
 
         reset_permutation_field(_$, args) {
-            _$.act.set_choice_response({ text: "..." });
+            _$.act.set_choice_response({ text: m.card.this_card.response });
         }    
     }
 });
