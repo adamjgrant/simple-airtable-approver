@@ -299,7 +299,7 @@ html {
 html,
 body {
     background: var(--twitter-blue-link);
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 body {
