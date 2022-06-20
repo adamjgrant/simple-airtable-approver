@@ -6,6 +6,7 @@
     color: var(--twitter-black-text);
     width: 100%;
     padding-top: 8px;
+    overflow: hidden;
 }
 
 [data-component~="card"] a {
