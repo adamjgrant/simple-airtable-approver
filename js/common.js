@@ -1,21 +1,24 @@
 const common = {
-    debounce(args) {
-        const func = args.func;
-        const wait = args.wait;
-        const immediate = args.immediate;
-
-        var timeout;
-        return function() {
-            var context = this,
-                args = arguments;
-            var later = function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            };
-            var callNow = immediate && !timeout;
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            if (callNow) func.apply(context, args);
-        }
+    debounceQueue: {},
+    debounce(fn, id, delay, args, that) {
+      delay = delay || 1000;
+      that = that || this;
+      args = args || new Array;
+      if (typeof common.debounceQueue[id] !== "object") {
+        common.debounceQueue[id] = new Object();
+      }
+      if (typeof common.debounceQueue[id].debounceTimer !== "undefined") {
+        clearTimeout(common.debounceQueue[id].debounceTimer);
+      }
+      return common.debounceQueue[id] = {
+        fn: fn,
+        id: id,
+        delay: delay,
+        args: args,
+        debounceTimer: setTimeout(function() {
+          common.debounceQueue[id].fn.apply(that, common.debounceQueue[id].args);
+          return common.debounceQueue[id] = void 0;
+        }, delay)
+      };
     }
 }

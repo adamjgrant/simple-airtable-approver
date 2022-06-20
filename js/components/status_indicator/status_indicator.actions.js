@@ -18,11 +18,7 @@ m.status_indicator.acts({
 
             if (args.reset === undefined) args.reset = true;
             if (args.reset) {
-                const reset = common.debounce({
-                    func: _$.act.reset_status,
-                    wait: 500,
-                });
-                reset();
+                common.debounce(_$.act.reset_status, 'reset', 500);
             }
         }
     }

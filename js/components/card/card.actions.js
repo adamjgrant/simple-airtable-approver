@@ -239,8 +239,7 @@ m.card.act({
         // m.bottom_nav.act.disable();
         m.status_indicator.act.set_status_yellow({ reset: false });
 
-        const edit = common.debounce({
-            func: () => {
+        common.debounce(() => {
                 m.card.act.airtable_base()('💬 Tweets').update([{
                     id: m.card.this_card.id,
                     fields: { "Tweet": args.text }
@@ -254,9 +253,9 @@ m.card.act({
                     }
                 });
             },
-            wait: 1000,
-        });
-        edit();
+            'edit',
+            1000,
+        );
     },
 
     select_all(_$, args) {
