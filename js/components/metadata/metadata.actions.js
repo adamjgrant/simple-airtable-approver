@@ -22,7 +22,8 @@ m.metadata.act({
     set_badge(_$, args) {
         if (m.viewport.current_view === "tinder") _$.act.show_badge();
         const approval_rate = _$.act.format_percentage({ number: args.job_approval_rate });
-        _$("#badge").innerHTML = `"${args.job_name}": ${approval_rate}%`;
+        _$("#badge p").innerHTML = `"${args.job_name}": ${approval_rate}%`;
+        _$("#badge").href = args.job_link;
     },
 
     set_response_quality(_$, args) {

@@ -7,6 +7,7 @@ m.card.act({
     },
 
     load_in_data(_$, args) {
+        console.log(args);
         return new Promise((resolve, reject) => {
             const response_options = args.record.get("Response Options");
             let responses = JSON.parse(response_options).length ? JSON.parse(response_options) : [args.record.get("Full tweet")];
@@ -19,6 +20,7 @@ m.card.act({
                 order: args.record.get("Optional Sort Ordering"),
                 job_name: args.record.get("Permutation Job Name")[0],
                 job_approval_rate: args.record.get("Permutation Job Approval Rate")[0],
+                job_link: `https://airtable.com/app2X2gnPXhFKDs1t/tblD70jsW5F9jEjGr/viwxIVb4yRM9zrHsY/${args.record.get("Job")[0]}?blocks=hide`,
                 reply_to_handle: args.record.get("Reply To Handle"),
                 sending_account_handle: args.record.get("Sending account handle"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
@@ -100,7 +102,8 @@ m.card.act({
         _$.act.set_card_values();
         m.metadata.act.set_badge({
             job_name: m.card.this_card.job_name,
-            job_approval_rate: m.card.this_card.job_approval_rate
+            job_approval_rate: m.card.this_card.job_approval_rate,
+            job_link: m.card.this_card.job_link
         });
         m.metadata.act.set_response_quality({
             response_quality: m.card.this_card.response_quality
