@@ -21,12 +21,12 @@
 
 [data-component~="bottom_nav"] #undo {
     transform: rotate(180deg);
-    margin-bottom: 50px;
+    margin-bottom: 75px;
     background: hsla(125, 0%, 35%, 0.1);
 }
 
 [data-component~="bottom_nav"] #approve {
-    margin-bottom: 25px;
+    margin-bottom: 18px;
     background: hsla(125, 100%, 35%, 0.1);
 }
 
@@ -45,15 +45,17 @@
 }
 
 [data-component~="bottom_nav"] button {
+    --size: 45px;
     padding: 10px 15px;
     background: transparent;
     border: none;
-    border-radius: 8px;
+    border-radius: 50%;
     margin: 0 3px;
     color: #333;
     cursor: pointer;
     margin-right: 20px;
-    width: 45px;
+    width: var(--size);
+    height: var(--size);
 }
 
 [data-component~="bottom_nav"] button:hover {
