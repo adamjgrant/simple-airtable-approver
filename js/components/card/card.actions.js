@@ -221,8 +221,9 @@ m.card.act({
     },
 
     manual_edit(_$, args) {
-        const text = _$("#choice-response").innerHTML;
-        _$.act.change_response_field({ text: text });
+        const text = _$("#choice-response").value;
+        _$.act.change_response_field({ text });
+        _$.act.edit_response({ text });
     },
 
     change_response_field(_$, args) {

@@ -74,6 +74,7 @@ m.choice.acts({
     set_choice_response(_$, args) {
         _$("#choice-response").innerHTML = args.text;
         _$("#choice-response").value = args.text;
+        m.card.act.edit_response(args);
     },
 
     priv: {
