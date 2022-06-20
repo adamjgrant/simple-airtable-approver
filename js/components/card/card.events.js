@@ -19,6 +19,8 @@ m.card.events(_$ => {
         });
     });
 
+    _$("#choice-response").addEventListener("keyup", _$.act.manual_edit);
+
     if (!called) {
         const validation = m.bottom_nav.act.validate_settings();
         if (!validation.valid) {

@@ -63,14 +63,17 @@ m.choice.acts({
         const tree = new Tree(args.json);
         const generated_text = tree.one;
         console.log(generated_text);
-        _$("#choice-response").innerHTML = generated_text;
-        _$("#choice-response").value = generated_text;
+        _$.act.set_choice_response({ text: generated_text });
         m.card.act.change_response_field({ text: generated_text });
         m.card.act.edit_response({ text: generated_text });
         const last_index = _$.me().length - 1;
         _$.act.select_choice_at_index({ index: last_index });
     },
 
+    set_choice_response(_$, args) {
+        _$("#choice-response").innerHTML = args.text;
+        _$("#choice-response").value = args.text;
+    },
 
     priv: {
         unselect_all_choices(_$, args) {
@@ -78,8 +81,7 @@ m.choice.acts({
         },
 
         reset_permutation_field(_$, args) {
-            _$("#choice-response").innerHTML = "...";
-            _$("#choice-response").value = "...";
-        }
+            _$.act.set_choice_response({ text: "..." });
+        }    
     }
 });

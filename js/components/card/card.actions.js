@@ -141,8 +141,11 @@ m.card.act({
     set_card_values(_$, args) {
         _$.act.reset_card_values();
         _$("#tweet").innerHTML = _$.act.format_embedded_tweet_at_index({ tweet: m.card.this_card.tweet, index: 0 });
-        _$("#response").innerHTML = m.card.this_card.response;
-        _$("#response").value = m.card.this_card.response;
+
+        const initial_choice = m.card.this_card.response;
+        _$("#response").innerHTML = initial_choice;
+        _$("#response").value = initial_choice;
+        m.choice.act.set_choice_response({ text: initial_choice });
 
         m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.response, index: 0 });
         m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.tweetalt1, index: 1 });
@@ -215,6 +218,11 @@ m.card.act({
                 });
             });
         }
+    },
+
+    manual_edit(_$, args) {
+        const text = _$("#choice-response").innerHTML;
+        _$.act.change_response_field({ text: text });
     },
 
     change_response_field(_$, args) {
