@@ -92,7 +92,7 @@
     margin: 0;
     outline: 0;
     width: calc(100% - 50px);
-    height: 60px;
+    height: 120px;
     font-size: var(--font-size);
     line-height: var(--line-height);
     box-sizing: border-box;
