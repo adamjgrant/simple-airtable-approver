@@ -7,7 +7,6 @@ m.card.act({
     },
 
     load_in_data(_$, args) {
-        console.log(args);
         return new Promise((resolve, reject) => {
             const response_options = args.record.get("Response Options");
             let responses = JSON.parse(response_options).length ? JSON.parse(response_options) : [args.record.get("Full tweet")];
