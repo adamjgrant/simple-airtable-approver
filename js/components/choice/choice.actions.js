@@ -77,6 +77,10 @@ m.choice.acts({
         m.card.act.edit_response(args);
     },
 
+    blur_choice_response(_$, args) {
+        _$("#choice-response").blur();
+    },
+
     priv: {
         unselect_all_choices(_$, args) {
             _$.me().forEach(choice => choice.classList.remove("selected"));

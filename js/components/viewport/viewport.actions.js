@@ -15,6 +15,7 @@ m.viewport.acts({
     },
 
     scroll_to_top(_$, args) {
+        m.choice.act.blur_choice_response();
         _$.me().scrollTo(0, 0);
     }
 });

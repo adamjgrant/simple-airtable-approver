@@ -16,11 +16,9 @@
 
 [data-component~="bottom_nav"] * {
     transition: all 0.20s;
-    margin-right: 20px;
 }
 
 [data-component~="bottom_nav"] #undo {
-    transform: rotate(180deg);
     margin-bottom: 75px;
     background: hsla(125, 0%, 35%, 0.1);
 }
@@ -40,7 +38,7 @@
 }
 
 [data-component~="bottom_nav"] button {
-    --size: 45px;
+    --size: 60px;
     padding: 10px 15px;
     background: transparent;
     border: none;
@@ -61,6 +59,7 @@
 [data-component~="bottom_nav"] #approve {
     margin-bottom: 18px;
     background: hsla(125, 100%, 35%, 0.1);
+    font-size: 1.45rem;
 }
 
 [data-component~="bottom_nav"] button#reject {
