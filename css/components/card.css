@@ -107,4 +107,7 @@
         color: white;
         border-color: #333;
     }
+    [data-component~="card"] a {
+        color: #1784c3;
+    }
 }
