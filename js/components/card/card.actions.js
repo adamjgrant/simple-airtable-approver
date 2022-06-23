@@ -24,7 +24,8 @@ m.card.act({
                 sending_account_handle: args.record.get("Sending account handle"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
                 thumbnail: _$.act.get_twitter_photo({ record: args.record }),
-                response_quality: args.record.get("Response Quality")
+                response_quality: args.record.get("Response Quality"),
+                combined_response_quality: args.record.get("Combined Response Quality")
             }
 
             _$.act.get_previous_responses({ record: args.record }).then(previous_responses => {
@@ -278,10 +279,8 @@ m.card.act({
             return 0;
         });
         m.card.data = m.card.data.sort((card, card2) => {
-            return card2.job_approval_rate - card.job_approval_rate;
-        }).sort((card, card2) => {
-            return card2.response_quality - card.response_quality;
-        });
+            return card2.combined_response_quality - card.combined_response_quality;
+        })
     }
 })
 
