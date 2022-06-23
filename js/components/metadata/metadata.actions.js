@@ -13,10 +13,12 @@ m.metadata.act({
 
     hide_response_quality(_$, args) {
         _$("#response_quality").classList.add("hide");
+        _$("#combined_response_quality").classList.add("hide");
     },
 
     show_response_quality(_$, args) {
         _$("#response_quality").classList.remove("hide");
+        _$("#combined_response_quality").classList.remove("hide");
     },
 
     set_badge(_$, args) {
@@ -29,7 +31,9 @@ m.metadata.act({
     set_response_quality(_$, args) {
         if (m.viewport.current_view === "tinder") _$.act.show_response_quality();
         const grade = _$.act.format_percentage({ number: args.response_quality});
+        const combined_grade = _$.act.format_percentage({ number: args.combined_response_quality});
         _$("#response_quality").innerHTML = `Grade: ${grade}%`;
+        _$("#combined_response_quality").innerHTML = `Combined: ${combined_grade}%`;
     },
 
     priv: {

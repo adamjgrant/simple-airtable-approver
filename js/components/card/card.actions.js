@@ -106,7 +106,8 @@ m.card.act({
             job_link: m.card.this_card.job_link
         });
         m.metadata.act.set_response_quality({
-            response_quality: m.card.this_card.response_quality
+            response_quality: m.card.this_card.response_quality,
+            combined_response_quality: m.card.this_card.combined_response_quality
         });
 
         m.viewport.act.scroll_to_top();
