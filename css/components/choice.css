@@ -121,6 +121,31 @@
     font-size: 16pt;
 }
 
+[data-component~="choice"] .select-all,
+[data-component~="choice"] .done {
+    display: none;
+}
+[data-component~="choice"] #choice-response:focus + .select-all,
+[data-component~="choice"] #choice-response:focus + .select-all + .done {
+    display: block;
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 10;
+    border: 0;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background: cornflowerblue;
+    opacity: 0.5;
+    color: white;
+    cursor: pointer;
+}
+[data-component~="choice"] #choice-response:focus + .select-all + .done {
+    left: auto;
+    right: 25px;
+}
+
 [data-component~="choice"] nav {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
