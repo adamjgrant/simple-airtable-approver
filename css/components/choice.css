@@ -108,6 +108,19 @@
     color: var(--twitter-black-text);
 }
 
+[data-component~="choice"] #choice-response:focus {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: auto;
+    z-index: 9;
+    background: white;
+    font-size: 16pt;
+}
+
 [data-component~="choice"] nav {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
