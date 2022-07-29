@@ -79,6 +79,7 @@
 [data-component~="choice"].selected #choice-response,
 [data-component~="choice"].selected nav {
     border-color: var(--twitter-blue-link);
+    color: var(--twitter-black-text);
 }
 
 [data-component~="choice"] #choice-response,
