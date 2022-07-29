@@ -85,7 +85,6 @@ m.choice.acts({
         setTimeout(() => {
             _$("#choice-response").focus();
             _$("#choice-response").select();
-            _$("#choice-response").focus();
         }, 100);
     },
 

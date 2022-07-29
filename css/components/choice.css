@@ -120,6 +120,7 @@
     z-index: 9;
     background: white;
     font-size: 16pt;
+    padding-top: 32pt;
 }
 
 [data-component~="choice"] .select-all,
@@ -141,6 +142,9 @@
     opacity: 0.5;
     color: white;
     cursor: pointer;
+    text-align: center;
+    padding: 0;
+    font-size: 0.85rem;
 }
 [data-component~="choice"] #choice-response:focus + .select-all + .done {
     left: auto;
