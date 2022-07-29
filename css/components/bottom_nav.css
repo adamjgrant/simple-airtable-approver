@@ -10,7 +10,7 @@
     top: 0;
     transition: opacity 1s;
     flex-direction: column;
-    z-index: 2;
+    z-index: 10;
     background: transparent;
 }
 
