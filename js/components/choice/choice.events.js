@@ -36,5 +36,6 @@ m.choice.events(_$ => {
         });
     });
 
+    _$("#choice-response").addEventListener("focus", () => { setTimeout(_$.act.select_all, 100) });
     _$(".select-all").addEventListener("mousedown", _$.act.select_all)
 })

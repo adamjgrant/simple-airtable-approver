@@ -83,7 +83,7 @@ m.choice.acts({
 
     select_all(_$, args) {
         let input = _$("#choice-response");
-        args.preventDefault();
+        if (args) args.preventDefault();
         input.setSelectionRange(0, 9999);
         setTimeout(() => {
             input.focus();
