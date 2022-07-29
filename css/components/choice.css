@@ -127,8 +127,7 @@
 [data-component~="choice"] .done {
     display: none;
 }
-[data-component~="choice"] #choice-response:focus + .select-all,
-[data-component~="choice"] #choice-response:focus + .select-all + .done {
+[data-component~="choice"] #choice-response:focus + .select-all {
     display: block;
     position: fixed;
     bottom: calc(var(--offset-h, 0) + 25px);
@@ -145,10 +144,6 @@
     text-align: center;
     padding: 0;
     font-size: 0.85rem;
-}
-[data-component~="choice"] #choice-response:focus + .select-all + .done {
-    left: auto;
-    right: 25px;
 }
 
 [data-component~="choice"] nav {

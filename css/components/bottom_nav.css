@@ -5,7 +5,7 @@
     position: fixed;
     justify-content: center;
     align-items: center;
-    bottom: 0;
+    bottom: var(--offset-h, 0);
     right: 0;
     top: 0;
     transition: opacity 1s;
