@@ -35,4 +35,6 @@ m.choice.events(_$ => {
             _$.act.permute({ json: permutations });
         });
     });
+
+    _$(".select-all").addEventListener("mousedown", _$.act.select_all)
 })

@@ -81,6 +81,14 @@ m.choice.acts({
         _$("#choice-response").blur();
     },
 
+    select_all(_$, args) {
+        setTimeout(() => {
+            _$("#choice-response").focus();
+            _$("#choice-response").select();
+            _$("#choice-response").focus();
+        }, 100);
+    },
+
     priv: {
         unselect_all_choices(_$, args) {
             _$.me().forEach(choice => choice.classList.remove("selected"));
