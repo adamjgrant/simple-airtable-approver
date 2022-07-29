@@ -130,7 +130,7 @@
 [data-component~="choice"] #choice-response:focus + .select-all + .done {
     display: block;
     position: fixed;
-    bottom: 25px;
+    bottom: calc(var(--offset-h, 0) + 25px);
     left: 25px;
     z-index: 10;
     border: 0;
