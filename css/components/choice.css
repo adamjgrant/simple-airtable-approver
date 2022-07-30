@@ -121,6 +121,7 @@
     background: white;
     font-size: 16pt;
     padding-top: 32pt;
+    outline: 0;
 }
 
 [data-component~="choice"] .select-all,
@@ -154,6 +155,8 @@
     padding-top: 8;
 }
 
-[data-component~="choice"] #choice-response:focus {
-    outline: 0;
+@media (prefers-color-scheme: dark) {
+    [data-component~="choice"] #choice-response:focus {
+        background: black;
+    }
 }
