@@ -1,0 +1,1 @@
+The odometer shows "APH" or Approvals per hour based on the time elapsed and the number of approvals that have happened.
