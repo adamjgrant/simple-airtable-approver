@@ -1,0 +1,3 @@
+m.notification.routes({
+
+});
