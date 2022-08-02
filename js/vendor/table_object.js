@@ -1,4 +1,4 @@
-export class ObjectArrayFromTableObject {
+export class TableObject {
     constructor(table_obj) {
         this.table_obj = table_obj;
         return this.objectArray;

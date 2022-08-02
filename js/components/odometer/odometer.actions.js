@@ -1,4 +1,4 @@
-import { table_obj } from "vendor/table_obj.js";
+import { TableObject } from "/js/vendor/table_object.js";
 
 m.odometer.acts({
   init(_$, args) {
@@ -36,7 +36,7 @@ m.odometer.acts({
 
     get_rewards(_$, args) {
         // Pre-programmed emoji + short message to show briefly based on specific logic
-        const rewards = new table_obj([
+        const rewards = new TableObject([
             ["emoji", "message",                     "for_arg"],
             ["🌟",    "High Score!",                 "high_score"]
         ]);
