@@ -34,6 +34,7 @@ m.bottom_nav.acts({
 
     approve(_$, args) {
         _$.act.update_review_status({ status: 1 });
+        m.odometer.act.register_that_an_approval_has_happened();
         if (args.dont_advance) { return; }
         m.card.act.advance_to_next_card();
     },
