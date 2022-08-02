@@ -1,4 +1,4 @@
-import { TableObject } from "/js/vendor/table_object.js";
+import { TableObject } from "../../../js/vendor/table_object.js";
 
 m.odometer.acts({
   init(_$, args) {
