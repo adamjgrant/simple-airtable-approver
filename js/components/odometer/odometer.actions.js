@@ -31,7 +31,7 @@ m.odometer.acts({
 
   priv: {
     has_reached_time_threshold(_$, args) {
-      return _$.act.time_elapsed_in_seconds() > C.FIVE_MINUTES_IN_SECONDS;
+      return _$.act.time_elapsed_in_seconds() > C.TWO_MINUTES_IN_SECONDS;
     },
     
     time_elapsed_in_seconds(_$, args) {
