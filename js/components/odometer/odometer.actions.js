@@ -22,7 +22,7 @@ m.odometer.acts({
   update_odometer(_$, args) {
     const score = _$.act.calculate_approvals_per_hour();
     const score_rounded = Math.round(score * 10)/10.0;
-    if (score_rounded > m.odometer.high_score) {
+    if (score_rounded > m.odometer.high_score && _$.act.has_reached_time_threshold()) {
         m.odometer.high_score = score_rounded;
         _$.act.send_reward({ reward: "high_score" });
     }
