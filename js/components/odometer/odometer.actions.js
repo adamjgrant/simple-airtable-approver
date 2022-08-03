@@ -1,4 +1,8 @@
 import { TableObject } from "../../../js/vendor/table_object.js";
+import { 
+    SECONDS_IN_A_MINUTE, 
+    MINUTES_IN_AN_HOUR 
+} from "../../../js/constants.js";
 
 m.odometer.acts({
   init(_$, args) {
@@ -31,7 +35,7 @@ m.odometer.acts({
 
     calculate_approvals_per_hour(_$, args) {
         const approvals_per_second = m.odometer.approvals_so_far / _$.act.time_elapsed_in_seconds();
-        return approvals_per_second * 60;
+        return approvals_per_second * SECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR;
     },
 
     get_rewards(_$, args) {
