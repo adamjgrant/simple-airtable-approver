@@ -46,7 +46,7 @@ m.bottom_nav.acts({
 
     reject(_$, args) {
         _$.act.update_review_status({ status: -1 });
-        m.odometer.unregister_an_approval({ id: m.card.this_card.id });
+        m.odometer.act.unregister_an_approval({ id: m.card.this_card.id });
         if (args.dont_advance) { return; }
         m.card.act.advance_to_next_card();
     },
