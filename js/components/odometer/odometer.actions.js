@@ -1,8 +1,5 @@
 import { TableObject } from "../../../js/vendor/table_object.js";
-import { 
-    SECONDS_IN_A_MINUTE, 
-    MINUTES_IN_AN_HOUR 
-} from "../../../js/constants.js";
+import { C } from "../../../js/constants.js";
 
 m.odometer.acts({
   init(_$, args) {
@@ -29,10 +26,14 @@ m.odometer.acts({
         m.odometer.high_score = score_rounded;
         _$.act.send_reward({ reward: "high_score" });
     }
-    _$(".aph").innerHTML = score_rounded;
+    _$(".aph").innerHTML = _$.act.has_reached_time_threshold() ? score_rounded : "---";
   },
 
   priv: {
+    has_reached_time_threshold(_$, args) {
+      return _$.act.time_elapsed_in_seconds() > C.FIVE_MINUTES_IN_SECONDS;
+    },
+    
     time_elapsed_in_seconds(_$, args) {
         const start = m.odometer.start_time;
         const finish = new Date();
@@ -41,7 +42,7 @@ m.odometer.acts({
 
     calculate_approvals_per_hour(_$, args) {
         const approvals_per_second = m.odometer.approvals.length / _$.act.time_elapsed_in_seconds();
-        return approvals_per_second * SECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR;
+        return approvals_per_second * C.SECONDS_IN_A_MINUTE * C.MINUTES_IN_AN_HOUR;
     },
 
     get_rewards(_$, args) {
