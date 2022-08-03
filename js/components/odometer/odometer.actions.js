@@ -6,14 +6,20 @@ import {
 
 m.odometer.acts({
   init(_$, args) {
-    m.odometer.approvals_so_far = 0;
+    m.odometer.approvals = [];
     m.odometer.high_score = 0;
     m.odometer.start_time = new Date();
   },
 
   register_that_an_approval_has_happened(_$, args) {
-    m.odometer.approvals_so_far++;
+    m.odometer.approvals.push({ id: args.id });
     _$.act.update_odometer();
+  },
+
+  unregister_an_approval(_$, args) {
+    m.odometer.approvals = m.odometer.approvals.filter(approval => {
+        return approval.id != args.id;
+    })
   },
 
   update_odometer(_$, args) {
@@ -34,7 +40,7 @@ m.odometer.acts({
     },
 
     calculate_approvals_per_hour(_$, args) {
-        const approvals_per_second = m.odometer.approvals_so_far / _$.act.time_elapsed_in_seconds();
+        const approvals_per_second = m.odometer.approvals.length / _$.act.time_elapsed_in_seconds();
         return approvals_per_second * SECONDS_IN_A_MINUTE * MINUTES_IN_AN_HOUR;
     },
 
