@@ -1,4 +1,3 @@
-import { TableObject } from "../../../js/vendor/table_object.js";
 import { C } from "../../../js/constants.js";
 
 m.odometer.acts({

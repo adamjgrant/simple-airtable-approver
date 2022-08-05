@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     padding: 10px;
-    padding-top: 45px;
+    padding-top: calc(var(--sat) + 10px);
     color: white;
     display: flex;
     justify-content: space-between;
