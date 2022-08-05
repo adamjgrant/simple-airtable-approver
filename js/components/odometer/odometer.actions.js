@@ -19,13 +19,18 @@ m.odometer.acts({
     })
   },
 
-  update_odometer(_$, args) {
+  get_rounded_score(_$, args) {
     const score = _$.act.calculate_approvals_per_hour();
     const score_rounded = Math.round(score * 10)/10.0;
-    if (score_rounded > m.odometer.high_score && _$.act.has_reached_time_threshold()) {
-        m.odometer.high_score = score_rounded;
-        _$.act.send_reward({ reward: "high_score" });
+    return score_rounded;
+  },
+
+  update_odometer(_$, args) {
+    const score_rounded = _$.act.get_rounded_score();
+    if (_$.act.has_reached_time_threshold) {
+      m.rewarder.act.check();
     }
+    
     _$(".aph").innerHTML = _$.act.has_reached_time_threshold() ? score_rounded : "---";
   },
 
@@ -43,23 +48,6 @@ m.odometer.acts({
     calculate_approvals_per_hour(_$, args) {
         const approvals_per_second = m.odometer.approvals.length / _$.act.time_elapsed_in_seconds();
         return approvals_per_second * C.SECONDS_IN_A_MINUTE * C.MINUTES_IN_AN_HOUR;
-    },
-
-    get_rewards(_$, args) {
-        // Pre-programmed emoji + short message to show briefly based on specific logic
-        const rewards = new TableObject([
-            ["emoji", "message",                     "for_arg"],
-            ["🌟",    "High Score!",                 "high_score"]
-        ]);
-        return rewards;
-    },
-
-    send_reward(_$, args) {
-        const rewards = _$.act.get_rewards();
-        const reward_type = args.reward;
-        const reward_to_send = rewards.filter(reward => {
-            return reward.for_arg === reward_type
-        });
     }
   }
 });
