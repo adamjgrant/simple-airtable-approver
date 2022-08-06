@@ -4,12 +4,13 @@ m.rewarder.acts({
     },
 
     send_notification(_$, args) {
-        let [rewardable, heading, message, icon] = args.tuple;
+        let [rewardable, heading, message, icon, animation] = args.tuple;
         if (rewardable) {
             m.notification.act.show_notification({
                 heading: heading,
                 message: message,
-                icon: icon
+                icon: icon,
+                animation: animation
             });
         }
     },
@@ -25,6 +26,7 @@ m.rewarder.acts({
                 result[1] = `High Score!`
                 result[2] = `You made it to ${score_rounded} APH`;
                 result[3] = `🏆`
+                result[4] = `animate__tada`
             }
             return result;
         }
