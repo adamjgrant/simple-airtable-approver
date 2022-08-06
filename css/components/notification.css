@@ -21,8 +21,22 @@
   color: white;
 }
 
-[data-component~='notification'] .notification h1 {
+[data-component~='notification'] .icon {
+  font-size: 2rem;
+  text-align: center;
   margin: 0;
-  font-size: 1rem;
-  font-weight: normal;
+  margin-top: -1.9rem;
+}
+
+[data-component~='notification'] .notification .heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+[data-component~='notification'] .notification .message {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 10px;
 }
