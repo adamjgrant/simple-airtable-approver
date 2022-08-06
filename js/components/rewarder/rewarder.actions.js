@@ -4,11 +4,13 @@ m.rewarder.acts({
     },
 
     send_notification(_$, args) {
-        if (args.tuple[0]) {
+        let [rewardable, heading, message, icon] = args.tuple;
+        if (rewardable) {
             m.notification.act.show_notification({
-                message: args.tuple[1],
-                icon: args.tuple[2] 
-            })
+                heading: heading,
+                message: message,
+                icon: icon
+            });
         }
     },
 
@@ -20,8 +22,9 @@ m.rewarder.acts({
             if (score_rounded > m.odometer.high_score) {
                 m.odometer.high_score = score_rounded;
                 result[0] = true;
-                result[1] = `High score! ${score_rounded} APH`;
-                result[2] = `🏆`
+                result[1] = `High Score!`
+                result[2] = `You made it to ${score_rounded} APH`;
+                result[3] = `🏆`
             }
             return result;
         }

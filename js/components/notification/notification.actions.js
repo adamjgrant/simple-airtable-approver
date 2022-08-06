@@ -4,7 +4,8 @@ m.notification.acts({
         notification_element.className = "notification";
         notification_element.innerHTML = `
             <span class="icon">${args.icon || ""}</span>
-            <h1>${args.message}</h1>
+            <h1>${args.heading}</h1>
+            <p>${args.message}</p>
         `;
         _$.me().appendChild(notification_element);
         setTimeout(() => { _$.act.hide_notification({ element: notification_element }) }, args.delay || 3000);
