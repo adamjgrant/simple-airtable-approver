@@ -57,7 +57,7 @@ m.account.acts({
         })
     },
 
-    set_scores: function set_scores(_$, args) {
+    get_all_scores_for_filter(_$, args) {
         let scores = {
             rejected: 0,
             in_review: 0,
@@ -70,6 +70,11 @@ m.account.acts({
             scores.in_review += account.scores.in_review;
             scores.approved += account.scores.approved;
         })
+        return scores;
+    },
+
+    set_scores: function set_scores(_$, args) {
+        let scores = _$.act.get_all_scores_for_filter();
 
         _$("#score-rejected").innerText = String(scores.rejected).padStart(3, '0');
         _$("#score-in-review").innerText = String(scores.in_review).padStart(3, '0');

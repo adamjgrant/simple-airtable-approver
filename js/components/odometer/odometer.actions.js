@@ -26,9 +26,7 @@ m.odometer.acts({
 
   update_odometer(_$, args) {
     const score_rounded = _$.act.get_rounded_score();
-    if (_$.act.has_reached_time_threshold()) {
-      m.rewarder.act.check();
-    }
+    m.rewarder.act.check();
     
     _$(".aph").innerHTML = _$.act.has_reached_time_threshold() ? score_rounded : "---";
   },
