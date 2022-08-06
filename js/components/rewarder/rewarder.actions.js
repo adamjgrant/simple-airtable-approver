@@ -21,7 +21,9 @@ m.rewarder.acts({
         scenario_high_score(_$, args) {
             let result = [false];
             let score_rounded = m.odometer.act.get_rounded_score();
-            if (score_rounded > m.odometer.high_score) {
+            let has_reached_time_threshold = m.odometer.act.has_reached_time_threshold();
+            let new_high_score = score_rounded > m.odometer.high_score;
+            if (new_high_score && has_reached_time_threshold) {
                 m.odometer.high_score = score_rounded;
                 result[0] = true;
                 result[1] = `High Score!`

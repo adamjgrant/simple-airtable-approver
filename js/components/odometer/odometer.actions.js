@@ -31,11 +31,11 @@ m.odometer.acts({
     _$(".aph").innerHTML = _$.act.has_reached_time_threshold() ? score_rounded : "---";
   },
 
+  has_reached_time_threshold(_$, args) {
+    return _$.act.time_elapsed_in_seconds() > C.SECONDS_IN_A_MINUTE;
+  },
+
   priv: {
-    has_reached_time_threshold(_$, args) {
-      return _$.act.time_elapsed_in_seconds() > C.SECONDS_IN_A_MINUTE;
-    },
-    
     time_elapsed_in_seconds(_$, args) {
         const start = m.odometer.start_time;
         const finish = new Date();
