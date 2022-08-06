@@ -9,6 +9,8 @@
   display: flex;
   flex-direction: column-reverse;
   pointer-events: none;
+  background: violet;
+  color: white;
 }
 
 [data-component~='notification'] .notification {
