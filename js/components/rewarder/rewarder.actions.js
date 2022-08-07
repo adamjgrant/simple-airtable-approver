@@ -37,7 +37,7 @@ m.rewarder.acts({
                 m.odometer.high_score = score_rounded;
                 result[0] = true;
                 result[1] = `High Score!`
-                result[2] = `You made it to ${score_rounded} APH`;
+                result[2] = `You made it to ${score_rounded} Approvals Per Hour over the past 2 mins`;
                 result[3] = `🏆`
                 result[4] = `animate__tada`
             }
