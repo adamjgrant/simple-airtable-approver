@@ -1,6 +1,7 @@
+const FIFTEEN_SECONDS_IN_MS = 15 * 1000;
 m.rewarder.acts({
     check(_$, args) {
-        _$.act.send_notification({ tuple: _$.act.scenario_high_score() });
+        common.debounce(_$.act.send_notification, 'high_score', FIFTEEN_SECONDS_IN_MS, [{ tuple: _$.act.scenario_high_score() }], this);
         _$.act.send_notification({ tuple: _$.act.scenario_ten_x_approved() });
     },
 
