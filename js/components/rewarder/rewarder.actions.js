@@ -53,7 +53,7 @@ m.rewarder.acts({
             const scores = m.account.act.get_all_scores_for_filter(); 
             let is_not_zero = scores.approve !== 0;
             let ten_x = scores.approved % 10 === 0;
-            let is_not_hundred_x = scores.approved % 100 === 0;
+            let is_not_hundred_x = scores.approved % 100 !== 0;
             let reached_a_new_level = scores.approved > m.rewarder.current_ten_x_approved;
 
             if (is_not_zero && ten_x && is_not_hundred_x && reached_a_new_level) {
