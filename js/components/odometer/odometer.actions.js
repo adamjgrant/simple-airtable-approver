@@ -8,13 +8,23 @@ m.odometer.acts({
   },
 
   register_that_an_approval_has_happened(_$, args) {
-    m.odometer.approvals.push({ id: args.id });
+    m.odometer.approvals.push({ id: args.id, time: Date.now() });
     _$.act.update_odometer();
   },
 
   unregister_an_approval(_$, args) {
     m.odometer.approvals = m.odometer.approvals.filter(approval => {
         return approval.id != args.id;
+    })
+  },
+
+  reset_interval(_$, args) {
+    // Set amount of time we measure for APH to two minutes.
+    // Remove any registrations outside that time.
+    const TWO_MINUTES_AGO_EPOCH = Date.now() - C.TWO_MINUTES_IN_MS;
+    m.odometer.start_time = new Date(TWO_MINUTES_AGO_EPOCH);
+    m.odometer.approvals = m.odometer.approvals.filter(approval => {
+      return approval.time >= TWO_MINUTES_AGO_EPOCH;
     })
   },
 
