@@ -1,19 +1,27 @@
-const FIFTEEN_SECONDS_IN_MS = 15 * 1000;
+import { C } from "../../constants.js";
 m.rewarder.acts({
     check(_$, args) {
-        common.debounce(_$.act.send_notification, 'high_score', FIFTEEN_SECONDS_IN_MS, [{ tuple: _$.act.scenario_high_score() }], this);
+        _$.act.send_notification({ 
+            tuple: _$.act.scenario_high_score(),
+            debounce: {
+                id: "high_score",
+                delay: C.FIFTEEN_SECONDS_IN_MS
+            }
+        });
         _$.act.send_notification({ tuple: _$.act.scenario_ten_x_approved() });
     },
 
     send_notification(_$, args) {
         let [rewardable, heading, message, icon, animation] = args.tuple;
         if (rewardable) {
-            m.notification.act.show_notification({
-                heading: heading,
-                message: message,
-                icon: icon,
-                animation: animation
-            });
+            common.debounce(() => {
+                m.notification.act.show_notification({
+                    heading: heading,
+                    message: message,
+                    icon: icon,
+                    animation: animation
+                });
+            }, args.debounce.id || '.', args.debounce.delay || 0)
         }
     },
 
