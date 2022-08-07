@@ -12,7 +12,7 @@ m.rewarder.acts({
     },
 
     send_notification(_$, args) {
-        let [rewardable, heading, message, icon, animation] = args.tuple;
+        let [rewardable, heading, message, icon, animation, background_color] = args.tuple;
         args.debounce = args.debounce || {};
         if (rewardable) {
             common.debounce(() => {
@@ -20,7 +20,8 @@ m.rewarder.acts({
                     heading: heading,
                     message: message,
                     icon: icon,
-                    animation: animation
+                    animation: animation,
+                    background_color: color || `#C600D7`
                 });
             }, args.debounce.id || '.', args.debounce.delay || 0)
         }
@@ -38,8 +39,9 @@ m.rewarder.acts({
                 result[0] = true;
                 result[1] = `High Score!`
                 result[2] = `You made it to ${score_rounded} Approvals Per Hour over the past 2 mins`;
-                result[3] = `🏆`
-                result[4] = `animate__tada`
+                result[3] = `🏆`;
+                result[4] = `animate__tada`;
+                result[5] = '#91D700' // GREEN
             }
             return result;
         },
@@ -59,6 +61,7 @@ m.rewarder.acts({
                 result[2] = `You've reached a new 10x level of approved tweets`;
                 result[3] = `🌟`;
                 result[4] = `animate__tada`;
+                result[5] = undefined;
                 m.rewarder.current_ten_x_approved = scores.approved;
             }
             return result;
