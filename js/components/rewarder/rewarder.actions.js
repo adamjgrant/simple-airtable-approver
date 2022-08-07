@@ -9,6 +9,7 @@ m.rewarder.acts({
             }
         });
         _$.act.send_notification({ tuple: _$.act.scenario_ten_x_approved() });
+        _$.act.send_notification({ tuple: _$.act.scenario_hundred_x_approved() });
     },
 
     send_notification(_$, args) {
