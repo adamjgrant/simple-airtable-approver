@@ -13,6 +13,7 @@ m.rewarder.acts({
 
     send_notification(_$, args) {
         let [rewardable, heading, message, icon, animation] = args.tuple;
+        args.debounce = args.debounce || {};
         if (rewardable) {
             common.debounce(() => {
                 m.notification.act.show_notification({
