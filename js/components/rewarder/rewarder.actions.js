@@ -22,7 +22,7 @@ m.rewarder.acts({
                     message: message,
                     icon: icon,
                     animation: animation,
-                    background_color: color || `#C600D7`
+                    background_color: background_color || `#C600D7`
                 });
             }, args.debounce.id || '.', args.debounce.delay || 0)
         }
