@@ -52,9 +52,10 @@ m.rewarder.acts({
             const scores = m.account.act.get_all_scores_for_filter(); 
             let is_not_zero = scores.approve !== 0;
             let ten_x = scores.approved % 10 === 0;
+            let is_not_hundred_x = scores.approved % 100 === 0;
             let reached_a_new_level = scores.approved > m.rewarder.current_ten_x_approved;
 
-            if (is_not_zero && ten_x && reached_a_new_level) {
+            if (is_not_zero && ten_x && is_not_hundred_x && reached_a_new_level) {
                 m.rewarder.current_ten_x_approved = scores.approved;
                 result[0] = true;
                 result[1] = `${scores.approved} Approved!`;
@@ -62,6 +63,27 @@ m.rewarder.acts({
                 result[3] = `🌟`;
                 result[4] = `animate__tada`;
                 result[5] = undefined;
+                m.rewarder.current_ten_x_approved = scores.approved;
+            }
+            return result;
+        },
+
+        scenario_hundred_x_approved(_$, args) {
+            // Some even multiple of 100 approvals have been made.
+            let result = [false];
+            const scores = m.account.act.get_all_scores_for_filter(); 
+            let is_not_zero = scores.approve !== 0;
+            let hundred_x = scores.approved % 100 === 0;
+            let reached_a_new_level = scores.approved > m.rewarder.current_hundred_x_approved;
+
+            if (is_not_zero && hundred_x && reached_a_new_level) {
+                m.rewarder.current_hundred_x_approved = scores.approved;
+                result[0] = true;
+                result[1] = `${scores.approved} Approved!`;
+                result[2] = `Holy FUCKING SHIT. You've reached a new 100x level of approved tweets`;
+                result[3] = `💯`;
+                result[4] = `animate__tada`;
+                result[5] = `#3D0043`;
                 m.rewarder.current_ten_x_approved = scores.approved;
             }
             return result;
