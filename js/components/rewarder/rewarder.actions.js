@@ -93,10 +93,11 @@ m.rewarder.acts({
 
         scenario_five_x_across_all_accounts(_$, args) {
             let result = [false];
+            let approval_array = m.account.accounts.map(account => account.scores.approved);
+            let highest_of_the_lowest = Math.min(approval_array);
             let more_than_one_account_exists = m.account.accounts.length > 1;
-            let highest_lowest_score_is_divisible_by_five = false // TODO
-            let lowest_score_between_all_accounts_is_highest_so_far = false // TODO
-            let highest_of_the_lowest = 0; // TODO
+            let highest_lowest_score_is_divisible_by_five = highest_of_the_lowest % 5 === 0;
+            let lowest_score_between_all_accounts_is_highest_so_far = highest_of_the_lowest > m.rewarder.current_five_x_across;
             let highest_of_the_lowest_is_not_zero = highest_of_the_lowest === 0;
             if (
                 more_than_one_account_exists
@@ -104,7 +105,7 @@ m.rewarder.acts({
                 && lowest_score_between_all_accounts_is_highest_so_far 
                 && highest_of_the_lowest_is_not_zero
             ) {
-                // TODO
+                m.rewarder.current_five_x_across = highest_of_the_lowest;
                 result[0] = true;
                 result[1] = `${highest_of_the_lowest} Approved Everywhere!`;
                 result[2] = `All accounts have at least ${highest_of_the_lowest} approved tweets!`;
@@ -118,3 +119,4 @@ m.rewarder.acts({
 
 });
 m.rewarder.current_ten_x_approved = 0;
+m.rewarder.current_five_x_across = 0;
