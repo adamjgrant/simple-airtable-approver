@@ -76,7 +76,7 @@
 }
 
 [data-component~="card"] #tweet {
-    min-height: 125px;
+    min-height: 90px;
 }
 
 [data-component~="card"] #tweet,
