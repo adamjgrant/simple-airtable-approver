@@ -10,6 +10,7 @@ m.rewarder.acts({
         });
         _$.act.send_notification({ tuple: _$.act.scenario_ten_x_approved() });
         _$.act.send_notification({ tuple: _$.act.scenario_hundred_x_approved() });
+        _$.act.send_notification({ tuple: _$.act.scenario_five_x_across_all_accounts() });
     },
 
     send_notification(_$, args) {
@@ -86,6 +87,30 @@ m.rewarder.acts({
                 result[4] = `animate__tada`;
                 result[5] = `#3D0043`;
                 m.rewarder.current_ten_x_approved = scores.approved;
+            }
+            return result;
+        },
+
+        scenario_five_x_across_all_accounts(_$, args) {
+            let result = [false];
+            let more_than_one_account_exists = m.account.accounts.length > 1;
+            let highest_lowest_score_is_divisible_by_five = false // TODO
+            let lowest_score_between_all_accounts_is_highest_so_far = false // TODO
+            let highest_of_the_lowest = 0; // TODO
+            let highest_of_the_lowest_is_not_zero = highest_of_the_lowest === 0;
+            if (
+                more_than_one_account_exists
+                && highest_lowest_score_is_divisible_by_five
+                && lowest_score_between_all_accounts_is_highest_so_far 
+                && highest_of_the_lowest_is_not_zero
+            ) {
+                // TODO
+                result[0] = true;
+                result[1] = `${highest_of_the_lowest} Approved Everywhere!`;
+                result[2] = `All accounts have at least ${highest_of_the_lowest} approved tweets!`;
+                result[3] = `⭐️⭐️⭐️⭐️`;
+                result[4] = `animate__tada`;
+                result[5] = `#FF52A3`;
             }
             return result;
         }
