@@ -281,7 +281,22 @@ m.card.act({
         });
         m.card.data = m.card.data.sort((card, card2) => {
             return card2.combined_response_quality - card.combined_response_quality;
+        });
+        m.card.data = _$.act.take_ten_percent_of_items_randomly_and_distribute_them_as_every_tenth_item_in_the_array({
+            cards: m.card.data
         })
+    },
+
+    take_ten_percent_of_items_randomly_and_distribute_them_as_every_tenth_item_in_the_array(_$, args) {
+        const arr = args.cards;
+        const number_of_items_to_select = Math.round(arr.length/10);
+        for (let x=0;x<number_of_items_to_select;x++) {
+          const randomly_chosen_item_index = Math.floor(Math.random()*arr.length);
+          const randomly_chosen_item = arr.splice(randomly_chosen_item_index, 1)[0];
+          const new_position = x*10+9;
+          arr.splice(new_position, 0, randomly_chosen_item);
+        }
+        return arr; 
     }
 })
 
