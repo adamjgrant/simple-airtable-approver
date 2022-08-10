@@ -11,10 +11,11 @@ m.rewarder.acts({
         _$.act.send_notification({ tuple: _$.act.scenario_ten_x_approved() });
         _$.act.send_notification({ tuple: _$.act.scenario_hundred_x_approved() });
         _$.act.send_notification({ tuple: _$.act.scenario_five_x_across_all_accounts() });
+        _$.act.send_notification({ tuple: _$.act.scenario_fifty_x_reviewed() });
     },
 
     send_notification(_$, args) {
-        let [rewardable, heading, message, icon, animation, background_color] = args.tuple;
+        let [rewardable, heading, message, icon, animation, background_color, color] = args.tuple;
         args.debounce = args.debounce || {};
         if (rewardable) {
             common.debounce(() => {
@@ -23,7 +24,8 @@ m.rewarder.acts({
                     message: message,
                     icon: icon,
                     animation: animation,
-                    background_color: background_color || `#C600D7`
+                    background_color: background_color || `#C600D7`,
+                    color: color || `#FFFFFF`;
                 });
             }, args.debounce.id || '.', args.debounce.delay || 0)
         }
@@ -114,9 +116,36 @@ m.rewarder.acts({
                 result[5] = `#FF52A3`;
             }
             return result;
+        },
+
+        scenario_fifty_x_reviewed(_$, args) {
+            let result = [false];
+            let all_scores = m.account.act.get_all_scores_for_filter();
+            let number_reviewed = all_scores.rejected + all_scores.approved;
+
+            let greater_than_0 = number_reviewed > 0;
+            let a_new_high = number_reviewed > m.rewarder.current_fifty_x_reviewed;
+            let divisible_by_5 = number_reviewed % 5 === 0; 
+            
+            if (
+                greater_than_0
+                && a_new_high
+                && divisible_by_5
+            ) {
+                m.rewarder.current_fifty_x_reviewed = number_reviewed;
+                result[0] = true;
+                result[1] = `50x Reviewed!`;
+                result[2] = `You've reviewed ${number_reviewed} tweets so far.`;
+                result[3] = `🔎`;
+                result[4] = `animate__tada`;
+                result[5] = `B9ED00`;
+                result[6] = `#333333`;
+            }
+            return result;
         }
     }
 
 });
 m.rewarder.current_ten_x_approved = 0;
 m.rewarder.current_five_x_across = 0;
+m.rewarder.current_fifty_x_reviewed = 0;

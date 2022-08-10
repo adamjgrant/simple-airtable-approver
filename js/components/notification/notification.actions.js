@@ -13,6 +13,7 @@ m.notification.acts({
             <p class="message">${args.message}</p>
         `;
         notification_element.style.backgroundColor = args.background_color || "#FFFFFF";
+        notification_element.style.color = args.color || "#FFFFFF";
         _$.me().appendChild(notification_element);
         setTimeout(() => { _$.act.hide_notification({ element: notification_element }) }, args.delay || 3000);
     },
