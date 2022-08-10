@@ -25,7 +25,7 @@ m.rewarder.acts({
                     icon: icon,
                     animation: animation,
                     background_color: background_color || `#C600D7`,
-                    color: color || `#FFFFFF`;
+                    color: color || `#FFFFFF`
                 });
             }, args.debounce.id || '.', args.debounce.delay || 0)
         }
