@@ -125,12 +125,12 @@ m.rewarder.acts({
 
             let greater_than_0 = number_reviewed > 0;
             let a_new_high = number_reviewed > m.rewarder.current_fifty_x_reviewed;
-            let divisible_by_5 = number_reviewed % 5 === 0; 
+            let divisible_by_50 = number_reviewed % 50 === 0; 
             
             if (
                 greater_than_0
                 && a_new_high
-                && divisible_by_5
+                && divisible_by_50
             ) {
                 m.rewarder.current_fifty_x_reviewed = number_reviewed;
                 result[0] = true;
@@ -138,7 +138,7 @@ m.rewarder.acts({
                 result[2] = `You've reviewed ${number_reviewed} tweets so far.`;
                 result[3] = `🔎`;
                 result[4] = `animate__tada`;
-                result[5] = `B9ED00`;
+                result[5] = `#B9ED00`;
                 result[6] = `#333333`;
             }
             return result;
