@@ -24,6 +24,7 @@ m.row_tweet.act({
 
     open_tweet(_$, args) {
         //   Switch to card by index
+        if (!args.row) return;
         const row = args.row
         const index = row.dataset.cardIndex;
         m.card.act.advance_to_card_at_index({ index: parseInt(index) });
