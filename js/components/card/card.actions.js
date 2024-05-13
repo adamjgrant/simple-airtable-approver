@@ -17,7 +17,7 @@ m.card.act({
                 tweetalt1: response_options.length ? responses[1] : "",
                 tweetalt2: response_options.length ? responses[2] : "",
                 order: args.record.get("Optional Sort Ordering"),
-                job_name: args.record.get("Permutation Job Name")[0],
+                job_name: [""].concat(args.record.get("Permutation Job Name")).reverse()[0],
                 job_approval_rate: args.record.get("Permutation Job Approval Rate")[0],
                 job_link: `https://airtable.com/app2X2gnPXhFKDs1t/tblD70jsW5F9jEjGr/viwxIVb4yRM9zrHsY/${args.record.get("Job")[0]}?blocks=hide`,
                 reply_to_handle: args.record.get("Reply To Handle"),
