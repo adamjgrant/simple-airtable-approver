@@ -3,7 +3,6 @@ m.card.act({
         const Airtable = require('airtable');
         // Get a base ID for an instance of art gallery example
         const base = new Airtable({ apiKey: localStorage.getItem("airtable_api_key") }).base(localStorage.getItem('airtable_base_id'));
-        debugger;
         return base;
     },
 
