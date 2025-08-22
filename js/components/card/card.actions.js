@@ -2,7 +2,7 @@ m.card.act({
     airtable_base(_$, args) {
         const Airtable = require('airtable');
         // Get a base ID for an instance of art gallery example
-        const base = new Airtable({ apiKey: localStorage.getItem("airtable_api_key") }).base(localStorage.getItem('airtable_base_id'));
+        const base = new Airtable({ token: localStorage.getItem("airtable_token") }).base(localStorage.getItem('airtable_base_id'));
         return base;
     },
 
@@ -80,7 +80,7 @@ m.card.act({
 
         if (_$.act.bad_connection_details()) {
             m.bottom_nav.act.show();
-            return m.curtain.act.set_curtain_text({ text: "Could not find Airtable Connection Key/Base ID" });
+            return m.curtain.act.set_curtain_text({ text: "Could not find Airtable Token/Base ID" });
         }
 
         m.bottom_nav.act.show();

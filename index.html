@@ -19,6 +19,7 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
 
     <meta name="theme-color" content="#fafafa">
     <script>
@@ -40,7 +41,6 @@
             "viewport"
         ];
     </script>
-    <script src="js/components.js"></script>
 </head>
 
 <body>
@@ -226,19 +226,27 @@
 
         </div>
     </div>
+    <script src="js/vendor/mozart.js"></script>
     <script src="js/common.js"></script>
     <script src="js/vendor/airtable.js"></script>
-    <script src="js/vendor/mozart.js"></script>
+    <script src="js/vendor/viewport-fix.js"></script>
+    <script src="js/vendor/permute.js"></script>
     <script type="module" src="js/vendor/table_object.js"></script>
     <script type="module" src="js/constants.js"></script>
+
     <script id="main_script" src="js/main.js"></script>
     <link rel="stylesheet" href="css/icofont.min.css">
     <script>
         const module = {};
     </script>
-    <script src="js/vendor/viewport-fix.js"></script>
-    <script>new VVP()</script>
-    <script src="js/vendor/permute.js"></script>
+    <script>
+        // Ensure VVP is available before initializing
+        if (typeof VVP !== 'undefined') {
+            new VVP();
+        } else {
+            console.error('VVP is not available');
+        }
+    </script>
 </body>
 
 </html>

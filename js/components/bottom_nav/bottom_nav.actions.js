@@ -1,27 +1,27 @@
 m.bottom_nav.acts({
     get_settings(_$, args) {
-        const api_key = prompt("Airtable API Key");
+        const token = prompt("Airtable Personal Access Token");
         const base = prompt("Airtable base ID");
 
-        localStorage.setItem("airtable_api_key", api_key);
+        localStorage.setItem("airtable_token", token);
         localStorage.setItem("airtable_base_id", base);
 
         alert("Set.");
     },
 
     validate_settings(_$, args) {
-        let key = localStorage.getItem("airtable_api_key");
+        let token = localStorage.getItem("airtable_token");
         let base_id = localStorage.getItem("airtable_base_id");
 
         let return_obj = { valid: false, message: "" };
         let missing_fields_array = [];
 
-        if (key == "null") key = undefined;
+        if (token == "null") token = undefined;
         if (base_id == "null") base_id = undefined;
 
-        if (!key) missing_fields_array.push("Airtable Key");
+        if (!token) missing_fields_array.push("Airtable Token");
         if (!base_id) missing_fields_array.push("Airtable Base ID");
-        if (key && base_id) return_obj.valid = true;
+        if (token && base_id) return_obj.valid = true;
 
         if (!return_obj.valid) {
             return_obj.message = `${missing_fields_array.join(" and ")} missing.`

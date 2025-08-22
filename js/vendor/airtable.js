@@ -162,7 +162,7 @@ require = (function() {
                 var type = error.type,
                     message = error.message;
                 if (statusCode === 401) {
-                    return new airtable_error_1.default('AUTHENTICATION_REQUIRED', 'You should provide valid api key to perform this operation', statusCode);
+                    return new airtable_error_1.default('AUTHENTICATION_REQUIRED', 'You should provide valid api key or token to perform this operation', statusCode);
                 } else if (statusCode === 403) {
                     return new airtable_error_1.default('NOT_AUTHORIZED', 'You are not authorized to perform this operation', statusCode);
                 } else if (statusCode === 404) {
@@ -3665,7 +3665,7 @@ require = (function() {
                 var apiVersion = opts.apiVersion || Airtable.apiVersion || defaultConfig.apiVersion;
                 Object.defineProperties(this, {
                     _apiKey: {
-                        value: opts.apiKey || Airtable.apiKey || defaultConfig.apiKey,
+                        value: opts.token || opts.apiKey || Airtable.token || Airtable.apiKey || defaultConfig.token || defaultConfig.apiKey,
                     },
                     _apiVersion: {
                         value: apiVersion,
@@ -3689,7 +3689,7 @@ require = (function() {
                     },
                 });
                 if (!this._apiKey) {
-                    throw new Error('An API key is required to connect to Airtable');
+                    throw new Error('An API key or token is required to connect to Airtable');
                 }
             }
             Airtable.prototype.base = function(baseId) {
@@ -3700,17 +3700,20 @@ require = (function() {
                     endpointUrl: undefined || 'https://api.airtable.com',
                     apiVersion: '0.1.0',
                     apiKey: undefined,
+                    token: undefined,
                     noRetryIfRateLimited: false,
                     requestTimeout: 300 * 1000,
                 };
             };
             Airtable.configure = function(_a) {
                 var apiKey = _a.apiKey,
+                    token = _a.token,
                     endpointUrl = _a.endpointUrl,
                     apiVersion = _a.apiVersion,
                     noRetryIfRateLimited = _a.noRetryIfRateLimited,
                     requestTimeout = _a.requestTimeout;
                 Airtable.apiKey = apiKey;
+                Airtable.token = token;
                 Airtable.endpointUrl = endpointUrl;
                 Airtable.apiVersion = apiVersion;
                 Airtable.noRetryIfRateLimited = noRetryIfRateLimited;
