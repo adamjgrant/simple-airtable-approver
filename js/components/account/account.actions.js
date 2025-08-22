@@ -136,9 +136,10 @@ m.account.acts({
         get_accounts(_$, args = {}) {
             let all_records = [];
             return new Promise((resolve, reject) => {
-                m.card.act.airtable_base()('🙂 Accounts').select({
-                    view: "Active permutations"
-                }).eachPage(function page(records, fetchNextPage) {
+                        m.card.act.airtable_base()('🙂 Accounts').select({
+            view: "Active permutations",
+            filterByFormula: "{Active} = 1"
+        }).eachPage(function page(records, fetchNextPage) {
                     all_records = all_records.concat(records);
                     fetchNextPage();
 
