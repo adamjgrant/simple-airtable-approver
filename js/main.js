@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     Promise
         .allSettled(promises)
         .then(() => {
+            console.log("Calling Mozart init");
             Mozart.init();
         });
 

@@ -227,6 +227,12 @@
         </div>
     </div>
     <script src="js/vendor/mozart.js"></script>
+    <script>
+        const module = {};
+
+        class Component extends Mozart {};
+        var m = Component.index;
+    </script>
     <script src="js/common.js"></script>
     <script src="js/vendor/airtable.js"></script>
     <script src="js/vendor/viewport-fix.js"></script>
@@ -236,9 +242,6 @@
 
     <script id="main_script" src="js/main.js"></script>
     <link rel="stylesheet" href="css/icofont.min.css">
-    <script>
-        const module = {};
-    </script>
     <script>
         // Ensure VVP is available before initializing
         if (typeof VVP !== 'undefined') {
