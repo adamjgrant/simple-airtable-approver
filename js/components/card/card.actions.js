@@ -25,7 +25,8 @@ m.card.act({
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
                 thumbnail: _$.act.get_twitter_photo({ record: args.record }),
                 response_quality: args.record.get("Response Quality"),
-                combined_response_quality: args.record.get("Combined Response Quality")
+                combined_response_quality: args.record.get("Combined Response Quality"),
+                grade: args.record.get("Grade") || 0
             }
 
             _$.act.get_previous_responses({ record: args.record }).then(previous_responses => {
@@ -274,17 +275,19 @@ m.card.act({
     },
 
     sort_cards(_$, args) {
+        // Sort by Grade property in descending order (highest values first)
         m.card.data = m.card.data.sort((a, b) => {
-            if (a.order > b.order) return 1;
-            if (a.order < b.order) return -1;
-            return 0;
+            // Handle cases where grade might be null/undefined
+            const gradeA = a.grade || 0;
+            const gradeB = b.grade || 0;
+            return gradeB - gradeA; // Descending order (highest first)
         });
-        m.card.data = m.card.data.sort((card, card2) => {
-            return card2.combined_response_quality - card.combined_response_quality;
-        });
-        m.card.data = _$.act.take_ten_percent_of_items_randomly_and_distribute_them_as_every_tenth_item_in_the_array({
-            cards: m.card.data
-        })
+        
+        // TODO: I can't remember why I did this.
+        // Apply the random distribution after sorting by grade
+        // m.card.data = _$.act.take_ten_percent_of_items_randomly_and_distribute_them_as_every_tenth_item_in_the_array({
+        //     cards: m.card.data
+        // })
     },
 
     take_ten_percent_of_items_randomly_and_distribute_them_as_every_tenth_item_in_the_array(_$, args) {
