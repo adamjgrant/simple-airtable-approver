@@ -8,6 +8,9 @@ m.card.act({
 
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
+            // Debug: Log all available fields on the record
+            console.log("Available fields on record:", Object.keys(args.record.fields));
+            
             const response_options = args.record.get("Response Options");
             let responses = JSON.parse(response_options).length ? JSON.parse(response_options) : [args.record.get("Full tweet")];
             let card_data = {
@@ -24,9 +27,11 @@ m.card.act({
                 sending_account_handle: args.record.get("Sending account handle"),
                 link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
                 thumbnail: _$.act.get_twitter_photo({ record: args.record }),
-                response_quality: args.record.get("Response Quality"),
-                combined_response_quality: args.record.get("Combined Response Quality"),
-                grade: args.record.get("Grade") || 0
+                grade: (() => {
+                    const gradeValue = args.record.get("Grade");
+                    console.log("Raw Grade value from Airtable:", gradeValue, "Type:", typeof gradeValue);
+                    return gradeValue || 0;
+                })()
             }
 
             _$.act.get_previous_responses({ record: args.record }).then(previous_responses => {
@@ -107,8 +112,7 @@ m.card.act({
             job_link: m.card.this_card.job_link
         });
         m.metadata.act.set_response_quality({
-            response_quality: m.card.this_card.response_quality,
-            combined_response_quality: m.card.this_card.combined_response_quality
+            grade: m.card.this_card.grade
         });
 
         m.viewport.act.scroll_to_top();
