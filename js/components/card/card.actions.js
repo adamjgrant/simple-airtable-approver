@@ -8,9 +8,6 @@ m.card.act({
 
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
-            // Debug: Log all available fields on the record
-            console.log("Available fields on record:", Object.keys(args.record.fields));
-            
             const response_options = args.record.get("Response Options");
             let responses = JSON.parse(response_options).length ? JSON.parse(response_options) : [args.record.get("Full tweet")];
             let card_data = {
@@ -29,7 +26,6 @@ m.card.act({
                 thumbnail: _$.act.get_twitter_photo({ record: args.record }),
                 grade: (() => {
                     const gradeValue = args.record.get("Grade");
-                    console.log("Raw Grade value from Airtable:", gradeValue, "Type:", typeof gradeValue);
                     return gradeValue || 0;
                 })()
             }
@@ -204,17 +200,18 @@ m.card.act({
             return new Promise((resolve, reject) => {
                 const external_tweet = args.record.get("External tweets");
                 const responds_to_text = args.record.get("Responds to (Text)");
-                
-                console.log("Processing external tweets for record:", args.record.getId(), "External tweets field:", external_tweet);
-                console.log("Available fields on record:", Object.keys(args.record.fields));
-                console.log("Responds to (Text):", responds_to_text);
 
                 // Always try to fetch external tweets if they exist
                 if (external_tweet && external_tweet.length > 0) {
-                    console.log("Fetching external tweet data...");
                     let responses = [];
                     let processed_ids = new Set(); // Prevent infinite loops
                     
+                    // Add timeout to prevent hanging
+                    const timeout = setTimeout(() => {
+                        console.warn("Timeout reached while loading external tweets, resolving with current responses");
+                        resolve(responses);
+                    }, 10000); // 10 second timeout
+
                     const get_tweet = (record_id) => {
                         if (processed_ids.has(record_id)) {
                             console.warn("Circular reference detected for external tweet ID:", record_id);
@@ -223,13 +220,17 @@ m.card.act({
                         }
                         
                         processed_ids.add(record_id);
-                        console.log("Fetching external tweet with ID:", record_id);
                         
                         _$.act.get_external_tweet_for_record_id({ recordId: record_id }).then(tweet => {
-                            console.log("Successfully fetched external tweet:", tweet);
                             responses.push(tweet);
                             
-                            resolve(responses);
+                            // Only try to fetch more if responds_to exists and has a value
+                            if (tweet.responds_to && tweet.responds_to.length > 0) {
+                                get_tweet(tweet.responds_to[0]);
+                            } else {
+                                clearTimeout(timeout);
+                                resolve(responses);
+                            }
                         }).catch(err => {
                             console.warn("Failed to fetch external tweet:", err);
                             clearTimeout(timeout);
@@ -239,7 +240,6 @@ m.card.act({
                     }
                     get_tweet(external_tweet[0]);
                 } else {
-                    console.log("No external tweets to fetch");
                     resolve([]);
                 }
             });
@@ -247,12 +247,7 @@ m.card.act({
 
         get_external_tweet_for_record_id(_$, args) {
             return new Promise((resolve, reject) => {
-                console.log("🔍 get_external_tweet_for_record_id called with recordId:", args.recordId);
-                console.log("🔍 About to call Airtable find...");
-                
                 _$.act.airtable_base()('📧 External tweets').find(args.recordId, function(err, record) {
-                    console.log("🔍 Airtable find callback triggered - err:", err, "record:", record);
-                    
                     if (err) { 
                         console.warn("Error finding external tweet:", err); 
                         return reject(err); 
@@ -263,13 +258,9 @@ m.card.act({
                         return reject(new Error("External tweet record not found"));
                     }
                     
-                    console.log("External tweet record fields:", Object.keys(record.fields));
                     const tweet = record.get("Tweet");
                     // Use the correct field: "Responded from (Internal)" instead of "Responds to (external)"
                     const respondedFrom = record.get("Responded from (Internal)");
-                    
-                    console.log("Tweet field value:", tweet);
-                    console.log("Responded from (Internal) field value:", respondedFrom);
                     
                     if (!tweet) {
                         console.warn("External tweet record missing 'Tweet' field for ID:", args.recordId);
@@ -282,7 +273,6 @@ m.card.act({
                         // The relationship is the other way around - the main tweet responds to this external tweet
                         responds_to: null
                     };
-                    console.log("Resolving with result:", result);
                     return resolve(result);
                 });
             });
