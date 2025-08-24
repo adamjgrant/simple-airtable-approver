@@ -22,8 +22,8 @@ m.card.act({
                 job_link: `https://airtable.com/app2X2gnPXhFKDs1t/tblD70jsW5F9jEjGr/viwxIVb4yRM9zrHsY/${[""].concat(args.record.get("Job")).reverse()[0]}?blocks=hide`,
                 reply_to_handle: args.record.get("Reply To Handle"),
                 sending_account_handle: args.record.get("Sending account handle"),
-                link_to_tweet: `https://twitter.com/BarackObama/status/${args.record.get("Reply To")}`,
-                thumbnail: _$.act.get_twitter_photo({ record: args.record }),
+                link_to_post: _$.act.convert_at_uri_to_bluesky_url({ atUri: args.record.get("Reply To") }),
+                thumbnail: _$.act.get_profile_photo({ record: args.record }),
                 grade: (() => {
                     const gradeValue = args.record.get("Grade");
                     return gradeValue || 0;
@@ -42,9 +42,9 @@ m.card.act({
         })
     },
 
-    get_twitter_photo(_$, args) {
-        const photo_record = args.record.get("Twitter Photo");
-        if (!photo_record || !photo_record.length) return "img/twitter.jpg";
+    get_profile_photo(_$, args) {
+        const photo_record = args.record.get("Profile photo");
+        if (!photo_record || !photo_record.length) return "img/twitter.jpg"; // Keep existing image for now
         return photo_record[0].url;
     },
 
@@ -162,8 +162,8 @@ m.card.act({
 
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
 
-        _$(".link-to-tweet").forEach(link => {
-            link.href = m.card.this_card.link_to_tweet;
+        _$(".link-to-post").forEach(link => {
+            link.href = m.card.this_card.link_to_post;
         });
 
         m.card.this_card.previous_responses.forEach((response, i) => {
@@ -276,6 +276,25 @@ m.card.act({
                     return resolve(result);
                 });
             });
+        },
+
+        convert_at_uri_to_bluesky_url(_$, args) {
+            const atUri = args.atUri;
+            if (!atUri) return atUri;
+
+            // Check if it's already a Bluesky URL
+            if (atUri.startsWith('https://bsky.app/profile/')) {
+                return atUri;
+            }
+
+            // Parse AT protocol URI: at://did:plc:.../app.bsky.feed.post/rkey
+            const uriMatch = atUri.match(/^at:\/\/([^\/]+)\/app\.bsky\.feed\.post\/([^:]+)/);
+            if (!uriMatch) return atUri; // Not a valid AT URI
+
+            const did = uriMatch[1];
+            const rkey = uriMatch[2];
+            
+            return `https://bsky.app/profile/${did}/post/${rkey}`;
         }
     },
 
