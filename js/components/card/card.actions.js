@@ -38,8 +38,10 @@ m.card.act({
                 card_data.previous_responses = previous_responses;
                 resolve(m.card.data.push(card_data));
             }).catch(err => {
-                console.log(err);
-                reject(err);
+                console.warn("Failed to load previous responses for tweet:", args.record.getId(), err);
+                // Still add the card data even if external tweets fail to load
+                card_data.previous_responses = [];
+                resolve(m.card.data.push(card_data));
             });
         })
     },
@@ -201,31 +203,87 @@ m.card.act({
         get_previous_responses(_$, args) {
             return new Promise((resolve, reject) => {
                 const external_tweet = args.record.get("External tweets");
+                const responds_to_text = args.record.get("Responds to (Text)");
+                
+                console.log("Processing external tweets for record:", args.record.getId(), "External tweets field:", external_tweet);
+                console.log("Available fields on record:", Object.keys(args.record.fields));
+                console.log("Responds to (Text):", responds_to_text);
 
-                if (!external_tweet) return resolve([]);
-                let responses = [];
-
-                const get_tweet = (record_id) => {
-                    _$.act.get_external_tweet_for_record_id({ recordId: record_id }).then(tweet => {
-                        responses.push(tweet);
-                        if (tweet.responds_to) get_tweet(tweet.responds_to[0]);
-                        else return resolve(responses);
-                    }).catch(err => {
-                        reject(err);
-                    });
+                // Always try to fetch external tweets if they exist
+                if (external_tweet && external_tweet.length > 0) {
+                    console.log("Fetching external tweet data...");
+                    let responses = [];
+                    let processed_ids = new Set(); // Prevent infinite loops
+                    
+                    const get_tweet = (record_id) => {
+                        if (processed_ids.has(record_id)) {
+                            console.warn("Circular reference detected for external tweet ID:", record_id);
+                            clearTimeout(timeout);
+                            return resolve(responses);
+                        }
+                        
+                        processed_ids.add(record_id);
+                        console.log("Fetching external tweet with ID:", record_id);
+                        
+                        _$.act.get_external_tweet_for_record_id({ recordId: record_id }).then(tweet => {
+                            console.log("Successfully fetched external tweet:", tweet);
+                            responses.push(tweet);
+                            
+                            resolve(responses);
+                        }).catch(err => {
+                            console.warn("Failed to fetch external tweet:", err);
+                            clearTimeout(timeout);
+                            // Don't reject the entire promise, just resolve with what we have
+                            resolve(responses);
+                        });
+                    }
+                    get_tweet(external_tweet[0]);
+                } else {
+                    console.log("No external tweets to fetch");
+                    resolve([]);
                 }
-                get_tweet(external_tweet[0]);
             });
         },
 
         get_external_tweet_for_record_id(_$, args) {
             return new Promise((resolve, reject) => {
+                console.log("🔍 get_external_tweet_for_record_id called with recordId:", args.recordId);
+                console.log("🔍 About to call Airtable find...");
+                
                 _$.act.airtable_base()('📧 External tweets').find(args.recordId, function(err, record) {
-                    if (err) { console.error(err); return reject(err); }
-                    return resolve({
-                        tweet: record.get("Tweet"),
-                        responds_to: record.get("Responds to (external)")
-                    });
+                    console.log("🔍 Airtable find callback triggered - err:", err, "record:", record);
+                    
+                    if (err) { 
+                        console.warn("Error finding external tweet:", err); 
+                        return reject(err); 
+                    }
+                    
+                    if (!record) {
+                        console.warn("External tweet record not found for ID:", args.recordId);
+                        return reject(new Error("External tweet record not found"));
+                    }
+                    
+                    console.log("External tweet record fields:", Object.keys(record.fields));
+                    const tweet = record.get("Tweet");
+                    // Use the correct field: "Responded from (Internal)" instead of "Responds to (external)"
+                    const respondedFrom = record.get("Responded from (Internal)");
+                    
+                    console.log("Tweet field value:", tweet);
+                    console.log("Responded from (Internal) field value:", respondedFrom);
+                    
+                    if (!tweet) {
+                        console.warn("External tweet record missing 'Tweet' field for ID:", args.recordId);
+                        return reject(new Error("External tweet missing Tweet field"));
+                    }
+                    
+                    const result = {
+                        tweet: tweet,
+                        // Since this is the external tweet being responded to, it doesn't have a "responds_to" field
+                        // The relationship is the other way around - the main tweet responds to this external tweet
+                        responds_to: null
+                    };
+                    console.log("Resolving with result:", result);
+                    return resolve(result);
                 });
             });
         }

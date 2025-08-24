@@ -49,6 +49,8 @@ m.card.events(_$ => {
             Promise.allSettled(load_in_data_promises).then(data => {
                 m.curtain.act.set_curtain_text({ text: "Done" });
                 if (data.length) {
+                    // Sort the cards by grade after all external tweet data is loaded
+                    m.card.act.sort_cards();
                     m.account.act.post_init();
                     const el = document.querySelector("[data-component='row_tweet']");
                     m.row_tweet.act.open_tweet({ row: el });
