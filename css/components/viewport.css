@@ -68,6 +68,13 @@
 
 /* Prevent multiple scrollbars from appearing */
 html,
-body {
+body,
+[data-component~="viewport"].tinder-view .view-tinder,
+[data-component~="viewport"].timeline-view .view-timeline,
+[data-component~="card"] {
   overflow: hidden;
+}
+
+[data-component~="viewport"].tinder-view .view-tinder {
+  display: inline-table;
 }
