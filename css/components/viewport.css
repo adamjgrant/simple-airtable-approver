@@ -58,3 +58,9 @@
         background: black;
     }
 }
+
+/* Prevent multiple scrollbars from appearing */
+html,
+body {
+  overflow: hidden;
+}
