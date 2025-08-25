@@ -24,6 +24,8 @@ m.card.act({
                 sending_account_handle: args.record.get("Sending account handle"),
                 link_to_post: _$.act.convert_at_uri_to_bluesky_url({ atUri: args.record.get("Reply To") }),
                 thumbnail: _$.act.get_profile_photo({ record: args.record }),
+                originator_profile_photo: _$.act.get_originator_profile_photo({ record: args.record }),
+                originator_handle: _$.act.get_originator_handle({ record: args.record }),
                 grade: (() => {
                     const gradeValue = args.record.get("Grade");
                     return gradeValue || 0;
@@ -43,9 +45,21 @@ m.card.act({
     },
 
     get_profile_photo(_$, args) {
-        const photo_record = args.record.get("Profile photo");
-        if (!photo_record || !photo_record.length) return "img/twitter.jpg"; // Keep existing image for now
+        const photo_record = args.record.get("Twitter Photo");
+        if (!photo_record || !photo_record.length) return "img/bluesky.jpg"; // Keep existing image for now
         return photo_record[0].url;
+    },
+
+    get_originator_profile_photo(_$, args) {
+      const photo_record = args.record.get("Profile photo");
+      if (!photo_record || !photo_record.length) return "img/bluesky.jpg"; // Keep existing image for now
+      return photo_record;
+    },
+
+    get_originator_handle(_$, args) {
+      const handle = args.record.get("Reply To Handle");
+      if (!handle || !handle.length) return "They say";
+      return `@${handle}`;
     },
 
     start(_$, args) {
@@ -161,6 +175,8 @@ m.card.act({
         m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.tweetalt2, index: 2 });
 
         _$("#response-thumbnail").src = m.card.this_card.thumbnail;
+        _$("#originator-profile-photo").src = m.card.this_card.originator_profile_photo;
+        _$("#originator-handle").innerHTML = m.card.this_card.originator_handle;
 
         _$(".link-to-post").forEach(link => {
             link.href = m.card.this_card.link_to_post;
