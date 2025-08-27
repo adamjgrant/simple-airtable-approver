@@ -119,4 +119,16 @@
     [data-component~="bottom_nav"].disabled {
         background: #333;
     }
+
+    [data-component~="bottom_nav"] #undo {
+      background: rgba(89, 89, 89, 0.3);
+    }
+
+    [data-component~="bottom_nav"] #approve {
+      background: hsla(125, 100%, 35%, 0.3);
+    }
+
+    [data-component~="bottom_nav"] button#reject {
+      background: hsla(34, 100%, 35%, 0.3);
+    }
 }
