@@ -51,3 +51,7 @@
     border-top-right-radius: 5px;
     background: rgba(255, 255, 255, 0.25);
 }
+
+body.offline [data-component="tabs"] {
+    background: var(--twitter-offline-blue);
+}

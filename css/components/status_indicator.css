@@ -22,6 +22,15 @@
     background: red;
 }
 
+[data-component="status_indicator"].offline {
+    background: #f59e0b;
+}
+
+[data-component="status_indicator"].offline-queue {
+    background: #f59e0b;
+    animation: pulse 2s infinite;
+}
+
 @media (prefers-color-scheme: dark) {
     [data-component="status_indicator"] {
         background-color: transparent;

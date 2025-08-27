@@ -1,6 +1,6 @@
 {
-    "short_name": "",
-    "name": "",
+    "short_name": "Tweet Approver",
+    "name": "Simple Airtable Tweet Approver",
     "icons": [{
         "src": "icon.png",
         "type": "image/png",
@@ -9,5 +9,6 @@
     "start_url": "/simple-airtable-approver",
     "background_color": "#fafafa",
     "theme_color": "rgb(27, 149, 224)",
-    "display": "standalone"
+    "display": "standalone",
+    "description": "A simple tool for approving tweets with offline support"
 }

@@ -23,7 +23,21 @@
 
     <meta name="theme-color" content="#fafafa">
     <script>
+        // Register service worker for offline support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+        
         const components = [
+			"offline_manager",
 			"rewarder",
 			"notification",
 			"odometer",
@@ -43,7 +57,7 @@
     </script>
 </head>
 
-<body>
+<body class="offline">
     <div data-component="viewport">
         <div data-component="curtain">
             <div class="text">
