@@ -120,7 +120,7 @@
     z-index: 9;
     background: white;
     font-size: 16pt;
-    padding-top: 32pt;
+    padding: 100px 100px 0 25px;
     outline: 0;
 }
 
