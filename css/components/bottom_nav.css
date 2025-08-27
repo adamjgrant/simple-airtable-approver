@@ -1,13 +1,13 @@
 [data-component~="bottom_nav"] {
-    height: var(--bottom-nav-height);
+    height: auto;
     margin: 0;
     display: flex;
     position: fixed;
     justify-content: center;
     align-items: center;
-    bottom: var(--offset-h, 0);
     right: 0;
-    top: 0;
+    bottom: 100px;
+    top: 100px;
     transition: opacity 1s;
     flex-direction: column;
     z-index: 10;
