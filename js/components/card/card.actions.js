@@ -6,6 +6,56 @@ m.card.act({
         return base;
     },
 
+    // Preload all avatar images in the background
+    preloadAllAvatars(_$, args) {
+        if (!m.card.data || m.card.data.length === 0) return;
+        
+        console.log('Preloading avatar images for', m.card.data.length, 'cards...');
+        
+        const avatarUrls = new Set();
+        
+        // Collect all unique avatar URLs
+        m.card.data.forEach(card => {
+            if (card.thumbnail && card.thumbnail !== "img/bluesky.jpg" && card.thumbnail !== "img/twitter.jpg") {
+                avatarUrls.add(card.thumbnail);
+            }
+            if (card.originator_profile_photo && card.originator_profile_photo !== "img/bluesky.jpg" && card.originator_profile_photo !== "img/twitter.jpg") {
+                avatarUrls.add(card.originator_profile_photo);
+            }
+        });
+        
+        // Preload each unique avatar
+        avatarUrls.forEach(url => {
+            _$.act.preloadImage({ url: url });
+        });
+        
+        console.log('Preloading', avatarUrls.size, 'unique avatar images');
+    },
+
+    // Preload a single image and store it in cache
+    preloadImage(_$, args) {
+        if (m.card.imageCache.has(args.url)) {
+            return; // Already cached
+        }
+        
+        const img = new Image();
+        
+        img.onload = () => {
+            // Store the loaded image in cache
+            m.card.imageCache.set(args.url, img);
+            console.log('Preloaded avatar:', args.url);
+        };
+        
+        img.onerror = () => {
+            console.warn('Failed to preload avatar:', args.url);
+            // Store a flag indicating this image failed to load
+            m.card.imageCache.set(args.url, 'failed');
+        };
+        
+        // Start loading the image
+        img.src = args.url;
+    },
+
     load_in_data(_$, args) {
         return new Promise((resolve, reject) => {
             const response_options = args.record.get("Response Options");
@@ -250,10 +300,26 @@ m.card.act({
             return;
         }
         
-        // Create a new image element to test if the URL loads successfully
+        // Check if the image is already cached
+        if (m.card.imageCache.has(args.photoUrl)) {
+            const cachedImage = m.card.imageCache.get(args.photoUrl);
+            if (cachedImage !== 'failed' && args.element && args.element.parentNode) {
+                // Use cached image immediately
+                args.element.src = args.photoUrl;
+                return;
+            } else if (cachedImage === 'failed') {
+                // Image failed to load previously, keep default
+                return;
+            }
+        }
+        
+        // If not cached, load it and cache for future use
         const img = new Image();
         
         img.onload = () => {
+            // Cache the successfully loaded image
+            m.card.imageCache.set(args.photoUrl, img);
+            
             // Only update the src if the element still exists and we're still on the same card
             if (args.element && args.element.parentNode) {
                 args.element.src = args.photoUrl;
@@ -261,7 +327,8 @@ m.card.act({
         };
         
         img.onerror = () => {
-            // If the image fails to load, keep the default image
+            // Cache the failure to avoid retrying
+            m.card.imageCache.set(args.photoUrl, 'failed');
             console.warn(`Failed to load profile photo: ${args.photoUrl}`);
         };
         
@@ -276,6 +343,30 @@ m.card.act({
         } else {
             twitter_box.classList.add("response-edit-hidden");
         }
+    },
+
+    // Preload a single image and store it in cache
+    preloadImage(_$, args) {
+        if (m.card.imageCache.has(args.url)) {
+            return; // Already cached
+        }
+        
+        const img = new Image();
+        
+        img.onload = () => {
+            // Store the loaded image in cache
+            m.card.imageCache.set(args.url, img);
+            console.log('Preloaded avatar:', args.url);
+        };
+        
+        img.onerror = () => {
+            console.warn('Failed to preload avatar:', args.url);
+            // Store a flag indicating this image failed to load
+            m.card.imageCache.set(args.url, 'failed');
+        };
+        
+        // Start loading the image
+        img.src = args.url;
     },
 
     priv: {
@@ -501,3 +592,4 @@ m.card.act({
 m.card.data = [];
 m.card.cards_processed = [];
 m.card.this_card = null;
+m.card.imageCache = new Map();

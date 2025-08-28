@@ -54,6 +54,11 @@ m.card.events(_$ => {
                     m.account.act.post_init();
                     const el = document.querySelector("[data-component='row_tweet']");
                     m.row_tweet.act.open_tweet({ row: el });
+                    
+                    // Start preloading all avatar images in the background
+                    setTimeout(() => {
+                        m.card.act.preloadAllAvatars();
+                    }, 100); // Small delay to ensure UI is responsive
                 };
                 _$.act.start();
             });

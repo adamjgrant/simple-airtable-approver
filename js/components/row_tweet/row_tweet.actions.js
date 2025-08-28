@@ -25,6 +25,11 @@ m.row_tweet.act({
         if (m.card && m.card.act) {
             m.card.act.saveAllToLocalStorage();
         }
+        
+        // Preload timeline avatars in the background for better performance
+        setTimeout(() => {
+            _$.act.preloadTimelineAvatars();
+        }, 100);
     },
 
     open_tweet(_$, args) {
@@ -55,6 +60,53 @@ m.row_tweet.act({
         })
     },
 
+    // Preload avatar images for timeline view
+    preloadTimelineAvatars(_$, args) {
+        if (!m.card.data || m.card.data.length === 0) return;
+        
+        console.log('Preloading timeline avatar images for', m.card.data.length, 'cards...');
+        
+        const avatarUrls = new Set();
+        
+        // Collect all unique avatar URLs from timeline cards
+        m.card.data.forEach(card => {
+            if (card.thumbnail && card.thumbnail !== "img/bluesky.jpg" && card.thumbnail !== "img/twitter.jpg") {
+                avatarUrls.add(card.thumbnail);
+            }
+        });
+        
+        // Preload each unique avatar
+        avatarUrls.forEach(url => {
+            _$.act.preloadImage({ url: url });
+        });
+        
+        console.log('Preloading', avatarUrls.size, 'unique timeline avatar images');
+    },
+
+    // Preload a single image and store it in cache
+    preloadImage(_$, args) {
+        if (m.row_tweet.imageCache.has(args.url)) {
+            return; // Already cached
+        }
+        
+        const img = new Image();
+        
+        img.onload = () => {
+            // Store the loaded image in cache
+            m.row_tweet.imageCache.set(args.url, img);
+            console.log('Preloaded timeline avatar:', args.url);
+        };
+        
+        img.onerror = () => {
+            console.warn('Failed to preload timeline avatar:', args.url);
+            // Store a flag indicating this image failed to load
+            m.row_tweet.imageCache.set(args.url, 'failed');
+        };
+        
+        // Start loading the image
+        img.src = args.url;
+    },
+
     priv: {
         get_template(_$, args) {
             return document.getElementById("timeline-row");
@@ -82,7 +134,17 @@ m.row_tweet.act({
             const card_row_tweet = card_element.querySelector("[data-component='row_tweet']");
             card_element.querySelector(".tweet").innerHTML = card.tweet;
             card_row_tweet.dataset.cardIndex = index;
-            card_element.querySelector(".tiny-response img").src = card.thumbnail;
+            
+            // Set default image immediately
+            const thumbnailImg = card_element.querySelector(".tiny-response img");
+            thumbnailImg.src = "img/bluesky.jpg";
+            
+            // Then lazy load the actual image
+            _$.act.lazy_load_profile_photo({ 
+                element: thumbnailImg, 
+                photoUrl: card.thumbnail 
+            });
+            
             card_row_tweet.classList.add(`show-tab-${card.sending_account_handle}`);
 
             const tiny_response_length_in_characters = 50;
@@ -95,6 +157,50 @@ m.row_tweet.act({
         clear(_$, args) {
             const template_html = _$.act.get_template().outerHTML;
             _$.act.get_parent().innerHTML = template_html;
+        },
+
+        lazy_load_profile_photo(_$, args) {
+            // If the photo URL is the default bluesky image, don't reload it
+            if (args.photoUrl === "img/bluesky.jpg" || args.photoUrl === "img/twitter.jpg") {
+                return;
+            }
+            
+            // Check if the image is already cached
+            if (m.row_tweet.imageCache.has(args.photoUrl)) {
+                const cachedImage = m.row_tweet.imageCache.get(args.photoUrl);
+                if (cachedImage !== 'failed' && args.element && args.element.parentNode) {
+                    // Use cached image immediately
+                    args.element.src = args.photoUrl;
+                    return;
+                } else if (cachedImage === 'failed') {
+                    // Image failed to load previously, keep default
+                    return;
+                }
+            }
+            
+            // If not cached, load it and cache for future use
+            const img = new Image();
+            
+            img.onload = () => {
+                // Cache the successfully loaded image
+                m.row_tweet.imageCache.set(args.photoUrl, img);
+                
+                // Only update the src if the element still exists
+                if (args.element && args.element.parentNode) {
+                    args.element.src = args.photoUrl;
+                }
+            };
+            
+            img.onerror = () => {
+                // Cache the failure to avoid retrying
+                m.row_tweet.imageCache.set(args.photoUrl, 'failed');
+                console.warn(`Failed to load profile photo: ${args.photoUrl}`);
+            };
+            
+            // Start loading the image
+            img.src = args.photoUrl;
         }
     }
 });
+
+m.row_tweet.imageCache = new Map();
