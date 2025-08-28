@@ -1,5 +1,6 @@
 :root {
     --twitter-blue-link: rgb(27, 149, 224);
+    --twitter-offline-blue: hsl(200, 15%, 53%);
     --twitter-black-text: rgb(15, 20, 25);
     --twitter-bar-color: rgb(196, 207, 214);
     --font-size: 15px;

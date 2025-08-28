@@ -91,37 +91,66 @@ m.bottom_nav.acts({
         document.querySelector("[data-component~='bottom_nav']").classList.remove("disabled");
     },
 
-    priv: {
-        update_review_status(_$, args = {}) {
-            m.status_indicator.act.set_status_yellow({ reset: false });
-            let new_status = "Pending Review";
-            if (args.status > 0) new_status = "Approved";
-            if (args.status < 0) new_status = "Rejected";
+            priv: {
+            update_review_status(_$, args = {}) {
+                m.status_indicator.act.set_status_yellow({ reset: false });
+                let new_status = "Pending Review";
+                if (args.status > 0) new_status = "Approved";
+                if (args.status < 0) new_status = "Rejected";
 
-            // Offline update of review status
-            let score_modification = {};
-            score_modification[args.status > 0 ? "approved" : "rejected"] = 1;
-            score_modification["in_review"] = -1;
+                // Offline update of review status
+                let score_modification = {};
+                score_modification[args.status > 0 ? "approved" : "rejected"] = 1;
+                score_modification["in_review"] = -1;
 
-            const this_card = args.this_card || m.card.this_card;
-            m.account.act.offline_score_update_for_handle({
-                handle: this_card.sending_account_handle,
-                score: score_modification
-            })
+                const this_card = args.this_card || m.card.this_card;
+                m.account.act.offline_score_update_for_handle({
+                    handle: this_card.sending_account_handle,
+                    score: score_modification
+                })
 
-            m.card.act.airtable_base()('💬 Tweets').update([{
-                id: this_card.id,
-                fields: { "Review Status": new_status }
-            }], function(err, records) {
-                if (err) {
-                    if (args.ecb) args.ecb();
-                    m.status_indicator.act.set_status_red();
-                    return console.error(err);
+                // Check if we're offline
+                console.log('Checking offline status:', m.offline_manager?.isOnline, 'navigator.onLine:', navigator.onLine);
+                if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+                    console.log('Offline detected, queuing action...');
+                    // Queue the review status update for when we're online
+                    m.offline_manager.act.addToOfflineQueue({
+                        type: 'update_review_status',
+                        data: {
+                            tweetId: this_card.id,
+                            status: new_status
+                        }
+                    });
+                    
+                    // Update local storage immediately
+                    if (this_card) {
+                        this_card.review_status = new_status;
+                        m.offline_manager.act.saveLocalData({
+                            key: `card_${this_card.id}`,
+                            data: this_card
+                        });
+                    }
+                    
+                    m.status_indicator.act.set_status_green();
+                    if (args.cb) args.cb();
+                    return;
+                } else {
+                    console.log('Online, proceeding with Airtable update...');
                 }
-                if (args.cb) args.cb();
-                m.status_indicator.act.set_status_green();
-                m.account.act.refresh_accounts();
-            });
+
+                m.card.act.airtable_base()('💬 Tweets').update([{
+                    id: this_card.id,
+                    fields: { "Review Status": new_status }
+                }], function(err, records) {
+                    if (err) {
+                        if (args.ecb) args.ecb();
+                        m.status_indicator.act.set_status_red();
+                        return console.error(err);
+                    }
+                    if (args.cb) args.cb();
+                    m.status_indicator.act.set_status_green();
+                    m.account.act.refresh_accounts();
+                });
+            }
         }
-    }
 })

@@ -20,6 +20,11 @@ m.row_tweet.act({
         if (!m.card.data.length) return console.log("No cards loaded yet. Skipping population");
         cards.forEach((card, index) => _$.act.make_row({ card: card, index: index }));
         _$.act.bind_events();
+        
+        // Save current state to local storage
+        if (m.card && m.card.act) {
+            m.card.act.saveAllToLocalStorage();
+        }
     },
 
     open_tweet(_$, args) {

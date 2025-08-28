@@ -35,6 +35,9 @@
     display: none;
 }
 
+body.offline [data-component="top_nav"] {
+    background: var(--twitter-offline-blue);
+}
 
 /*
 See viewport.css for toggling visibility of these

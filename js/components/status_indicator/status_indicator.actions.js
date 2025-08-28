@@ -11,6 +11,18 @@ m.status_indicator.acts({
 
     set_status_yellow(_$, args) { _$.act.set_status({ color: "yellow", reset: (args && args.reset) }) },
 
+    set_status_offline(_$, args) { _$.act.set_status({ color: "offline", reset: (args && args.reset) }) },
+
+    updateOfflineQueueStatus(_$, args) {
+        if (m.offline_manager && m.offline_manager.act) {
+            const status = m.offline_manager.act.getQueueStatus();
+            if (status.hasPendingActions) {
+                _$.me().className = "status-indicator offline-queue";
+                _$.me().setAttribute('title', `${status.queueLength} actions queued for when online`);
+            }
+        }
+    },
+
     priv: {
         set_status(_$, args) {
             _$.act.reset_status();
