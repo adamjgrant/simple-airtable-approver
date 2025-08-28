@@ -216,8 +216,20 @@ m.card.act({
         m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.tweetalt1, index: 1 });
         m.choice.act.set_text_for_choice_at_index({ text: m.card.this_card.tweetalt2, index: 2 });
 
-        _$("#response-thumbnail").src = m.card.this_card.thumbnail;
-        _$("#originator-profile-photo").src = m.card.this_card.originator_profile_photo;
+        // Set default images immediately for instant display
+        _$("#response-thumbnail").src = "img/bluesky.jpg";
+        _$("#originator-profile-photo").src = "img/bluesky.jpg";
+        
+        // Then load the actual images asynchronously
+        _$.act.lazy_load_profile_photo({ 
+            element: _$("#response-thumbnail"), 
+            photoUrl: m.card.this_card.thumbnail 
+        });
+        _$.act.lazy_load_profile_photo({ 
+            element: _$("#originator-profile-photo"), 
+            photoUrl: m.card.this_card.originator_profile_photo 
+        });
+        
         _$("#originator-handle").innerHTML = m.card.this_card.originator_handle;
 
         _$(".link-to-post").forEach(link => {
@@ -230,6 +242,31 @@ m.card.act({
         });
 
         m.choice.act.reset_choices();
+    },
+
+    lazy_load_profile_photo(_$, args) {
+        // If the photo URL is the default bluesky image, don't reload it
+        if (args.photoUrl === "img/bluesky.jpg" || args.photoUrl === "img/twitter.jpg") {
+            return;
+        }
+        
+        // Create a new image element to test if the URL loads successfully
+        const img = new Image();
+        
+        img.onload = () => {
+            // Only update the src if the element still exists and we're still on the same card
+            if (args.element && args.element.parentNode) {
+                args.element.src = args.photoUrl;
+            }
+        };
+        
+        img.onerror = () => {
+            // If the image fails to load, keep the default image
+            console.warn(`Failed to load profile photo: ${args.photoUrl}`);
+        };
+        
+        // Start loading the image
+        img.src = args.photoUrl;
     },
 
     toggle_response_edit(_$, args) {
