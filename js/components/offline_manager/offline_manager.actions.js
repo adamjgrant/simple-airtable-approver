@@ -1,3 +1,5 @@
+const PUBLIC_ENDPOINT = "https://1.1.1.1/cdn-cgi/trace";
+
 m.offline_manager.acts({
     init(_$, args) {
         // Initialize offline manager
@@ -84,7 +86,7 @@ m.offline_manager.acts({
         
         // Try to fetch from an external service that won't be cached
         // Using a small, fast service that should respond quickly
-        fetch('https://httpbin.org/status/200', { 
+        fetch(PUBLIC_ENDPOINT, { 
             method: 'HEAD',
             cache: 'no-cache',
             signal: AbortSignal.timeout(5000) // 5 second timeout
@@ -130,7 +132,7 @@ m.offline_manager.acts({
         console.log('Testing multiple network endpoints...');
         
         const endpoints = [
-            'https://httpbin.org/status/200',
+            PUBLIC_ENDPOINT,
             'https://www.google.com/favicon.ico',
             'https://www.cloudflare.com/favicon.ico'
         ];
