@@ -28,6 +28,38 @@ m.card.events(_$ => {
         }
 
         called = true;
+        
+        // Check if we're offline before attempting Airtable fetch
+        if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+            console.log('Offline detected during initialization, loading from cache...');
+            m.curtain.act.set_curtain_text({ text: "Loading from cache..." });
+            
+            // Try to load from local storage
+            const loadedFromStorage = m.card.act.loadFromLocalStorage();
+            if (loadedFromStorage && m.card.data.length > 0) {
+                console.log('Successfully loaded', m.card.data.length, 'cards from cache');
+                m.curtain.act.set_curtain_text({ text: "Done" });
+                
+                // Initialize the app with cached data
+                m.card.act.sort_cards();
+                m.account.act.post_init();
+                const el = document.querySelector("[data-component='row_tweet']");
+                m.row_tweet.act.open_tweet({ row: el });
+                
+                // Start preloading all avatar images in the background
+                setTimeout(() => {
+                    m.card.act.preloadAllAvatars();
+                }, 100);
+                
+                _$.act.start();
+                return;
+            } else {
+                console.log('No cached data available, will attempt online fetch...');
+                m.curtain.act.set_curtain_text({ text: "No cached data, attempting online fetch..." });
+            }
+        }
+        
+        // Proceed with online fetch
         _$.act.airtable_base()('💬 Tweets').select({
             view: "Permutations Review Board",
             maxRecords: 500,
@@ -42,7 +74,33 @@ m.card.events(_$ => {
 
             fetchNextPage();
         }, function done(err) {
-            if (err) { console.error(err); }
+            if (err) { 
+                console.error('Error fetching from Airtable:', err);
+                // If we're offline and have cached data, try to use that instead
+                if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+                    console.log('Airtable fetch failed, attempting to load from cache...');
+                    const loadedFromStorage = m.card.act.loadFromLocalStorage();
+                    if (loadedFromStorage && m.card.data.length > 0) {
+                        console.log('Successfully loaded', m.card.data.length, 'cards from cache after fetch failure');
+                        m.curtain.act.set_curtain_text({ text: "Loaded from cache" });
+                        
+                        m.card.act.sort_cards();
+                        m.account.act.post_init();
+                        const el = document.querySelector("[data-component='row_tweet']");
+                        m.row_tweet.act.open_tweet({ row: el });
+                        
+                        setTimeout(() => {
+                            m.card.act.preloadAllAvatars();
+                        }, 100);
+                        
+                        _$.act.start();
+                        return;
+                    }
+                }
+                // If no cached data available, show error
+                m.curtain.act.set_curtain_text({ text: "Failed to load data. Please check your connection." });
+                return;
+            }
 
             // Status update: Waiting for joined data...
 

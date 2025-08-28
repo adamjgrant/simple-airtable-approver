@@ -42,20 +42,9 @@ m.account.acts({
     post_init(_$, args) {
         m.tabs.act.generate_all_tabs();
         
-        // Try to load data from local storage if offline
-        if (m.offline_manager && !m.offline_manager.act.isOnline()) {
-            const loadedFromStorage = m.card.act.loadFromLocalStorage();
-            if (loadedFromStorage) {
-                m.row_tweet.act.populate();
-                m.tabs.act.select_tab({ name: "all" });
-                m.curtain.act.remove_curtain();
-                return;
-            }
-        }
-        
         m.row_tweet.act.populate();
         m.tabs.act.select_tab({ name: "all" });
-        m.curtain.act.remove_curtain()
+        m.curtain.act.remove_curtain();
     },
 
     refresh_accounts(_$, args) {
