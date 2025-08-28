@@ -506,15 +506,7 @@ m.card.act({
         // Check if we're offline
         console.log('Card edit: Checking offline status:', m.offline_manager?.isOnline, 'navigator.onLine:', navigator.onLine);
         if (m.offline_manager && !m.offline_manager.act.isOnline()) {
-            console.log('Card edit: Offline detected, queuing action...');
-            // Queue the edit for when we're online
-            m.offline_manager.act.addToOfflineQueue({
-                type: 'edit_response',
-                data: {
-                    tweetId: m.card.this_card.id,
-                    response: args.text
-                }
-            });
+            console.log('Card edit: Offline detected, updating local cache...');
             
             // Update local storage immediately
             if (m.card.this_card) {
@@ -524,6 +516,12 @@ m.card.act({
                     data: m.card.this_card
                 });
             }
+            
+            // Smart queue management - only keep the latest edit for each tweet
+            _$.act.updateOfflineEditQueue({
+                tweetId: m.card.this_card.id,
+                response: args.text
+            });
             
             m.status_indicator.act.set_status_green();
             m.bottom_nav.act.enable();
@@ -586,6 +584,28 @@ m.card.act({
           arr.splice(new_position, 0, randomly_chosen_item);
         }
         return arr; 
+    },
+
+    updateOfflineEditQueue(_$, args) {
+        // Smart queue management for offline edits
+        // Only keep the latest edit for each tweet to avoid duplicate actions
+        const { tweetId, response } = args;
+        
+        if (!m.offline_manager || !m.offline_manager.act) {
+            return;
+        }
+        
+        // Use the smart queue method to update existing action or add new one
+        m.offline_manager.act.updateOrAddToOfflineQueue({
+            type: 'edit_response',
+            data: {
+                tweetId: tweetId,
+                response: response
+            },
+            updateKey: 'tweetId' // Use tweetId to identify duplicate actions
+        });
+        
+        console.log('Offline edit queue updated for tweet:', tweetId);
     }
 })
 

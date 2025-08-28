@@ -199,6 +199,59 @@ m.offline_manager.acts({
         return action.id;
     },
 
+    updateOrAddToOfflineQueue(_$, args) {
+        // Smart queue management - update existing action or add new one
+        const { type, data, updateKey } = args;
+        
+        if (updateKey) {
+            // Look for existing action with the same updateKey
+            const existingIndex = m.offline_manager.offlineQueue.findIndex(action => 
+                action.type === type && action.data[updateKey] === data[updateKey]
+            );
+            
+            if (existingIndex !== -1) {
+                // Update existing action
+                console.log('Updating existing offline action:', type, 'for key:', updateKey);
+                m.offline_manager.offlineQueue[existingIndex].data = { ...m.offline_manager.offlineQueue[existingIndex].data, ...data };
+                m.offline_manager.offlineQueue[existingIndex].timestamp = Date.now();
+                _$.act.saveOfflineQueue();
+                return m.offline_manager.offlineQueue[existingIndex].id;
+            }
+        }
+        
+        // Add new action if no existing one found
+        return _$.act.addToOfflineQueue(args);
+    },
+
+    cleanupDuplicateActions(_$, args) {
+        // Remove duplicate actions, keeping only the latest version of each
+        const seen = new Map(); // type + key -> latest action index
+        const toRemove = [];
+        
+        m.offline_manager.offlineQueue.forEach((action, index) => {
+            const key = `${action.type}_${action.data.tweetId || action.data.id || 'unknown'}`;
+            
+            if (seen.has(key)) {
+                // We've seen this action before, mark for removal
+                toRemove.push(index);
+            } else {
+                // First time seeing this action, remember it
+                seen.set(key, index);
+            }
+        });
+        
+        // Remove duplicates (in reverse order to maintain indices)
+        toRemove.reverse().forEach(index => {
+            console.log('Removing duplicate action:', m.offline_manager.offlineQueue[index]);
+            m.offline_manager.offlineQueue.splice(index, 1);
+        });
+        
+        if (toRemove.length > 0) {
+            console.log(`Cleaned up ${toRemove.length} duplicate actions`);
+            _$.act.saveOfflineQueue();
+        }
+    },
+
     removeFromOfflineQueue(_$, args) {
         const index = m.offline_manager.offlineQueue.findIndex(action => action.id === args.id);
         if (index > -1) {
@@ -278,6 +331,9 @@ m.offline_manager.acts({
 
         console.log('Processing offline queue:', m.offline_manager.offlineQueue.length, 'actions');
         
+        // Clean up duplicate actions before processing
+        _$.act.cleanupDuplicateActions();
+        
         // Process in batches
         const batch = m.offline_manager.offlineQueue.slice(0, m.offline_manager.batchSize);
         
@@ -315,10 +371,24 @@ m.offline_manager.acts({
     processReviewStatusUpdate(_$, args) {
         const action = args;
         
+        // Validate record id and payload before sending
+        const tweetId = action && action.data && action.data.tweetId;
+        const status = action && action.data && action.data.status;
+        if (!tweetId || typeof tweetId !== 'string') {
+            console.warn('Skipping invalid review status action (missing/invalid record id):', action);
+            _$.act.removeFromOfflineQueue({ id: action.id });
+            return;
+        }
+        if (status === undefined || status === null) {
+            console.warn('Skipping invalid review status action (missing status):', action);
+            _$.act.removeFromOfflineQueue({ id: action.id });
+            return;
+        }
+
         // Try to update Airtable
         m.card.act.airtable_base()('💬 Tweets').update([{
-            id: action.data.tweetId,
-            fields: { "Review Status": action.data.status }
+            id: tweetId,
+            fields: { "Review Status": status }
         }], (err, records) => {
             if (err) {
                 console.error('Failed to process review status update:', err);
@@ -336,10 +406,24 @@ m.offline_manager.acts({
     processResponseEdit(_$, args) {
         const action = args;
         
+        // Validate record id and payload before sending
+        const tweetId = action && action.data && action.data.tweetId;
+        const response = action && action.data && action.data.response;
+        if (!tweetId || typeof tweetId !== 'string') {
+            console.warn('Skipping invalid response edit action (missing/invalid record id):', action);
+            _$.act.removeFromOfflineQueue({ id: action.id });
+            return;
+        }
+        if (response === undefined || response === null) {
+            console.warn('Skipping invalid response edit action (missing response):', action);
+            _$.act.removeFromOfflineQueue({ id: action.id });
+            return;
+        }
+
         // Try to update Airtable
         m.card.act.airtable_base()('💬 Tweets').update([{
-            id: action.data.tweetId,
-            fields: { "Tweet": action.data.response }
+            id: tweetId,
+            fields: { "Tweet": response }
         }], (err, records) => {
             if (err) {
                 console.error('Failed to process response edit:', err);
