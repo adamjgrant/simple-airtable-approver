@@ -75,6 +75,7 @@ m.choice.acts({
         _$("#choice-response").innerHTML = args.text;
         _$("#choice-response").value = args.text;
         m.card.act.edit_response(args);
+        _$.act.updateCharacterCounter();
     },
 
     blur_choice_response(_$, args) {
@@ -88,6 +89,14 @@ m.choice.acts({
         setTimeout(() => {
             input.focus();
         }, 100);
+    },
+
+    updateCharacterCounter(_$, args) {
+        const textarea = _$("#choice-response");
+        const counter = _$("#character-counter");
+        if (!textarea || !counter) return;
+        const remaining = 300 - (textarea.value || "").length;
+        counter.textContent = remaining;
     },
 
     priv: {

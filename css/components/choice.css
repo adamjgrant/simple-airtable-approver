@@ -155,6 +155,20 @@
     padding-top: 8;
 }
 
+[data-component~="choice"] .character-counter {
+  display: none;
+  position: fixed;
+  top: 90px;
+  right: 25px;
+  font-size: 25pt;
+  color: #BBB;
+  z-index: 10;
+}
+
+[data-component~="choice"] textarea:focus + .character-counter {
+  display: block;
+}
+
 @media (prefers-color-scheme: dark) {
     [data-component~="choice"] #choice-response:focus {
         background: black;
