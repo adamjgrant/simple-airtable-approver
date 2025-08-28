@@ -34,11 +34,29 @@ m.card.act({
 
             _$.act.get_previous_responses({ record: args.record }).then(previous_responses => {
                 card_data.previous_responses = previous_responses;
+                
+                // Save card data to local storage for offline use
+                if (m.offline_manager && m.offline_manager.act) {
+                    m.offline_manager.act.saveLocalData({
+                        key: `card_${card_data.id}`,
+                        data: card_data
+                    });
+                }
+                
                 resolve(m.card.data.push(card_data));
             }).catch(err => {
                 console.warn("Failed to load previous responses for tweet:", args.record.getId(), err);
                 // Still add the card data even if external tweets fail to load
                 card_data.previous_responses = [];
+                
+                // Save card data to local storage for offline use
+                if (m.offline_manager && m.offline_manager.act) {
+                    m.offline_manager.act.saveLocalData({
+                        key: `card_${card_data.id}`,
+                        data: card_data
+                    });
+                }
+                
                 resolve(m.card.data.push(card_data));
             });
         })
@@ -64,6 +82,30 @@ m.card.act({
 
     start(_$, args) {
         // _$.act.advance_to_next_card();
+    },
+
+    loadFromLocalStorage(_$, args) {
+        // Try to load card data from local storage if offline
+        if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+            const localData = m.offline_manager.act.getLocalData({ key: 'cardData' });
+            if (localData && localData.length > 0) {
+                m.card.data = localData;
+                console.log('Loaded', localData.length, 'cards from local storage');
+                return true;
+            }
+        }
+        return false;
+    },
+
+    saveAllToLocalStorage(_$, args) {
+        // Save all card data to local storage for offline use
+        if (m.offline_manager && m.offline_manager.act) {
+            m.offline_manager.act.saveLocalData({
+                key: 'cardData',
+                data: m.card.data
+            });
+            console.log('Saved', m.card.data.length, 'cards to local storage');
+        }
     },
 
     format_card(_$, args) {
@@ -332,6 +374,35 @@ m.card.act({
     edit_response(_$, args) {
         // m.bottom_nav.act.disable();
         m.status_indicator.act.set_status_yellow({ reset: false });
+
+        // Check if we're offline
+        console.log('Card edit: Checking offline status:', m.offline_manager?.isOnline, 'navigator.onLine:', navigator.onLine);
+        if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+            console.log('Card edit: Offline detected, queuing action...');
+            // Queue the edit for when we're online
+            m.offline_manager.act.addToOfflineQueue({
+                type: 'edit_response',
+                data: {
+                    tweetId: m.card.this_card.id,
+                    response: args.text
+                }
+            });
+            
+            // Update local storage immediately
+            if (m.card.this_card) {
+                m.card.this_card.response = args.text;
+                m.offline_manager.act.saveLocalData({
+                    key: `card_${m.card.this_card.id}`,
+                    data: m.card.this_card
+                });
+            }
+            
+            m.status_indicator.act.set_status_green();
+            m.bottom_nav.act.enable();
+            return;
+        } else {
+            console.log('Card edit: Online, proceeding with Airtable update...');
+        }
 
         common.debounce(() => {
                 m.card.act.airtable_base()('💬 Tweets').update([{

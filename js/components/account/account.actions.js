@@ -41,6 +41,18 @@ m.account.acts({
 
     post_init(_$, args) {
         m.tabs.act.generate_all_tabs();
+        
+        // Try to load data from local storage if offline
+        if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+            const loadedFromStorage = m.card.act.loadFromLocalStorage();
+            if (loadedFromStorage) {
+                m.row_tweet.act.populate();
+                m.tabs.act.select_tab({ name: "all" });
+                m.curtain.act.remove_curtain();
+                return;
+            }
+        }
+        
         m.row_tweet.act.populate();
         m.tabs.act.select_tab({ name: "all" });
         m.curtain.act.remove_curtain()
@@ -48,10 +60,48 @@ m.account.acts({
 
     refresh_accounts(_$, args) {
         return new Promise((resolve, reject) => {
+            // Check if we're offline
+            if (!m.offline_manager.act.isOnline()) {
+                // Try to load from local storage
+                const localAccounts = m.offline_manager.act.getLocalData({ key: 'accounts' });
+                if (localAccounts) {
+                    m.account.accounts = localAccounts;
+                    if (!m.account.account_filter.length) _$.act.add_all_accounts_to_filter();
+                    _$.act.set_scores();
+                    resolve(localAccounts);
+                    return;
+                }
+                
+                // Queue the refresh for when we're online
+                m.offline_manager.act.addToOfflineQueue({
+                    type: 'refresh_accounts',
+                    data: {}
+                });
+                
+                // Return empty accounts for now
+                resolve([]);
+                return;
+            }
+            
             _$.act.get_accounts().then(accounts => {
                 if (!m.account.account_filter.length) _$.act.add_all_accounts_to_filter();
                 _$.act.set_scores();
+                
+                // Save to local storage for offline use
+                m.offline_manager.act.saveLocalData({
+                    key: 'accounts',
+                    data: accounts
+                });
+                
+                // Also save card data to local storage
+                if (m.card && m.card.act) {
+                    m.card.act.saveAllToLocalStorage();
+                }
+                
                 resolve(accounts);
+            }).catch(err => {
+                console.error('Failed to refresh accounts:', err);
+                reject(err);
             });
         })
     },
