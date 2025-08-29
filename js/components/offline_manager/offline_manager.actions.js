@@ -364,6 +364,9 @@ m.offline_manager.acts({
             case 'refresh_accounts':
                 _$.act.processRefreshAccounts(action);
                 break;
+            case 'update_metadata_approval_date':
+                _$.act.processMetadataApprovalDateUpdate(action);
+                break;
             default:
                 console.warn('Unknown action type:', action.type);
                 _$.act.removeFromOfflineQueue({ id: action.id });
@@ -447,6 +450,38 @@ m.offline_manager.acts({
         }).catch(err => {
             console.error('Failed to refresh accounts:', err);
             _$.act.handleActionFailure(action);
+        });
+    },
+
+    processMetadataApprovalDateUpdate(_$, args) {
+        const action = args;
+        
+        // Validate metadata id and date before sending
+        const metadataId = action && action.data && action.data.metadataId;
+        const date = action && action.data && action.data.date;
+        if (!metadataId || typeof metadataId !== 'string') {
+            console.warn('Skipping invalid metadata update action (missing/invalid metadata id):', action);
+            _$.act.removeFromOfflineQueue({ id: action.id });
+            return;
+        }
+        if (!date || typeof date !== 'string') {
+            console.warn('Skipping invalid metadata update action (missing date):', action);
+            _$.act.removeFromOfflineQueue({ id: action.id });
+            return;
+        }
+
+        // Try to update Airtable
+        m.card.act.airtable_base()('📊 Metadata').update([{
+            id: metadataId,
+            fields: { "Value": date }
+        }], (err, records) => {
+            if (err) {
+                console.error('Failed to process metadata approval date update:', err);
+                _$.act.handleActionFailure(action);
+            } else {
+                console.log('Successfully processed metadata approval date update to:', date);
+                _$.act.removeFromOfflineQueue({ id: action.id });
+            }
         });
     },
 

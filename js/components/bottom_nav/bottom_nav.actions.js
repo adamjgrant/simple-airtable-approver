@@ -131,6 +131,11 @@ m.bottom_nav.acts({
                         });
                     }
                     
+                    // Queue metadata update if tweet was approved
+                    if (args.status > 0) {
+                        m.metadata.act.update_metadata_approval_date();
+                    }
+                    
                     m.status_indicator.act.set_status_green();
                     if (args.cb) args.cb();
                     return;
@@ -150,6 +155,11 @@ m.bottom_nav.acts({
                     if (args.cb) args.cb();
                     m.status_indicator.act.set_status_green();
                     m.account.act.refresh_accounts();
+                    
+                    // Update metadata approval date if tweet was approved
+                    if (args.status > 0) {
+                        m.metadata.act.update_metadata_approval_date();
+                    }
                 });
             }
         }

@@ -38,6 +38,41 @@ m.metadata.act({
         _$("#response_quality").innerHTML = `Grade: ${gradeValue}`;
     },
 
+    update_metadata_approval_date(_$, args) {
+        // Get current date in YYYY-MM-DD format
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const dateString = `${year}-${month}-${day}`;
+        
+        // Check if we're offline
+        if (m.offline_manager && !m.offline_manager.act.isOnline()) {
+            console.log('Offline detected, queuing metadata update...');
+            // Queue the metadata update for when we're online
+            m.offline_manager.act.addToOfflineQueue({
+                type: 'update_metadata_approval_date',
+                data: {
+                    metadataId: 'recMfVvygJa10rCue',
+                    date: dateString
+                }
+            });
+            return;
+        }
+
+        // Update the metadata record in Airtable
+        m.card.act.airtable_base()('📊 Metadata').update([{
+            id: 'recMfVvygJa10rCue',
+            fields: { "Value": dateString }
+        }], function(err, records) {
+            if (err) {
+                console.error('Failed to update metadata approval date:', err);
+            } else {
+                console.log('Successfully updated metadata approval date to:', dateString);
+            }
+        });
+    },
+
     priv: {
         format_percentage(_$, args) {
             return parseFloat(Math.round(args.number * 1000)) / 10.0;
