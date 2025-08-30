@@ -10,6 +10,8 @@
     padding-bottom: 100px;
     overflow: auto;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* momentum scrolling on iOS */
+    overscroll-behavior: contain;      /* stop scroll chaining on modern iOS */
 }
 
 [data-component~="viewport"]:after {

@@ -301,6 +301,7 @@ html,
 body {
     background: var(--twitter-blue-link);
     overflow: hidden;
+    max-height: 100svh;
 }
 
 body {
