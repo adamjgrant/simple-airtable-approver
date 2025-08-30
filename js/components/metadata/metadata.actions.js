@@ -4,7 +4,9 @@ m.metadata.act({
     },
 
     hide_badge(_$, args) {
-        _$("#badge").classList.add("hide");
+        if (_$("#badge")) {
+          _$("#badge").classList.add("hide");
+        }
     },
 
     show_badge(_$, args) {
