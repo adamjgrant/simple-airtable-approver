@@ -295,17 +295,18 @@ textarea {
 html {
     min-height: calc(100% + env(safe-area-inset-top));
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    max-height: 100svh;
 }
 
 html,
 body {
     background: var(--twitter-blue-link);
     overflow: hidden;
-    max-height: 100svh;
 }
 
 body {
     overflow: hidden;
+    max-height: 100vh;
 }
 
 @media (prefers-color-scheme: dark) {
