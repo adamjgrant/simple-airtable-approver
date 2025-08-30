@@ -28,3 +28,7 @@
 [data-component="metadata"] #badge.hide {
     display: none;
 }
+
+[data-component="viewport"].timeline-view [data-component="metadata"] {
+    display: none;
+}

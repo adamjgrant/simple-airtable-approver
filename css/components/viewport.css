@@ -57,6 +57,7 @@
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
+    height: 100svh;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,7 +73,6 @@
 html,
 body,
 [data-component~="viewport"].tinder-view .view-tinder,
-[data-component~="viewport"].timeline-view .view-timeline,
 [data-component~="card"] {
   overflow: hidden;
 }
