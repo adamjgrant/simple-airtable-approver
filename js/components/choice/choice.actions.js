@@ -99,6 +99,43 @@ m.choice.acts({
         counter.textContent = remaining;
     },
 
+    remove_question(_$, args) {
+        // This can be called from any component context, so we need to use document.querySelector
+        const textarea = document.querySelector("#choice-response");
+        if (!textarea) return console.error("No textarea found");
+        
+        let text = textarea.value || textarea.innerHTML;
+        
+        // Split by ".", remove last item if it ends with "?", then join
+        let sentences = text.split(".");
+        
+        if (sentences.length > 1) {
+            const lastSentence = sentences[sentences.length - 1].trim();
+            
+            // Check if last sentence ends with "?"
+            if (lastSentence.endsWith("?")) {
+                // Remove the last sentence
+                sentences.pop();
+                // Join with "." and add a "." at the end if there's content
+                text = sentences.join(".").trim();
+                if (text && !text.endsWith(".")) {
+                    text += ".";
+                }
+                
+                // Update the card's response in memory
+                if (m.card.this_card) {
+                    m.card.this_card.response = text;
+                }
+                
+                // Update the textarea and call edit_response via the choice component
+                m.choice.act.set_choice_response({ text: text });
+                
+                // Select the choice-autofill (index 3) to mark it as selected
+                m.choice.act.select_choice_at_index({ index: 3, skip_update: true });
+            }
+        }
+    },
+
     priv: {
         unselect_all_choices(_$, args) {
             _$.me().forEach(choice => choice.classList.remove("selected"));

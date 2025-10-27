@@ -39,5 +39,5 @@ m.choice.events(_$ => {
     _$("#choice-response").addEventListener("focus", () => { setTimeout(_$.act.select_all, 100) });
     _$("#choice-response").addEventListener("input", () => { _$.act.updateCharacterCounter() });
     _$("#choice-response").addEventListener("keyup", () => { _$.act.updateCharacterCounter() });
-    _$(".select-all").addEventListener("mousedown", _$.act.select_all)
+    _$(".select-all").addEventListener("mousedown", _$.act.select_all);
 })

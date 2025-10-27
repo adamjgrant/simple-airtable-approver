@@ -8,4 +8,5 @@ m.bottom_nav.events(_$ => {
     _$("#reject-and-go-back").addEventListener("click", _$.act.reject_and_go_back);
 
     _$("#undo").addEventListener("click", m.card.act.undo);
+    _$("#remove-question").addEventListener("click", () => { m.choice.act.remove_question() });
 });

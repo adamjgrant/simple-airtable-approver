@@ -531,14 +531,17 @@ m.card.act({
         }
 
         common.debounce(() => {
+                console.log('Debounce firing - updating Airtable with text:', args.text);
                 m.card.act.airtable_base()('💬 Tweets').update([{
                     id: m.card.this_card.id,
                     fields: { "Tweet": args.text }
                 }], function(err, records) {
                     if (err) {
+                        console.error('Airtable update error:', err);
                         m.status_indicator.act.set_status_red();
                         return console.error(err);
                     } else {
+                        console.log('Airtable update successful');
                         m.bottom_nav.act.enable();
                         m.status_indicator.act.set_status_green();
                     }

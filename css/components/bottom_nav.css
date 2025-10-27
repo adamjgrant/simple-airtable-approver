@@ -65,6 +65,12 @@
 [data-component~="bottom_nav"] button#reject {
     color: crimson;
     background: hsla(34, 100%, 35%, 0.1);
+    margin-bottom: 18px;
+}
+
+[data-component~="bottom_nav"] button#remove-question {
+    color: #4A90E2;
+    background: hsla(210, 70%, 50%, 0.1);
 }
 
 [data-component~="bottom_nav"] #approve:active {
@@ -77,6 +83,11 @@
     background: hsla(34, 100%, 35%, 1.0);
 }
 
+[data-component~="bottom_nav"] button#remove-question:active {
+    color: white;
+    background: hsla(210, 70%, 50%, 1.0);
+}
+
 [data-component~="bottom_nav"] button#reject-and-go-back {
     background: crimson;
     color: white;
@@ -86,7 +97,8 @@
 [data-component~="bottom_nav"].disabled button#reject-and-go-back,
 [data-component~="bottom_nav"].disabled button#approve-and-go-back,
 [data-component~="bottom_nav"].disabled button,
-[data-component~="bottom_nav"].disabled button#approve {
+[data-component~="bottom_nav"].disabled button#approve,
+[data-component~="bottom_nav"].disabled button#remove-question {
     color: #BBB;
     background: transparent;
     border-color: transparent;
@@ -95,6 +107,11 @@
 @media (hover: hover) {
     [data-component~="bottom_nav"] button#reject:hover {
         background: crimson;
+        color: white;
+    }
+
+    [data-component~="bottom_nav"] button#remove-question:hover {
+        background: #4A90E2;
         color: white;
     }
 
@@ -130,5 +147,9 @@
 
     [data-component~="bottom_nav"] button#reject {
       background: hsla(34, 100%, 35%, 0.3);
+    }
+
+    [data-component~="bottom_nav"] button#remove-question {
+      background: hsla(210, 70%, 50%, 0.3);
     }
 }
