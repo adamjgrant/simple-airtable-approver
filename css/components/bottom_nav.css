@@ -65,7 +65,7 @@
 [data-component~="bottom_nav"] button#reject {
     color: crimson;
     background: hsla(34, 100%, 35%, 0.1);
-    margin-bottom: 18px;
+    margin-bottom: 75px;
 }
 
 [data-component~="bottom_nav"] button#remove-question {
