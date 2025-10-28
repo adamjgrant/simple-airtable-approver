@@ -36,7 +36,13 @@ m.choice.events(_$ => {
         });
     });
 
-    _$("#choice-response").addEventListener("focus", () => { setTimeout(_$.act.select_all, 100) });
+    _$("#choice-response").addEventListener("focus", (e) => { 
+        // Keep the current selected_index when focusing the textarea
+        // (Don't change it to 3, just keep whatever choice is currently selected)
+        // The user is editing the currently selected choice
+        console.log('Choice-response focused. Current value:', e.target.value, 'selected_index:', m.choice.selected_index);
+        setTimeout(_$.act.select_all, 100);
+    });
     _$("#choice-response").addEventListener("input", () => { _$.act.updateCharacterCounter() });
     _$("#choice-response").addEventListener("keyup", () => { _$.act.updateCharacterCounter() });
     _$(".select-all").addEventListener("mousedown", _$.act.select_all);

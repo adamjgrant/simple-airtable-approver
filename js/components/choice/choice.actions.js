@@ -60,8 +60,19 @@ m.choice.acts({
     },
 
     set_text_for_choice_at_index(_$, args) {
-        const chosen_choice = _$.me()[args.index]
-        chosen_choice.querySelector("p").innerHTML = args.text;
+        const chosen_choice = _$.me()[args.index];
+        console.log('set_text_for_choice_at_index: index', args.index, 'choice element:', chosen_choice, 'text:', args.text);
+        if (chosen_choice) {
+            const pElement = chosen_choice.querySelector("p");
+            if (pElement) {
+                pElement.innerHTML = args.text;
+                console.log('Updated p element:', pElement);
+            } else {
+                console.error('No p element found in choice:', chosen_choice);
+            }
+        } else {
+            console.error('No choice element found at index:', args.index);
+        }
     },
 
     permute(_$, args) {

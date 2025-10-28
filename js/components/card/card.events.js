@@ -14,7 +14,11 @@ m.card.events(_$ => {
     _$("#disclose-response-edit").addEventListener("click", _$.act.toggle_response_edit);
 
     _$("[data-component='choice']").forEach((choice, index) => {
-        choice.addEventListener("click", () => {
+        choice.addEventListener("click", (e) => {
+            // Don't select if clicking on interactive elements (textarea, buttons, nav links, etc.)
+            if (e.target.closest('#choice-response, button, nav, a')) {
+                return;
+            }
             m.choice.act.select_choice_at_index({ index: index });
         });
     });
