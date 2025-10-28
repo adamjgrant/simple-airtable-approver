@@ -488,6 +488,11 @@ m.card.act({
         const text = _$("#choice-response").value;
         _$.act.change_response_field({ text });
         _$.act.edit_response({ text });
+        
+        // Also update the selected choice's <p> element in real-time
+        if (m.choice && m.choice.selected_index !== undefined && m.choice.selected_index < 3) {
+            m.choice.act.set_text_for_choice_at_index({ text: text, index: m.choice.selected_index });
+        }
     },
 
     change_response_field(_$, args) {
@@ -503,6 +508,20 @@ m.card.act({
         // m.bottom_nav.act.disable();
         m.status_indicator.act.set_status_yellow({ reset: false });
 
+        // Update the card's in-memory data based on which choice is selected
+        if (m.card.this_card && m.choice && m.choice.selected_index !== undefined) {
+            if (m.choice.selected_index === 0) {
+                m.card.this_card.response = args.text;
+            } else if (m.choice.selected_index === 1) {
+                m.card.this_card.tweetalt1 = args.text;
+            } else if (m.choice.selected_index === 2) {
+                m.card.this_card.tweetalt2 = args.text;
+            } else {
+                // Autofill or no selection - update response (default)
+                m.card.this_card.response = args.text;
+            }
+        }
+
         // Check if we're offline
         console.log('Card edit: Checking offline status:', m.offline_manager?.isOnline, 'navigator.onLine:', navigator.onLine);
         if (m.offline_manager && !m.offline_manager.act.isOnline()) {
@@ -510,7 +529,6 @@ m.card.act({
             
             // Update local storage immediately
             if (m.card.this_card) {
-                m.card.this_card.response = args.text;
                 m.offline_manager.act.saveLocalData({
                     key: `card_${m.card.this_card.id}`,
                     data: m.card.this_card
@@ -532,9 +550,28 @@ m.card.act({
 
         common.debounce(() => {
                 console.log('Debounce firing - updating Airtable with text:', args.text);
+                
+                // Build Response Options array from the current card data
+                // The card data has already been updated above based on selected_index
+                let responseOptions = [
+                    m.card.this_card.response || "",
+                    m.card.this_card.tweetalt1 || "",
+                    m.card.this_card.tweetalt2 || ""
+                ];
+                
+                console.log('Building Response Options from card data:', responseOptions);
+                
+                // Update both "Tweet" and "Response Options" fields
+                const fields = { 
+                    "Tweet": args.text,
+                    "Response Options": JSON.stringify(responseOptions)
+                };
+                
+                console.log('Updating Response Options:', responseOptions);
+                
                 m.card.act.airtable_base()('💬 Tweets').update([{
                     id: m.card.this_card.id,
-                    fields: { "Tweet": args.text }
+                    fields: fields
                 }], function(err, records) {
                     if (err) {
                         console.error('Airtable update error:', err);

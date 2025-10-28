@@ -6,6 +6,7 @@ m.choice.acts({
         _$.act.show_all_choices();
         _$.act.hide_empty_choices();
         _$.act.select_the_next_nonempty_choice();
+        m.choice.selected_index = 0;
     },
 
     show_all_choices(_$, args) {
@@ -47,6 +48,9 @@ m.choice.acts({
         const chosen_choice = _$.me()[args.index]
         chosen_choice.classList.add("selected");
         let choice_text = _$.act.get_text_for_choice_at_index({ index: args.index });
+        
+        // Track which choice is selected (for editing purposes)
+        m.choice.selected_index = args.index;
 
         if (!args.skip_update) {
             m.card.act.change_response_field({ text: choice_text });
@@ -76,6 +80,11 @@ m.choice.acts({
         _$("#choice-response").value = args.text;
         m.card.act.edit_response(args);
         _$.act.updateCharacterCounter();
+        
+        // Also update the selected choice's <p> element (if not the autofill choice)
+        if (m.choice.selected_index !== undefined && m.choice.selected_index < 3) {
+            _$.act.set_text_for_choice_at_index({ text: args.text, index: m.choice.selected_index });
+        }
     },
 
     blur_choice_response(_$, args) {
@@ -122,16 +131,23 @@ m.choice.acts({
                     text += ".";
                 }
                 
-                // Update the card's response in memory
-                if (m.card.this_card) {
-                    m.card.this_card.response = text;
+                // Update the card's data in memory based on which choice is selected
+                if (m.card.this_card && m.choice && m.choice.selected_index !== undefined) {
+                    if (m.choice.selected_index === 0) {
+                        m.card.this_card.response = text;
+                    } else if (m.choice.selected_index === 1) {
+                        m.card.this_card.tweetalt1 = text;
+                    } else if (m.choice.selected_index === 2) {
+                        m.card.this_card.tweetalt2 = text;
+                    } else {
+                        // Autofill or no selection - update response (default)
+                        m.card.this_card.response = text;
+                    }
                 }
                 
                 // Update the textarea and call edit_response via the choice component
+                // This will also update the selected choice's <p> element via set_choice_response
                 m.choice.act.set_choice_response({ text: text });
-                
-                // Select the choice-autofill (index 3) to mark it as selected
-                m.choice.act.select_choice_at_index({ index: 3, skip_update: true });
             }
         }
     },
@@ -146,3 +162,6 @@ m.choice.acts({
         }    
     }
 });
+
+// Initialize the selected_index to 0 (first choice)
+m.choice.selected_index = 0;

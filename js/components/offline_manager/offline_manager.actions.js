@@ -425,10 +425,31 @@ m.offline_manager.acts({
             return;
         }
 
-        // Try to update Airtable
+        // Get the card data to extract tweetalt1 and tweetalt2 for Response Options
+        let cardData = null;
+        if (m.card && m.card.data) {
+            cardData = m.card.data.find(card => card.id === tweetId);
+        }
+        
+        // If card not in data array, check this_card
+        if (!cardData && m.card && m.card.this_card && m.card.this_card.id === tweetId) {
+            cardData = m.card.this_card;
+        }
+        
+        // Build Response Options array
+        const responseOptions = [
+            response, // index 0
+            (cardData ? (cardData.tweetalt1 || "") : ""), // index 1
+            (cardData ? (cardData.tweetalt2 || "") : "")  // index 2
+        ];
+        
+        // Try to update Airtable with both Tweet and Response Options
         m.card.act.airtable_base()('💬 Tweets').update([{
             id: tweetId,
-            fields: { "Tweet": response }
+            fields: { 
+                "Tweet": response,
+                "Response Options": JSON.stringify(responseOptions)
+            }
         }], (err, records) => {
             if (err) {
                 console.error('Failed to process response edit:', err);
