@@ -122,31 +122,31 @@
                     </article>
                 </div>
                 <div class="twitter-box">
-                    <a class="link-to-post" href=""><img id="originator-profile-photo" src="img/twitter.jpg" class="profile"></a>
+                    <a aria-hidden="true" class="link-to-post" href=""><img id="originator-profile-photo" src="img/twitter.jpg" class="profile"></a>
                     <article>
                         <h1 id="originator-handle">They say</h1>
-                        <p id="tweet">This is the tweet</p>
+                        <p id="tweet" aria-label="the tweet you're responding to">This is the tweet</p>
                     </article>
                 </div>
                 <div class="twitter-box response-edit-hidden">
-                    <a id="select-all"><img src="" class="profile" id="response-thumbnail"></a>
+                    <a aria-hidden="true" id="select-all"><img src="" class="profile" id="response-thumbnail"></a>
                     <article>
-                        <h1>Responding with <small><a id="disclose-response-edit" href="#">Toggle Edit</a></small></h1>
-                        <textarea id="response">This is the response</textarea>
+                        <h1 aria-hidden="true">Responding with <small><a id="disclose-response-edit" href="#">Toggle Edit</a></small></h1>
+                        <textarea id="response" aria-label="custom response">This is the response</textarea>
                     </article>
                 </div>
                 <div class="choices">
-                    <div data-component="choice" class="choice-1 selected">
+                    <div aria-label="response option 1" aria-role="button" data-component="choice" class="choice-1 selected">
                         <p>(Not implemented yet)</p>
                     </div>
-                    <div data-component="choice" class="choice-2">
+                    <div aria-label="response option 2" aria-role="button" data-component="choice" class="choice-2">
                         <p>(Not implemented yet)</p>
                     </div>
-                    <div data-component="choice" class="choice-3">
+                    <div aria-label="response option 3" aria-role="button" data-component="choice" class="choice-3">
                         <p>(Not implemented yet)</p>
                     </div>
                     <div data-component="choice" class="choice-autofill">
-                        <textarea id="choice-response" placeholder="Type a custom response"></textarea>
+                        <textarea aria-label="custom response" id="choice-response" placeholder="Type a custom response"></textarea>
                         <div id="character-counter" class="character-counter">300</div>
                         <button class="select-all">Select All</button>
                         <nav>
