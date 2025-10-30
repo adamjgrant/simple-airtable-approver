@@ -47,6 +47,7 @@ m.choice.acts({
         _$.act.unselect_all_choices();
         const chosen_choice = _$.me()[args.index]
         chosen_choice.classList.add("selected");
+        chosen_choice.setAttribute("aria-pressed", "true");
         let choice_text = _$.act.get_text_for_choice_at_index({ index: args.index });
         
         // Track which choice is selected (for editing purposes)
@@ -165,7 +166,10 @@ m.choice.acts({
 
     priv: {
         unselect_all_choices(_$, args) {
-            _$.me().forEach(choice => choice.classList.remove("selected"));
+            _$.me().forEach(choice => {
+                choice.classList.remove("selected");
+                choice.setAttribute("aria-pressed", "false");
+            });
         },
 
         reset_permutation_field(_$, args) {
